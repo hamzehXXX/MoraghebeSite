@@ -1,0 +1,818 @@
+@font-face {
+    font-family: iransansweb;
+    src: url(fonts/IRANSansWeb.ttf);
+}
+@font-face {
+    font-family: iransanswebbold;
+    src: url(fonts/IRANSansWeb_Bold.ttf);
+}
+@font-face {
+    font-family: iransansweblight;
+    src: url(fonts/IRANSansWeb_Light.ttf);
+}
+@font-face {
+    font-family: iransanswebmedium;
+    src: url(fonts/IRANSansWeb_Medium.ttf);
+}
+
+@font-face {
+    font-family: iransanswebultralight;
+    src: url(fonts/IRANSansWeb_UltraLight.ttf);
+}
+@font-face {
+    font-family: web_yekan;
+    src: url(fonts/web_Yekan.woff);
+}
+
+@font-face {
+    font-family: iranyekanwebbold;
+    src: url(fonts/iranyekanwebbold.ttf);
+}@font-face {
+    font-family: iranyekanwebboldfanum;
+    src: url(fonts/iranyekanwebboldfanum.ttf);
+}@font-face {
+    font-family: iranyekanwebregularfanum;
+    src: url(fonts/iranyekanwebregularfanum.ttf);
+}
+.edit-profile {
+    font-size: .9rem;
+    font-family: iransansweb;
+    background-color: #EEE;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.save-profile {
+    font-size: .9rem;
+    color: white;
+    font-family: iransansweb;
+    background-color: #0d3b66;
+    padding: 8px 16px;
+    border-radius: 4px;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.save-profile--visible {
+    visibility: visible;
+}
+
+.fa-search {
+    display: none;
+    visibility: hidden;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    position: relative;
+}
+tbody th {
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    flex-grow: 1;
+    width: 100%;
+    padding: 0.8em 1.2em;
+    overflow: hidden;
+    list-style-type: none;
+    outline: 1px solid #ddd;
+    text-align: center;
+    font-weight: 300;
+    position: sticky;
+    right: 0;
+}
+td{
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    flex-grow: 1;
+    width: 100%;
+    padding: 0.8em 1.2em;
+    overflow: hidden;
+    list-style-type: none;
+    outline: 1px solid #ddd;
+    text-align: center;
+    font-weight: 300;
+
+
+}
+
+
+
+.arbayiin-table {
+    overflow-x: auto;
+}
+
+
+.firstcol {
+    background: white;
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+
+}
+table td .firstcol {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+.some-page-wrapper {
+    margin: 15px;
+    display: table;
+    font-family: "IRANYekanWeb(FaNum)";
+}
+
+.row {
+    /*max-width: 100px;*/
+    /*flex-direction: row;*/
+    flex-wrap: wrap;
+    color: #0d3b66;
+    display: table-row;
+
+    border-collapse: collapse;
+    font-family: "IRANYekanWeb(FaNum) Light";
+
+}
+
+.row:nth-of-type(odd) {
+    background-color: rgba(203, 203, 203, 0.23);
+}
+.table:nth-of-type(even) {
+    background-color: rgba(242, 28, 113, 0.1);
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+
+}
+
+.orange-column {
+    font-family:"IRANYekanWeb(FaNum) Light";
+    box-sizing: border-box;
+    flex-grow: 1;
+    overflow: hidden;
+    list-style-type: none;
+    text-align: center;
+    font-weight: 300;
+    display: table-cell;
+    border-radius: 5%;
+    padding: 1em;
+
+}
+
+.blue-column {
+    box-sizing: border-box;
+    flex-grow: 1;
+    padding: 0.8em 1.2em;
+    overflow: hidden;
+    list-style-type: none;
+    text-align: center;
+    font-weight: 300;
+    display: table-cell;
+
+}
+
+.green-column {
+    box-sizing: border-box;
+    flex-grow: 1;
+    padding: .8em;
+    padding-top: .4em;
+    overflow: hidden;
+    list-style-type: none;
+    text-align: center;
+    font-weight: 300;
+    display: table-cell;
+    font-family: "IRANYekanWeb(FaNum)", web_yekan;
+
+}
+
+/* The container must be positioned relative: */
+.custom-select {
+    position: relative;
+    font-family: Arial;
+}
+
+.custom-select select {
+    display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+    background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#results{
+    white-space:nowrap;
+    /*margin-right: 15px;*/
+    border-collapse: collapse;
+    display: table;
+    border: solid 1px #DDEEEE;
+    font: normal 13px "IRANYekanWeb(FaNum) ", iransansweb;
+}
+#results li{
+    list-style-type: none;
+    display: table-cell;
+    padding-right: 5px;
+
+}
+
+
+.t-header{
+    /*max-width: 100px;*/
+    background-color: #0d3b66;
+    color: #FFFFFF;
+    font-weight: normal;
+    font-family: iranyekanwebregularfanum;
+    text-align: center;
+    padding: .4em;
+    border-radius: 5px;
+    /*border: solid 1px white;*/
+
+
+}
+.nameheader{
+    background-color: #0d3b66;
+    color: #FFFFFF;
+    font-weight: normal;
+    text-align: center;
+    padding: .4em;
+    border-radius: 5px;
+    font-family: iranyekanwebregularfanum;
+}
+
+.sabtamal{
+    -webkit-box-direction: normal;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    -webkit-appearance: none;
+    background: 0 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    font-weight: 600;
+    padding: 5px 9px;
+    text-align: center;
+    text-transform: inherit;
+    text-overflow: ellipsis;
+    user-select: none;
+    width: auto;
+    border-radius: 4px;
+    color: #f3ffff;
+    position: relative;
+    border: 1px solid transparent;
+    background-color: #3897f0;
+}
+
+
+.select-css {
+    display: block;
+    font-size: 12px;
+    font-family:"IRANYekanWeb(FaNum) Light";
+    font-weight: 700;
+    color: #444;
+    line-height: 1.0;
+    padding: .6em 1.4em .5em .8em;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    border: 1px solid #aaa;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+    border-radius: .5em;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+    linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+}
+
+.select-css__inactive{
+    background-image: none;
+    -webkit-background-image: none;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    display: none;
+
+}
+.select-css__matni{
+    background-image: none;
+    -webkit-background-image: none;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    display: none;
+
+}
+.select-css::-ms-expand {
+    display: none;
+}
+.select-css:hover {
+    border-color: #888;
+}
+.select-css:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    color: #222;
+    outline: none;
+}
+.select-css option {
+    font-weight:normal;
+}
+
+.header2{
+    -webkit-box-direction: normal;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    color: #999;
+    text-align: center;
+    font-weight: 600;
+    line-height: 20px;
+    font-size: 17px;
+    margin: 0 40px 10px;
+}
+.resultname{
+    padding: 0 .31em;
+    /*position: sticky;*/
+    /*right: 0;*/
+    line-height: 45px;
+    font-size: 18px;
+    color: #000;
+    border-right: #e7e7e7 solid 1px;
+    border-bottom: #e7e7e7 solid 1px;
+    border-collapse: collapse;
+    font-family: iranyekanwebregularfanum;
+
+}
+
+
+.resultvalue{
+    text-overflow: ellipsis;
+    /*white-space: nowrap;*/
+    overflow: hidden;
+    line-height: 45px;
+    max-width: 155px;
+    word-break: break-all;
+    padding: 0 .31em;
+    /*border-left: #e7e7e7 solid 1px;*/
+    border-bottom: #e7e7e7 solid 1px;
+    font-size: 18px;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: "IRANYekanWeb(FaNum) Light", "B Yekan";
+
+}
+
+/*.table-num{*/
+/*    background-color: #f3f3f3;*/
+/*    color: #0d3b66;*/
+/*    font-weight: bolder;*/
+/*    text-align: center;*/
+/*    width: 55px;*/
+/*    border: 1px solid transparent;*/
+/*    font-family:"IRANYekanWeb(FaNum) ";*/
+/*}*/
+
+.table-num{
+    background-color: #FFFFFF;
+    color: #0d3b66;
+    line-height: 45px;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 18px;
+    width: 55px;
+    border-bottom: 1px solid #e7e7e7;
+    font-family: iranyekanwebregularfanum;
+}
+
+@media (max-width: 360px) {
+    .resultname{
+        padding: 0 .31em;
+        position: sticky;
+        line-height: 45px;
+        right: 0;
+        max-width: 100px;
+        text-overflow: ellipsis;
+         white-space: nowrap;
+        overflow: hidden;
+        font-size:14px;
+        background-color: #0d3b66;
+        color: white;
+        border-top: #999 solid 1px;
+        border-collapse: collapse;
+        font-family:iranyekanwebregularfanum;
+
+    }
+
+    .table-num{
+        background-color: #f3f3f3;
+        color: #0d3b66;
+        position: sticky;
+        right: 0;
+        line-height: 45px;
+        font-weight: bolder;
+        text-align: center;
+        font-size: 14px;
+        width: 55px;
+        border: 1px solid transparent;
+        font-family: iranyekanwebregularfanum;
+    }
+
+    .resultvalue{
+        font-size: 14px;
+        padding: 0 .31em;
+        border-top: #999 solid 1px;
+        /*border-collapse: collapse;*/
+        text-align: center;
+        font-family:iranyekanwebregularfanum;
+        line-height: 45px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 150px;
+        word-break: break-all;
+    }
+}
+.dd{
+    /*position: sticky;*/
+    /*position: -webkit-sticky;*/
+    /*right: 0;*/
+    z-index: 15;
+
+}.ddd{
+     position: sticky;
+     /*position: -webkit-sticky;*/
+     right: 0;
+     /*right: 55px;*/
+     background-color: #FFFFFF;
+     z-index: 15;
+     border-collapse: collapse;
+ }
+#my-arbayiin{
+
+    text-decoration: none;
+}
+#my-arbayiin a{
+    text-decoration: none;
+
+
+}#my-arbayiin li{
+     list-style-type: none;
+ }
+
+
+._1 {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    direction: rtl;
+    font-family: "IRANYekanWeb(FaNum)", Tahoma, Arial, Helvetica, sans-serif;
+    color: #000;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #dcdcdc;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
+}
+
+._left{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    direction: rtl;
+    font-family: 'IRANYekanWeb(FaNum)', Tahoma, Arial, Helvetica, sans-serif;
+    color: #000;
+    line-height: 60px;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+
+}
+.pull-left{
+    float: left !important;
+}
+.deal-like{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    direction: rtl;
+    font-family: 'IRANYekanWeb(FaNum)', Tahoma, Arial, Helvetica, sans-serif;
+    color: #000;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    list-style: none;
+    padding-right: 0;
+    padding-left: initial;
+    margin-right: -5px;
+    margin-left: 0;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 60px;
+    height: 100%;
+}
+
+.star-count{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    direction: rtl;
+    font-family: 'IRANYekanWeb(FaNum) Light', Tahoma, Arial, Helvetica, sans-serif;
+    list-style: none;
+    cursor: pointer;
+    line-height: 60px;
+    box-sizing: border-box;
+    color: #787878;
+    font-size: 1.1rem !important;
+    margin-left: 5px;
+    float: right;
+}
+
+.ft{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    direction: rtl;
+    font-family: 'IRANYekanWeb(FaNum)', Tahoma, Arial, Helvetica, sans-serif;
+    color: #f57621;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+    padding-left: 10px;
+}
+
+.arbayiin-name{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    direction: rtl;
+    font-family: 'IRANYekanWeb(FaNum)', Tahoma, Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    background-color: transparent;
+    text-decoration: none;
+    outline: 0 !important;
+    font-size: 1rem;
+    margin: 0;
+    line-height: 20px;
+    padding-left: 10px;
+    color: #f57621;
+}
+.section-arbayiin{
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    padding: 0;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.results-ul {
+    list-style-type: none;
+    text-decoration: none;
+}.results-ul a{
+     text-decoration: none;
+     font-size: 1.3em;
+ }
+.khadem-ul {
+    list-style-type: none;
+    text-decoration: none;
+}
+.khadem-ul a{
+    text-decoration: none;
+    font-size: 1.3em;
+}
+.khadem{
+    color: #682685;
+    font-size: 1.5em;
+}
+
+.table-header{
+    background: #0d3b66 !important;
+    color: white;
+    font-family: "IRANYekanWeb(FaNum) ";
+}
+
+.arbayiin-duration{
+    margin: 15px;
+
+}
+
+.arbayiin-results-title{
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    font-family: iransanswebbold;
+}
+
+.results-form{
+    background: #cbcbcb;
+}
+
+.results-form .results-form__header{
+
+    margin: 5% ;
+    alignment: center;
+    color: #df0000;
+    border-bottom: 2px solid #222222;
+    width:60%;
+
+    font-family: "IRANYekanWeb(FaNum) b", iransanswebbold;
+}
+.results-form__forms{
+    alignment: center;
+    width: 90%;
+    margin-right: 5%;
+    background: #fffFFF;
+    border: #a6a6a6 1px dot-dot-dash;
+    border-radius: 5px;
+}
+.results-form__forms h6{
+    width: 90%;
+    margin-right: 5%;
+    margin-top: 17px;
+    padding-top: 12px ;
+    font-size: 1.4em;
+    font-weight: bolder;
+    color: #000000;font-family: "IRANYekanWeb(FaNum) b";
+
+
+}
+.results-form__submit{
+    margin: 5%;
+    font-size: .9rem;
+
+    padding: 8px 16px;
+    display: inline-block;
+
+    border-radius: 4px;
+    cursor: pointer;
+    color: #FFF;
+    border: none;
+    background-color: #F95738;
+    line-height: 1.65;
+}
+.results-form__textarea{
+    border: #cbcbcb dashed 1px;
+    margin-right: 5%;
+    width: 90%;
+}
+
+.arbayiin-title{
+    border: 1px solid #c32929;
+    width: 80%;
+    border-radius: 5px;
+    font-size: 1.3em;
+    padding: 10px;
+}
+.arbayiin-title a:nth-of-type(even){
+    background: #d8226b;
+    color: #fffFFF;
+}
+
+.arbayiin-title_sabegh{
+    border: 1px solid #7f887d;
+    width: 80%;
+    border-radius: 5px;
+    font-size: 1.3em;
+    padding: 10px;
+}
+.arbayiin-title_sabegh a:nth-of-type(even){
+    background: #737a70;
+    color: #fffFFF;
+}
+
+.duration{
+
+    margin-right: 10px;
+}
+.sub-duration{
+    float: left;
+    /*float: none;*/
+    margin-right: 10px;
+}
+.results-form__ui{
+    background: #BEBEBE;
+}
+
+.amal-js{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.pop-outer {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    font-family: web_yekan, sans-serif;
+
+}
+.pop-inner {
+    background-color: #fff;
+    width: 50%;
+    height: 60%;
+    padding: 25px;
+    margin: 15% auto;
+    alignment: center;
+    vertical-align: center;
+    z-index: 100;
+    border-radius: 5px;
+    overflow-y: auto;
+
+}
+.close-popup{
+    cursor: pointer;
+    cursor: hand;
+    z-index: 100;
+    background: #c32929;
+    color: white;
+}
+
+.date-pop-outer {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    font-family: web_yekan, sans-serif;
+
+}
+.date-pop-inner {
+    background-color: #fff;
+    width: 50%;
+    height: 60%;
+    padding: 25px;
+    margin: 15% auto;
+    alignment: center;
+    vertical-align: center;
+    z-index: 100;
+    border-radius: 5px;
+    overflow-y: auto;
+
+}
+.date-close-popup{
+    cursor: pointer;
+    cursor: hand;
+    z-index: 100;
+    background: #c32929;
+    color: white;
+}
+
+/*@media (max-width: 600px) {*/
+/*    .page-banner__title {*/
+/*        font-size: 2.4rem;*/
+/*        font-family: web_yekan, "IRANYekanWeb(FaNum) Light", serif;*/
+
+/*    }*/
+/*}*/
+
+.dim-selector{
+    opacity: 0.3;
+
+}

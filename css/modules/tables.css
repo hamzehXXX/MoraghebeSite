@@ -1,0 +1,162 @@
+/* spacing */
+table.amal-table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 300px;
+    font-family: iranyekanwebregularfanum;
+    /*border: 3px solid purple;*/
+}
+.amal-table tbody {
+    border-collapse:separate;
+    border-spacing:3px;
+}
+
+
+
+table.amal-table thead th:nth-child(1) {
+    width: 4%;
+    /*border-left: solid 1px red;*/
+    text-align: right;
+
+}
+
+table.amal-table thead th:nth-child(2) {
+    width: 46%;
+}
+
+table.amal-table th, td {
+    padding: 8px;
+}
+
+/* typography */
+table.amal-table thead tr th, tfoot th {
+    font-family: "iranyekanwebregularfanum";
+}
+
+table.amal-table th {
+    letter-spacing: 1px;
+}
+
+table.amal-table td {
+    letter-spacing: 1px;
+}
+
+table.amal-table tbody td {
+    text-align: right;
+}
+
+/* graphics and colors */
+
+[type="radio"]:checked,
+ [type="radio"]:not(:checked) {
+     position: absolute;
+     padding-top: 23px;
+     right: -999px;
+ }
+
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+    position: relative;
+    padding-right: 28px;
+
+    cursor: pointer;
+    line-height: 20px;
+    padding-bottom: 14px;
+    display: table;
+    color: #666666;
+}
+
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 32px;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    background: #f87da9;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+[type="radio"]:checked + label:after {
+    top: 4px;
+     opacity: 1;
+     -webkit-transform: scale(1);
+     transform: scale(1);
+ }
+
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+/* zebra striping */
+table.amal-table tr.zebra th{
+    /*background: rgba(255, 255, 0, 0.29);*/
+}
+table.amal-table tr.zebra.odd{
+    /*border-bottom: solid red 0px;*/
+}
+table.amal-table tr.zebra + tr{
+    background: rgba(77, 77, 0, 0.07);
+}
+table.amal-table tr.zebra td{
+    /*background: rgba(103, 100, 26, 0.48);*/
+    border-bottom: none;
+    color: #0b43c6;
+    font-weight: bolder;
+    font-family: iranyekanwebregularfanum;
+}
+table.amal-table tr.zebra td{
+    font-weight: bolder;
+}
+table tr.zebra th{
+    /*border: solid 1px black;*/
+    font-weight: bolder;
+}
+
+table.amal-table tr.zebra {
+    /*border-top: solid 1px black;*/
+
+}
+
+
+@media (max-width: 994px) {
+    table.amal-table {
+
+    }
+    table.amal-table thead th:nth-child(1) {
+        width: 8%;
+        /*border-left: solid 1px red;*/
+        background:  rgba(255, 252, 50, 0.12);
+
+    }
+
+    table.amal-table thead th:nth-child(2) {
+        width: 92%;
+        background: rgba(255, 252, 50, 0.12);
+
+    }
+}
+
+.hide-table {
+    display: none;
+}
