@@ -57,7 +57,7 @@ include_once('jdf.php');
                     <?php
                 setup_postdata($post); // Set the Main Query to the 'arbayiin'
                         $resultsTable = new ResultsTable($salekID);     // Instantiate ResultsTable class
-                        $resultsTable->showResultsTable();      // Show the results table
+                        $resultsTable->showResultsTable('');      // Show the results table
                 wp_reset_postdata();                            // Sets the Main Query back to the 'salek'
                     ?>
                     <br/>
