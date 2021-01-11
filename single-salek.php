@@ -65,6 +65,10 @@ include_once('jdf.php');
                 }
             }
         }
+
+        //======================================================================
+        //          BEFORE APPLICATION ARBAYIINS
+        //======================================================================
         $posts = get_field('arbayiin');
         $userID = get_field('salekid')['ID']; // Get the current user ID
         if ($posts) {
@@ -133,12 +137,12 @@ include_once('jdf.php');
                                                <?php
                                                set_query_var( 'userID', $userID );
                                                set_query_var( 'arbayiinID', $arbayiinID );
-                                               echo get_template_part( 'template-parts/content', 'results' );
+//                                               echo get_template_part( 'template-parts/content', 'results' );
                                                ?>
                                            </ul>
                                        </div>
                                    </li>
-                                   <?php echo get_template_part( 'template-parts/content', 'resultsform' ); ?>
+<!--                                   --><?php //echo get_template_part( 'template-parts/content', 'resultsform' ); ?>
                                <?php endif; ?>
                            <?php endforeach; ?>
                        <?php endif; ?>

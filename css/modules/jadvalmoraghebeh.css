@@ -401,24 +401,6 @@ table td .firstcol {
 
 }
 
-
-.resultvalue{
-    text-overflow: ellipsis;
-    /*white-space: nowrap;*/
-    overflow: hidden;
-    line-height: 45px;
-    max-width: 155px;
-    word-break: break-all;
-    padding: 0 .31em;
-    /*border-left: #e7e7e7 solid 1px;*/
-    border-bottom: #e7e7e7 solid 1px;
-    font-size: 18px;
-    border-collapse: collapse;
-    text-align: center;
-    font-family: "IRANYekanWeb(FaNum) Light", "B Yekan";
-
-}
-
 /*.table-num{*/
 /*    background-color: #f3f3f3;*/
 /*    color: #0d3b66;*/
@@ -474,20 +456,6 @@ table td .firstcol {
         font-family: iranyekanwebregularfanum;
     }
 
-    .resultvalue{
-        font-size: 14px;
-        padding: 0 .31em;
-        border-top: #999 solid 1px;
-        /*border-collapse: collapse;*/
-        text-align: center;
-        font-family:iranyekanwebregularfanum;
-        line-height: 45px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        max-width: 150px;
-        word-break: break-all;
-    }
 }
 .dd{
     /*position: sticky;*/

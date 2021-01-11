@@ -68,9 +68,7 @@ while(have_posts()) {
 
     <div class="container container--narrow page-section">
         <?php
-//        echo '<pre>';
-//        var_dump($amalResults);
-//        echo '</pre>';
+
         ?>
 <!--        //------------------------------------------------------->
 <!--        // Meta-Box-->
@@ -88,14 +86,9 @@ while(have_posts()) {
         if (!$amalSize){
             $display = 'hide-table';
             $startDate = apply_filters('arbayiin_startDate', $amalSize);
-//            $startDateFromOptions = get_option($optionName);
             echo '<br/>'  . '<br/>';
-//            var_dump($startDateFromOptions);
         }
 
-//        update_option( $optionName, $startDate);
-//        $startDate = get_option($optionName);
-//        var_dump($startDate);
         if (strlen($startDate) <=10){
             $period = new DatePeriod(
                 new DateTime($startDate), // Start date of the period
@@ -106,7 +99,6 @@ while(have_posts()) {
                 $days[] = $day -> format('Y/m/d');
             }
 
-//            print_r($days);
         }
         if (strlen($startDate) <=10 && strlen($startDate) != 0){
             $display = '';
@@ -224,162 +216,12 @@ while(have_posts()) {
 ?>
         <div class="arbayiin-results-title <?php echo $display;?>">نتایج اربعین</div>
 
-
-
-            <div class="arbayiin-table <?php echo $display;?>">
-            <ul class="min-list" style="display: inline-table" id="results">
 <?php
                 //-----------------------------------------------------
                 // First Column of the Table -- NUMBERS
                 //-----------------------------------------------------
-?>
-                <li class=" dd" >
-                    <div class="t-header" >ردیف</div>
-
-                    <?php
-                        $taskCount = 1;
-                        while (have_rows('amal')): the_row();
-                            // vars
-                            $name = get_sub_field('amal_name');
-                            $content = get_sub_field('amal_desc');
-                            $repeat = get_sub_field('amal_repeat');
-                            $weekDay = get_sub_field('weekday');
-                    ?>
-                    <div class="table-num "><?php echo $taskCount; $taskCount++ ?></div>
-                        <?php endwhile; ?>
-                        <div class="table-num" style="color:  #fffFFF; background-color: #fffFFF"  >-</div>
-                        <div class="table-num" style="color:  #fffFFF; background-color: #fffFFF" >-</div>
-                </li>
-
-                <?php
-                //-----------------------------------------------------
-                // Second Column of the Table -- NAMES
-                //-----------------------------------------------------
-                ?>
-
-                <li class="ddd  " style="display: table-cell; " >
-                    <div class="nameheader" >نام عمل</div>
-
-                    <?php
-                    $taskCount = 1;
-                    $nameArray = array();
-                    while (have_rows('amal')): the_row();
-                        // vars
-                        $name = get_sub_field('amal_name');
-                        $content = get_sub_field('amal_desc');
-                        $repeat = get_sub_field('amal_repeat');
-                        $weekDay = get_sub_field('weekday');
-                        $nameArray[] = $name;
-                        $taskCount++;
-                        ?>
-                        <div class="resultname amal-js" data-content="<?php echo $content; ?>" data-name="<?php echo $name; ?>"><?php echo $name;  ?></div>
-                    <?php endwhile; ?>
-                    <div class="resultname" style="background-color:#7ad2ee; color: #FFFFFF"  >جمع امتیازات روز</div>
-
-                    <!-- NAME COLUMN: DATE CELL -->
-
-                    <div class="resultname sabtdate"  style="background-color: #cbcbcb" >تاریخ ثبت</div>
-
-                </li>
-
-
-                <?php
-                //-----------------------------------------------------
-                // RESULT Columns of the Table
-                //-----------------------------------------------------
-                ?>
-                <?php
-
-                while ($amalResults-> have_posts()) {  // loop through results posts
-                    $amalResults -> the_post();
-                ?>
-                <li class="row" style="display: table-cell; " >
-
-                  <?php #header ?>
-                            <div class="t-header" ><?php echo get_field('day') ?></div>
-
-                            <?php
-                            $results = get_field('results'); // Get results field which is a string seperating each result by a ','
-
-                            $array = explode('!@#', $results);  // explode result's String into an Array
-                            $sumDayPoints = 0;  // Initialize the sum of the day's result points
-                            $dayCounter = 0 ;
-//                            echo '<pre>';
-//                            print_r(array_chunk($array, sizeof($array)-1));
-//                            echo '</pre>';
-                            unset($array[sizeof($array)-1]);
-                            foreach($array as $item): // Loop through result's array
-
-                                preg_match_all('!\d+!', $item, $matches); // we get only numbers in each result from the array and store them into an array called $matches
-//                            array_push($dayPointsArray, intval(implode(' ', $matches[0]))); // get numbers from matches and convert their type to integer and push in $sumDayPoints
-                                $sumDayPoints += intval(implode(' ', $matches[0]));
-                                $resultString = '';
-
-                                    switch ($item){
-                                        case 0:
-                                            $resultString = 'انجام ندادم';
-                                            break;
-                                        case 1:
-                                            $resultString = 'ضعیف';
-                                            break;
-                                        case 2:
-                                            $resultString = 'متوسط';
-                                            break;
-                                        case 3:
-                                            $resultString = 'خوب';
-                                            break;
-                                        case '':
-                                            $resultString = '';
-                                            break;
-                                    }
-
-
-
-                        ?>
-                        <!-- DAY COLUMNS RESULT VALUES -->
-                        <div class="resultvalue" data-result="<?php echo $item; ?>"  data-name="<?php echo $nameArray[$dayCounter]; ?>" ><?php echo $resultString; ?></div>
-                      <?php $dayCounter++; endforeach; ?>
-
-                    <?php
-
-                    // COLOR GRADING FOR THE WHOLE DAY POINTS
-                    if ($sumDayPoints >= ($taskCount*3)*0.6)$sumPointsColor = '#d6ffe7';
-                    if ($sumDayPoints >= ($taskCount*3)*0.3 AND $sumDayPoints <($taskCount*3)*0.6)$sumPointsColor = '#fff9d1';
-                    if ($sumDayPoints < ($taskCount*3)*0.3)$sumPointsColor = '#ffdbdb';
-                    ?>
-
-                    <!-- DAY COLUMNS SUM POINTS -->
-                    <div class="resultvalue" style="background-color: <?php echo $sumPointsColor ?>"><?php echo $sumDayPoints; ?></div>
-
-                    <!-- DAY COLUMNS DATE OF SUBMIT -->
-                    <div class="resultvalue" style="background-color: #ECECEC; direction: ltr"><?php echo jdate('Y-m-d',strtotime(get_the_date())); ?></div>
-
-                </li>
-                <?php  }  wp_reset_postdata();  ?>
-            </ul>
-            </div>
-                <hr class="section-break"/>
-
-<!--        <div class="resultsContainer">-->
-<!--            <div class="firstContainer">-->
-<!--                <div class="firstContainer__static">-->
-<!--                <div class="radif">ردیف</div>-->
-<!--                <div class="amaltitle">نام عمل</div>-->
-<!--                </div>-->
-<!--                <div class="firstContainer__dynamic">-->
-<!--                <div class="radif">1</div>-->
-<!--                <div class="amaltitle">نماز شب</div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="secondContainer">-->
-<!--            --><?php //for($i = 0; $i < 40; $i++): ?>
-<!--            <div class="amalday">shugulu --><?php //echo $i + 1; ?><!--</div>-->
-<!--           --><?php //endfor; ?>
-<!--            </div>-->
-<!--        </div>-->
-
-        <?php
-
+$resultsTable = new ResultsTable(get_current_user_id());     // Instantiate ResultsTable class
+$resultsTable->showResultsTable($display);
 
         //********************************       [ RESULTS FORM ]       ********************************* START >>>>>>
 
@@ -394,11 +236,9 @@ while(have_posts()) {
         </div>
         <?php
 }
-       //####################################################################################### END <<<<<<<<<<<<<<<<<<
+       //############################### END <<<<<<<<<<<<<<<<<<
  ?>
-
                 <hr class="section-break"/>
-
 
         <?php
         //======================================================================
