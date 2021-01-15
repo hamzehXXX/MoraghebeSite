@@ -8,7 +8,7 @@ add_filter('admin_footer_text', 'remove_footer_admin');
 
 // Hide the "Please update now" notification
 function hide_update_notice() {
-get_currentuserinfo();
+    wp_get_current_user();
 if (get_current_user_id() != 1) {
 remove_action( 'admin_notices', 'update_nag', 3 );
 }
@@ -34,6 +34,7 @@ if (get_current_user_id() != 1) {
     remove_meta_box('dashboard_primary', 'dashboard', 'normal'); //Removes the 'WordPress News' widget
     remove_meta_box('dashboard_secondary', 'dashboard', 'normal'); //Removes the secondary widget
     remove_meta_box('dashboard_right_now', 'dashboard', 'normal'); //Removes the 'At a Glance' widget
+    remove_meta_box('dashboard_site_health', 'dashboard', 'normal'); // Removes the 'site health' widget
 }
 
 }

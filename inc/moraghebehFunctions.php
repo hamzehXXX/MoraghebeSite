@@ -41,9 +41,6 @@ function startDateHelper() {}
 function insertResults($argsArray) {
     $title = $argsArray['title'];
     $days = $argsArray['days'];
-//    echo '<pre>';
-//    var_dump($days);
-//    echo '</pre>';
     $arbId = $argsArray['ID'];
     $userID = $argsArray['userID'];
     $user = get_user_by( 'id', $userID );
@@ -56,7 +53,13 @@ function insertResults($argsArray) {
     $displayDate = $amalSize == 0?'(' . $currentWeekDay . ', ' .$startDate.')':'(' . $currentWeekDay . ', '.$days[$amalSize].')';
     $rows = $argsArray['rows'];
 
+$disableSubmitBtn = '';
+$submitButtonText = 'ثبت اعمال';
+if ($days[$amalSize] > jdate('Y/m/d')) {
+    $disableSubmitBtn = 'disabled';
+    $submitButtonText = 'امکان ثبت اعمال روز آینده وجود ندارد';
 
+}
 
     ?>
     <table class="amal-table">
@@ -127,7 +130,7 @@ function insertResults($argsArray) {
         <tfoot>
         <tr>
             <th scope="row" colspan="2" >
-                <input class="" type="submit" id="submit-amal" name="<?php echo 'submit-amal'; ?>" value="ثبت اعمال" >
+                <input class="" type="submit" id="submit-amal" name="<?php echo 'submit-amal'; ?>" value="<?php echo $submitButtonText;?>" <?php echo $disableSubmitBtn;?>>
             </th>
         </tr>
         </tfoot>

@@ -156,7 +156,7 @@ while(have_posts()) {
 
                 <hr class="section-break"/>
 
-            <?php endif; ?>
+            <?php endif; // ($amalsize<$duration) ?>
     <?php endif; ?>
             <?php get_template_part('template-parts/content', 'popup'); ?>
 

@@ -163,7 +163,7 @@ function ourLoginCSS() {
 
 }
 
-add_filter('login_headertitle', 'ourLoginTitle');
+add_filter('login_headertext', 'ourLoginTitle');
 
 function ourLoginTitle() {
     return get_bloginfo('name');
@@ -603,7 +603,7 @@ function wpexplorer_add_dashboard_widgets() {
         'wpexplorer_dashboard_widget_function' // Display function.
     );
 }
-add_action( 'wp_dashboard_setup', 'wpexplorer_add_dashboard_widgets' );
+//add_action( 'wp_dashboard_setup', 'wpexplorer_add_dashboard_widgets' );
 
 /**
  * Create the function to output the contents of your Dashboard Widget.
@@ -612,4 +612,61 @@ function wpexplorer_dashboard_widget_function() {
     echo "Hello there, I'm a great Dashboard Widget. Edit me!";
 }
 
+
+!defined('ABSPATH') AND exit;
+/** Plugin Name: (#64933) »kaiser« Add post/page note */
+
+function wpse64933_add_posttype_note()
+{
+    global $post, $pagenow;
+
+    // Abort in certain conditions, based on the global $pagenow
+    if (!in_array(
+        $pagenow
+        , array(
+            'post-new.php',
+            'post.php',
+            'edit.php'
+        )
+    ))
+        return;
+
+    // Abort in certain conditions, based on the global $post
+    if (!in_array(
+        $post -> post_type
+        , array(
+            'post'
+        , 'page',
+            'amal'
+        )
+    ))
+        return;
+
+    // You can use the global $post here
+    echo '<p>این صفحه مخصوص استفاده در کد های وب سایت می باشد. درصورت تغییر فیلد های این بخش نمایش نتایج اعمال با مشکل مواجه خواهد شد، لذا تغییر فیلد های این بخش به هیچ عنوان توصیه نمی شود. بهترین استفاده ای که در این بخش برای شما توصیه می شود، حذف کردن نتایج شاگردان در صورت لزوم می باشد. منتها دقّت کافی داشته باشید که نتایج را از آخرین تاریخ ثبت شده حذف کنید. مثلا سالکی 10 روز را ثبت کرده است، و شما می خواهید روز پنجم را حذف کنید. برای این کار لازم است روز دهم، نهم، هشتم، هفتم، ششم، و پنجم را حذف بفرمایید.</p>';
+}
+
+add_action('all_admin_notices', 'wpse64933_add_posttype_note');
+
+// extend expiretime of login session
+add_filter('auth_cookie_expiration', 'my_expiration_filter', 99, 3);
+function my_expiration_filter($seconds, $user_id, $remember){
+
+    //if "remember me" is checked;
+    if ( $remember ) {
+        //WP defaults to 2 weeks;
+        $expiration = 14*24*60*60; //UPDATE HERE;
+    } else {
+        //WP defaults to 48 hrs/2 days;
+        $expiration = 2*24*60*60; //UPDATE HERE;
+    }
+
+    //http://en.wikipedia.org/wiki/Year_2038_problem
+    if ( PHP_INT_MAX - time() < $expiration ) {
+        //Fix to a little bit earlier!
+        $expiration =  PHP_INT_MAX - time() - 5;
+    }
+
+    return $expiration;
+}
 ?>
