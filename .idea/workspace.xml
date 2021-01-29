@@ -4,6 +4,7 @@
     <list default="true" id="9d4ca1b5-b948-436d-86c1-d2b7cbb9a39e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/scripts-bundled.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/scripts-bundled.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,6 +77,10 @@
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\moraghebe\wp-content\themes\moraghebehtheme\js" />
+      <recent name="D:\xampp\htdocs\moraghebe\wp-content\themes\moraghebehtheme\js\modules" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ham\Local Sites\moraghebe\app\public\wp-content\themes\moraghebehtheme\fonts" />
       <recent name="C:\Users\Ham\Local Sites\moraghebe\app\public\wp-content\themes\moraghebehtheme\js" />
@@ -136,7 +141,7 @@
       <workItem from="1593173183540" duration="6466000" />
       <workItem from="1610649390901" duration="14561000" />
       <workItem from="1611589101178" duration="4968000" />
-      <workItem from="1611899633098" duration="4652000" />
+      <workItem from="1611899633098" duration="5196000" />
     </task>
     <servers />
   </component>

@@ -29,7 +29,7 @@ function moraghebeh_files() {
 //    wp_enqueue_style('custom-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
     //microtime() gozashtim beja version number ke harbar load kone
     wp_enqueue_script('jquery_moraghebeh-js', get_theme_file_uri('/js/jquery-3.5.1.min.js'), array('jquery'), '3.5.1', true);
-    wp_enqueue_script('persiandatepicker-js', get_theme_file_uri('/js/persianDatepicker.js'), NULL, '1.1', true);  
+    wp_enqueue_script('persiandatepicker-js', get_theme_file_uri('/js/persianDatepicker.min.js'), NULL, '1.1', true);
     wp_enqueue_script('main_moraghebeh-js', get_theme_file_uri('/js/scripts-bundled.js'), NULL, $jQueryVersion, true);
     wp_enqueue_script('prism-js', get_theme_file_uri('/js/prism.js'), NULL, '1.0', true);
 //    wp_enqueue_script('main_moraghebeh-jsfd', get_theme_file_uri('/js/jquery-1.10.1.min.js'), NULL, microtime(), true);
