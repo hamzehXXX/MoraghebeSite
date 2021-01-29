@@ -22,13 +22,13 @@ require get_theme_file_path('/classes/ResultsTable.php');
 function moraghebeh_files() {
     wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
     $styleVersion = '1.1';
-    $jQueryVersion = '1.1';
+    $jQueryVersion = '1.2';
     wp_enqueue_style('moraghebeh_main_styles', get_stylesheet_uri(), NULL, $styleVersion);
 
 
-    wp_enqueue_style('custom-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
+//    wp_enqueue_style('custom-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
     //microtime() gozashtim beja version number ke harbar load kone
-    wp_enqueue_script('jquery_moraghebeh-js', get_theme_file_uri('/js/jquery-3.3.1.min.js'), array('jquery'), '3.3.1', true);
+    wp_enqueue_script('jquery_moraghebeh-js', get_theme_file_uri('/js/jquery-3.5.1.min.js'), array('jquery'), '3.5.1', true);
     wp_enqueue_script('main_moraghebeh-js', get_theme_file_uri('/js/scripts-bundled.js'), NULL, $jQueryVersion, true);
     wp_enqueue_script('prism-js', get_theme_file_uri('/js/prism.js'), NULL, '1.0', true);
 //    wp_enqueue_script('main_moraghebeh-jsfd', get_theme_file_uri('/js/jquery-1.10.1.min.js'), NULL, microtime(), true);

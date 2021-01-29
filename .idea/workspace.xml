@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9d4ca1b5-b948-436d-86c1-d2b7cbb9a39e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/archive-arbayiin.php" beforeDir="false" afterPath="$PROJECT_DIR$/archive-arbayiin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/moraghebehFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/moraghebehFunctions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/single-arbayiin.php" beforeDir="false" afterPath="$PROJECT_DIR$/single-arbayiin.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +138,7 @@
       <workItem from="1593173183540" duration="6466000" />
       <workItem from="1610649390901" duration="14561000" />
       <workItem from="1611589101178" duration="4968000" />
-      <workItem from="1611899633098" duration="1002000" />
+      <workItem from="1611899633098" duration="3409000" />
     </task>
     <servers />
   </component>

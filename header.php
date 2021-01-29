@@ -32,8 +32,8 @@ if (!is_user_logged_in()) {
 <!--        <link rel="stylesheet" href="--><?php //get_theme_file_uri('/dist/themes/bars-movie.css') ?><!--">-->
 
         <!-- Fonts -->
-        <link href="http://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
-        <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+<!--        <link href="http://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">-->
+<!--        <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
 <!--        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
 <!--        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>-->
         <?php wp_head(); ?>
