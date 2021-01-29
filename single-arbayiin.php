@@ -116,41 +116,27 @@ while(have_posts()) {
             <?php if( have_rows('amal') ): ?>
 
             <!--    Header Table -->
-
+            <?php
+            $argsArray = array(
+                'title' => get_the_title(),
+                "amalSize" => $amalSize,
+                'duration' => $duration,
+                'ID' => get_the_ID(),
+                'userID' => get_current_user_id(),
+                'rows' => get_field('amal'),
+                'days' => $days,
+                'currentDayTimeStamp' => $currentDayTimeStamp,
+                "startDate" => $startDate,
+            ); ?>
                 <div class='some-page-wrapper'>
-                    <?php
-                    $argsArray = array(
-                        'title' => get_the_title(),
-                        "amalSize" => $amalSize,
-                        'duration' => $duration,
-                        'ID' => get_the_ID(),
-                        'userID' => get_current_user_id(),
-                        'rows' => get_field('amal'),
-                        'days' => $days,
-                        'currentDayTimeStamp' => $currentDayTimeStamp,
-                        "startDate" => $startDate,
-                    );
 
+                    <?php
                     /**
                      * Functions hooked into after_some-page_wrapper
                      *
                      * @hooked insertResults()
                      */
                     do_action('after_some-page_wrapper', $argsArray); ?>
-
-                    <?php
-                    $taskCount = 1;
-                    $dayPointsArray = [];
-                    while (have_rows('amal')): the_row();
-                        // vars
-                        $name = get_sub_field('amal_name');
-                        $content = get_sub_field('amal_desc');
-                        $repeat = get_sub_field('amal_repeat');
-                        $weekDay = get_sub_field('weekday');
-                        $resultType = get_sub_field('result_type');
-                        ?>
-
-                    <?php endwhile; // have_row ?>
 
                 </div>
 

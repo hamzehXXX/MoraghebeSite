@@ -15,7 +15,7 @@ function setStartDate() {
 //    echo '</form>';
     echo '<div class="start-date__alert"></div>';
     echo '<script>';
-    echo 'jQuery(function () {$("#startDate").persianDatepicker();});';
+    echo 'jQuery(function () {jQuery("#startDate").persianDatepicker();});';
     echo '</script>';
 
 //    if(isset($_POST['sbmt'])) {
@@ -38,6 +38,9 @@ function setStartDate() {
 
 function startDateHelper() {}
 
+/**hooked: after_some-page_wrapper hook
+ * @param $argsArray
+ */
 function insertResults($argsArray) {
     $title = $argsArray['title'];
     $days = $argsArray['days'];
@@ -140,11 +143,11 @@ if ($days[$amalSize] > jdate('Y/m/d')) {
     <?php
     $resultsArray = '';
     if(isset($_POST['submit-amal'])) {
-        echo 'submited!!!';
+//        echo 'submited!!!';
         for ($i=1; $i<$rowNumber; $i++) {
             $result = $_POST['result-'.$i] == ''?'0':$_POST['result-'.$i];
             $resultsArray .= $result . '!@#';
-            echo $_POST['result-'.$i] . ' ___';
+//            echo $_POST['result-'.$i] . ' ___';
         }
 
         $arbDate = 'روز ' . CONSTANTS::getDays()[$amalSize] . $displayDate;

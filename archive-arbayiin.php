@@ -11,73 +11,7 @@
     </div>
     <div class="container container--narrow page-section">
         <div class="generic-content">
-            <?php
-                // $apple = new GooglesheetTest();
-                // $apple -> runSpreadSheet();
-            ?>
-<!--            <hr/>-->
-            <?php
-//            echo locate_template( 'content-select.php' );
-//            $args = ['some data', 'to use'];
-//            $args = array( 'section_title' => 'hello world',
-//                            'section_content' => 'babay');
-//            require 'template-parts/content-select.php';
-//            set_query_var( 'section_title', 'hello world' );
-//                get_template_part('template-parts/content', 'select');
 
-            ?>
-<!--            <hr/>-->
-<!--    <form action="#" method="post">-->
-<!--        <select name="Color[]" multiple> // Initializing Name With An Array-->
-<!--            <option value="عدم انجام">عدم انجام</option>-->
-<!--            <option value="ضعیف">ضعیف</option>-->
-<!--            <option value="متوسط">متوسط</option>-->
-<!--            <option value="خوب">خوب</option>-->
-<!--        </select>-->
-<!--        <input type="submit" name="submit" value="انتقال به spreadsheet" />-->
-<!--    </form>-->
-<?php
-// $apple = new GooglesheetTest();
-// echo $apple->runSpreadSheet();
-//if(isset($_POST['submit'])) {
-//// As output of $_POST['Color'] is an array we have to use foreach Loop to display individual value
-//    foreach ($_POST['Color'] as $select) {
-//        echo "نتیجه ی  :" . $select . ' به spreadsheet منتقل شد.' . '<br/>'; // Displaying Selected Value
-//        echo $apple->runSpreadSheet($select);
-//    }
-//}
-    ?>
-<!--            <hr/>-->
-<!--    <form action="" method="post">-->
-<!--        <input type="radio" name="radio" value="Radio 1">Radio 1-->
-<!--        <input type="radio" name="radio" value="Radio 2">Radio 2-->
-<!--        <input type="radio" name="radio" value="Radio 3">Radio 3-->
-<!--        <input type="submit" name="submit" value="Get Selected Values" />-->
-<!--    </form>-->
-<?php
-//if (isset($_POST['submit'])) {
-//    if (isset($_POST['radio'])) {
-//        echo "You have selected :" . $_POST['radio'];  //  Displaying Selected Value
-//        echo $apple->runSpreadSheet($_POST['radio']);
-//    }
-//}
-    ?>
-<!--            <hr/>-->
-
-<!--            <form method="post" >-->
-<!--                Name: <input type="text" name="fname">-->
-<!--                <input type="submit">-->
-<!--            </form>-->
-<!--            --><?php
-//            $allowed_keys = [ 'author', 'post_author', 'date', 'post_date' ];
-//            $orderby      = sanitize_key( $_POST['fname'] );
-//            if ( in_array( $orderby, $allowed_keys, true ) ) {
-//                // Modify the query to sort by the orderby key.
-//                echo 'in array bud';
-//            } else {
-//                echo 'nabud';
-//            }
-//            ?>
             <h4 class="headline--post-title">اربعین های جاری من</h4>
             <ul class="" id="my-arbayiin">
             <?php //################################################### NEW ARBAYIINS################################
