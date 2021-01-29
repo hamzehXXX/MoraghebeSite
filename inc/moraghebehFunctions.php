@@ -15,7 +15,7 @@ function setStartDate() {
 //    echo '</form>';
     echo '<div class="start-date__alert"></div>';
     echo '<script>';
-    echo 'jQuery(function () {$("#startDate").persianDatepicker();});';
+    echo 'jQuery(function () {jQuery("#startDate").persianDatepicker();});';
     echo '</script>';
 
 //    if(isset($_POST['sbmt'])) {
