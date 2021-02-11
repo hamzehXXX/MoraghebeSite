@@ -311,6 +311,16 @@ function note_custom_columns_list($columns) {
 }
 add_filter( 'manage_note_posts_columns', 'note_custom_columns_list' );
 
+function amal_custom_columns_list($columns) {
+    $columns['author']     = 'نویسنده';
+    // $columns['title']     = 'نوع یادداشت';
+//    $columns['date']     = 'تاریخ';
+//    unset( $columns['title']  );
+
+    return $columns;
+}
+add_filter( 'manage_amal_posts_columns', 'amal_custom_columns_list' );
+
 
 
 
