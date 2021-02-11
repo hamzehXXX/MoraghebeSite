@@ -312,7 +312,7 @@ function note_custom_columns_list($columns) {
 add_filter( 'manage_note_posts_columns', 'note_custom_columns_list' );
 
 function amal_custom_columns_list($columns) {
-    $columns['author']     = 'نویسنده';
+    $columns['author']     = 'نام سالک';
     // $columns['title']     = 'نوع یادداشت';
 //    $columns['date']     = 'تاریخ';
 //    unset( $columns['title']  );
