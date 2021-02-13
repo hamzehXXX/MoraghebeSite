@@ -8,7 +8,7 @@ function setStartDate() {
     echo '<label for="startDate" >تاریخ شروع: </label>';
     ?>
     <input class="start-date" type="text" id="startDate" name="drddd" autocomplete="off" value=""
-            data-userid = "<?php echo get_current_user_id(); ?>"
+            data-userid = "<?php echo get_current_user_id(); ?>"  onkeydown="return false" 
             data-arbid = "<?php the_ID(); ?>">
     <?php
     echo '<button name="sbmt" id="submit-date" >انتخاب</button>';

@@ -21,24 +21,21 @@
                 'numberposts'	=> -1,
                 'posts_per_page'	=> -1,
                 'post_type'		=> 'salek',
+				 'meta_query' => array(
+                array(
+                    'key' => 'salekid',
+                    'compare' => '=',
+                    'value' => get_current_user_id()
+                )
+            )
             );
-            $the_query = new WP_Query( $myargs);
-            while ($the_query->have_posts()){
-                $the_query->the_post();
-//                echo get_field('salekid')['ID'] . " - " . get_current_user_id() . '<br/>';
-                if (get_field('salekid')['ID'] == get_current_user_id()){
-
-                    // arbayiin haye bad az application
-                    /**
-                     * ARBAYIIN HAYE BAD AZ APPLICATION
-                     * Field Structure:
-                     *
-                     * - parent_repeater (Repeater)
-                     *   - parent_title (Text)
-                     *   - child_repeater (Repeater)
-                     *     - child_title (Text)
-                     */
-                    if( have_rows('arb_after_app') ):
+			
+			$post = get_posts($myargs);
+			$post = $post[0];  // get_posts in $posts gets an array with only one element in this case which is the current salek post
+			if ($post) {
+				//print_r($post);
+				setup_postdata( $post);
+				if( have_rows('arb_after_app') ):
                         while( have_rows('arb_after_app') ) : the_row();
 
                             // Get parent value.
@@ -57,10 +54,31 @@
                         <?php
                         endwhile; //have_rows
                     endif; // have_rows
-                }
-            }
+			}
+            //$the_query = new WP_Query( $myargs);
+           // while ($the_query->have_posts()){
+              //  $the_query->the_post();
+				
+//                echo get_field('salekid')['ID'] . " - " . get_current_user_id() . '<br/>';
+         //       if (get_field('salekid')['ID'] == get_current_user_id()){
+
+                    // arbayiin haye bad az application
+                    /**
+                     * ARBAYIIN HAYE BAD AZ APPLICATION
+                     * Field Structure:
+                     *
+                     * - parent_repeater (Repeater)
+                     *   - parent_title (Text)
+                     *   - child_repeater (Repeater)
+                     *     - child_title (Text)
+                     */
+                    
+              //  }
+           // }
             ?>
-            </ul>
+            </ul>	
+			
+			<?php wp_reset_postdata(); ?>
             <hr/>
         <h4>اربعین های سابق</h4>
 
