@@ -65,6 +65,12 @@ function moraghebeh_features() {
 add_action('after_setup_theme', 'moraghebeh_features');
 
 
+add_filter( 'manage_edit-salek_sortable_columns', 'smashing_salek_sortable_columns');
+function smashing_salek_sortable_columns( $columns ) {
+  $columns['khadem'] = 'khademid';
+  return $columns;
+}
+
 // edit default queries
 function moraghebeh_adjust_queries($query) {
     if (!is_admin() AND is_post_type_archive('event') AND $query->is_main_query()) {
@@ -83,7 +89,14 @@ function moraghebeh_adjust_queries($query) {
         $query->set('posts_per_page', -1);
     }
 
+if( ! is_admin() || ! $query->is_main_query() ) {
+    return;
+  }
 
+  if ( 'khademid' === $query->get( 'orderby') ) {
+    $query->set( 'orderby', 'meta_value' );
+    $query->set( 'meta_key', 'khademid' );
+  }
 }
 add_action('pre_get_posts', 'moraghebeh_adjust_queries');
 
@@ -226,7 +239,7 @@ if( is_user_logged_in() ) {
 }
 
 
-add_filter(
+/* add_filter(
     'posts_results',
     function (array $posts, WP_Query $query) {
         foreach ($posts as $post) {
@@ -240,7 +253,7 @@ add_filter(
     },
     10,
     2
-);
+); */
 
 // CHANGE POST_OBJECT custom field orderby to date modified
 add_filter( 'acf/fields/post_object/query', 'change_posts_order' );
@@ -251,22 +264,12 @@ function change_posts_order( $args ) {
 }
 
 
-
-function salek_custom_columns_list($columns) {
-    $columns['author']     = 'نویسنده';
-    $columns['khademid']     = 'خادم';
-//    $columns['date']     = 'تاریخ';
-//    unset( $columns['title']  );
-
-    return $columns;
-}
-add_filter( 'manage_salek_posts_columns', 'salek_custom_columns_list' );
-
 function my_page_columns($columns) {
     $columns = array(
         'cb' => '< input type="checkbox" />',
         'title' => 'نام سالک',
         'khadem' => 'خادم',
+        'arb_after_app' => 'اربعینیات جاری',
         'city' => 'شهر'
     );
     return $columns;
@@ -274,7 +277,14 @@ function my_page_columns($columns) {
 function my_custom_columns($column) {
     global $post;
     if($column == 'khadem') {
-        echo get_field('khademid', $post->ID)['display_name'];
+		$firstName = get_field('khademid', $post->ID)['user_firstname'];
+		$lastName = get_field('khademid', $post->ID)['user_lastname'];
+		
+		?> 
+		<a href="<?php echo get_admin_url($post->ID) . 'edit.php?post_type=salek&khademid=' .  get_field('khademid', $post->ID)['ID']; ?>">
+		<?php
+        echo $firstName . ' ' . $lastName;
+		echo '</a>';
     } else {
         echo '';
     }
@@ -283,6 +293,21 @@ function my_custom_columns($column) {
     } else {
         echo '';
     }
+	
+	if($column == 'arb_after_app') {
+		/* echo '<pre>';
+		print_r(get_field($column, $post->ID));
+		echo '</pre>'; */
+		$dastoorRows = get_field($column, $post->ID);
+	if(!($dastoorRows)) {
+		echo '<h3 style="color:#ff0000">فاقد اربعین</h3>';
+		return;
+	}
+		foreach($dastoorRows as $row) {
+			echo $row['dastoor_takhsised']->post_title;
+			echo '<br/>';
+		}
+	}
 }
 add_action("manage_salek_posts_custom_column", "my_custom_columns");
 add_filter("manage_salek_posts_columns", "my_page_columns");
@@ -368,6 +393,53 @@ function rose_filter_by_author() {
         wp_dropdown_users($params);
     }
 }
+
+//add_action('restrict_manage_posts', 'salek_filter_by_khadem');
+function salek_filter_by_khadem() {
+	if (isset($_GET['post_type'])) {
+        $type = $_GET['post_type'];
+    }
+	
+	if('salek' == $type) {
+		$params = array(
+			'name' => 'khademid',
+			'show_option_all' => 'همه ی سالکان'
+		);
+		
+		if (isset($_GET['user'])) {
+            $params['selected'] = $_GET['user'];
+        }
+        wp_dropdown_users($params);
+	}
+}
+
+
+  
+  
+  //add_filter( 'parse_query', 'filter_request_query' , 10);
+function filter_request_query($query){
+    //modify the query only if it admin and main query.
+    if( !(is_admin() AND $query->is_main_query()) ){ 
+      return $query;
+    }
+    //we want to modify the query for the targeted custom post and filter option
+    if( !('salek' === $query->query['post_type'] AND isset($_GET['khademid']) ) ){
+      return $query;
+    }
+    //for the default value of our filter no modification is required
+    if(0 == $_GET['khademid']){
+      return $query;
+    }
+   //modify the query_vars.
+    $query->query_vars = array(array(
+      'field' => 'khademid',
+      'value' => $_GET['khademid'],
+      'compare' => '=',
+      'type' => 'CHAR'
+    ));
+    return $query;
+  }
+  
 
 // Enable font size and font family selects in the editor
 if ( ! function_exists( 'am_add_mce_font_buttons' ) ) {
