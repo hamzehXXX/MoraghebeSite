@@ -33,7 +33,7 @@ private $nameArray;
     private function numbersColumn(){
         echo '<li class=" dd" >'; // start of the first column
         echo '<div class="t-header" >ردیف</div>';
-        $taskCount = 1;
+        $taskCount = 0;
         while (have_rows('amal')) {
             the_row();
             echo '<div class="table-num ">';
@@ -73,9 +73,7 @@ private $nameArray;
 
     private function resultsColumn($taskCount){
         $amalResults = $this->getAmalResults();
-//        echo '<pre>';
-//        print_r($amalResults);
-//        echo '</pre>';
+
         while ($amalResults -> have_posts()) {
             $amalResults -> the_post();
             echo '<li class="row" style="display: table-cell; " >'; // start result column
@@ -90,8 +88,14 @@ private $nameArray;
             $dayCounter = 0;
             unset($array[sizeof($array)-1]); // remove the last element of array which is empty
             foreach($array as $item) { // Loop through result's array
-                preg_match_all('!\d+!', $item, $matches); // we get only numbers in each result from the array and store them into an array called $matches
-                $sumDayPoints += intval(implode(' ', $matches[0]));
+			$singlePoint = intval($item);
+                //preg_match_all('!\d+!', $item, $matches); // we get only numbers in each result from the array and store them into an array called $matches
+
+				if($singlePoint > 3 or strlen($item) > 1) {
+					$singlePoint = 3;
+				} 
+			
+                $sumDayPoints += $singlePoint;
                 $item = esc_html($item);
                 $resultStringArray = $this -> getResultString($item);
                 $resultString = $resultStringArray[0];
