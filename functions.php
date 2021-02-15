@@ -143,9 +143,8 @@ add_action('admin_init', 'redirectSubsToFrontEnd');
 
 function redirectSubsToFrontEnd() {
     $ourCurrentUser = wp_get_current_user();
-
-    if (count($ourCurrentUser->roles) == 1 AND ($ourCurrentUser->roles[0] == 'subscriber') OR ($ourCurrentUser->roles[0] == 'salek-mard') or ($ourCurrentUser->roles[0] == 'salek-zan')
-        or ($ourCurrentUser->roles[0] == 'khadem-mard')or ($ourCurrentUser->roles[0] == 'khadem-zan')) {
+	$ourCurrentUserRoles = $ourCurrentUser->roles;
+	if(!in_array('admin', $ourCurrentUserRoles) AND !in_array('administrator', $ourCurrentUserRoles) ) {
         wp_redirect(site_url('/'));
         exit;
     }
