@@ -17,7 +17,7 @@ while(have_posts()) {
         </div>
 
         <div>
-            sdfrrr
+
             <div class="embed-container">
                 <embed src="http://www.google.com" style="width:500px; height: 300px;"/>
                 <?php the_field('embed'); ?>

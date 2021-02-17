@@ -1,5 +1,7 @@
 <?php
-
+/** hooked in arbayiin_startDate filter
+ * @return mixed|void
+ */
 function setStartDate() {
     $optionName = get_current_user_id() . '-' . get_the_ID();
     $startDate = get_option($optionName);
@@ -25,20 +27,15 @@ function setStartDate() {
 //    } else {
 //        $startDate = 'لطفا حتما تاریخ شروع را مشخص بفرمایید';
 //    }
-
-
 //    echo $startDate;
 
-    if ($startDate == '') {
-
-    }
     return $startDate;
 
 }
 
 function startDateHelper() {}
 
-/**hooked: after_some-page_wrapper hook
+/**hooked: after_some-page_wrapper hook in single-arbayiin.php
  * @param $argsArray
  */
 function insertResults($argsArray) {
@@ -49,6 +46,7 @@ function insertResults($argsArray) {
     $user = get_user_by( 'id', $userID );
     $startDate = $argsArray['startDate'];
     $amalSize = $argsArray['amalSize'];
+
 
     $optionName = get_current_user_id() . '-' . get_the_ID() . '-period';
     $days = get_option($optionName);

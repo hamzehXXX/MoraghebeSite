@@ -717,8 +717,7 @@ function wpse64933_add_posttype_note()
     if (!in_array(
         $post -> post_type
         , array(
-            'post'
-        , 'page',
+            
             'amal'
         )
     ))
@@ -751,4 +750,16 @@ function my_expiration_filter($seconds, $user_id, $remember){
 
     return $expiration;
 }
+
+
+
+// filter
+function my_posts_where( $where ) {
+
+    $where = str_replace("meta_key = 'arb_after_app_$", "meta_key LIKE 'arb_after_app_%", $where);
+
+    return $where;
+}
+
+add_filter('posts_where', 'my_posts_where');
 ?>
