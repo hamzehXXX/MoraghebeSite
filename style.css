@@ -1025,7 +1025,7 @@ body.login {
   line-height: 1.65;
 }
 .site-header {
-
+  /*z-index: 3;*/
   position: absolute;
   top: 0;
   left: 0;
@@ -1043,6 +1043,7 @@ body.login {
     height: 30px;
   }
 .site-header__menu {
+  z-index: 5;
     visibility: hidden;
     position: relative;
     background-color: rgba(13, 55, 94, 0.89);
