@@ -2,6 +2,7 @@ import $ from 'jquery';
 
 class MobileMenu {
   constructor() {
+
     this.menu = $(".site-header__menu");
     this.openButton = $(".site-header__menu-trigger");
     this.events();

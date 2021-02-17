@@ -24,4 +24,3 @@ var rate = new Rate();
 var profile = new Profile();
 var amal = new Amal();
 var resulstsForm = new ResultsForm();
-console.log("scripts");

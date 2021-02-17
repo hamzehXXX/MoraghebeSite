@@ -49,7 +49,7 @@ include('jdf.php'); ?>
             <h2>
                 <a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
             </h2>
-            <small><?php echo jdate('jS F, Y') ?> توسط <?php the_author_posts_link() ?></small>
+<!--            <small>--><?php //echo jdate('jS F, Y') ?><!-- توسط --><?php //the_author_posts_link() ?><!--</small>-->
 
             <div class="entry">
             <?php the_excerpt(); ?>

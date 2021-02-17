@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d4ca1b5-b948-436d-86c1-d2b7cbb9a39e" name="Default Changelist" comment="" />
+    <list default="true" id="9d4ca1b5-b948-436d-86c1-d2b7cbb9a39e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archive-arbayiin.php" beforeDir="false" afterPath="$PROJECT_DIR$/archive-arbayiin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archive-salek.php" beforeDir="false" afterPath="$PROJECT_DIR$/archive-salek.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +143,8 @@
       <workItem from="1611589101178" duration="4968000" />
       <workItem from="1611899633098" duration="7718000" />
       <workItem from="1613018532896" duration="787000" />
+      <workItem from="1613404822470" duration="708000" />
+      <workItem from="1613486223032" duration="145000" />
     </task>
     <servers />
   </component>

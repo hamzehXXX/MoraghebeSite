@@ -46,8 +46,8 @@ include('jdf.php');
                     <h2 class="headline headline--medium headline--post-title"><a
                                 href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                     <div class="metabox">
-                        <p>نوشته شده توسط <?php the_author_posts_link(); ?> در
-                            <?php echo jdate('d F Y'); ?> در <?php echo get_the_category_list(', '); ?></p>
+                        <p>نوشته شده در
+                            <?php echo gregorian_to_jalali(get_the_date('Y'), get_the_date('m'), get_the_date('d'), '/'); ?> در <?php echo get_the_category_list(', '); ?></p>
                     </div>
 
                     <div class="generic-content">
