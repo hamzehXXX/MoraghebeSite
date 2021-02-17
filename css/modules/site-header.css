@@ -20,7 +20,7 @@
 
   &__menu {
     visibility: hidden;
-    position: absolute;
+    position: relative;
     background-color: color($mainBlue a(89%) b(+3%));
     left: 0;
     right: 0;
@@ -42,7 +42,7 @@
       visibility: visible;
       opacity: 1;
       transform: translateY(0) scale(1);
-      position: absolute;
+      position: relative;
       background-color: transparent;
       float: right;
       padding-top: 0;
