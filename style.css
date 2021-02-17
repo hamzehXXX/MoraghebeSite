@@ -1025,7 +1025,7 @@ body.login {
   line-height: 1.65;
 }
 .site-header {
-  z-index: 3;
+
   position: absolute;
   top: 0;
   left: 0;
@@ -1057,6 +1057,7 @@ body.login {
   }
 .site-header__menu--active {
       position: absolute;
+      z-index: 9;
       opacity: 1;
       transform: translateY(0);
       visibility: visible;
