@@ -47,7 +47,6 @@ function insertResults($argsArray) {
     $startDate = $argsArray['startDate'];
     $amalSize = $argsArray['amalSize'];
 
-
     $optionName = get_current_user_id() . '-' . get_the_ID() . '-period';
     $days = get_option($optionName);
     $currentWeekDay = empty($days)?'':getCurrentWeekDay($days[$amalSize]);

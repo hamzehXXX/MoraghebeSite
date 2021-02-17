@@ -18,11 +18,6 @@ while(have_posts()) {
 
         <div>
 
-            <div class="embed-container">
-                <embed src="http://www.google.com" style="width:500px; height: 300px;"/>
-                <?php the_field('embed'); ?>
-            </div>
-
             <?php  the_content(); ?></div>
     <?php
     $relatetArbayiin = get_field('related_arbayiin');
