@@ -1045,7 +1045,7 @@ body.login {
 .site-header__menu {
   z-index: 5;
     visibility: hidden;
-    position: relative;
+    position: absolute;
     background-color: rgba(13, 55, 94, 0.89);
     left: 0;
     right: 0;

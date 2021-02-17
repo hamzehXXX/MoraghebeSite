@@ -21,7 +21,7 @@ require get_theme_file_path('/classes/ResultsTable.php');
 
 function moraghebeh_files() {
     wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-    $styleVersion = '1.6';
+    $styleVersion = '1.7';
     $jQueryVersion = '1.3';
     wp_enqueue_style('moraghebeh_main_styles', get_stylesheet_uri(), NULL, $styleVersion);
 
