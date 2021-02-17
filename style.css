@@ -1308,7 +1308,7 @@ body.login {
     margin: 0;
   }
 .hero-slider {
-  position: relative;
+  position: absolute;
 
 }
 .hero-slider div {
