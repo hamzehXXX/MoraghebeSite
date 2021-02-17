@@ -37,7 +37,7 @@ private $nameArray;
         while (have_rows('amal')) {
             the_row();
             echo '<div class="table-num ">';
-            echo $taskCount;
+            echo $taskCount+1;
             $taskCount++;
             echo '</div>';
         }
