@@ -33,12 +33,19 @@ function setStartDate() {
 
 }
 
-function startDateHelper() {}
+function testHelper($var) {
+    echo '<pre>';
+    print_r($var);
+    echo '</pre>';
+}
+
 
 /**hooked: after_some-page_wrapper hook in single-arbayiin.php
  * @param $argsArray
  */
 function insertResults($argsArray) {
+
+//    echo '<br/>' . jdate('r', $timeStamp + 2*86400);
     $title = $argsArray['title'];
     $days = $argsArray['days'];
     $arbId = $argsArray['ID'];
@@ -53,6 +60,7 @@ function insertResults($argsArray) {
     $displayDate = $amalSize == 0?'(' . $currentWeekDay . ', ' .$startDate.')':'(' . $currentWeekDay . ', '.$days[$amalSize].')';
     $rows = $argsArray['rows'];
 
+//testHelper($days);
 $disableSubmitBtn = '';
 $submitButtonText = 'ثبت اعمال';
 if ($days[$amalSize] > jdate('Y/m/d')) {
@@ -151,7 +159,7 @@ if ($days[$amalSize] > jdate('Y/m/d')) {
     wp_insert_post(array(
             'post_type' => 'amal',
             'post_status' => 'publish',
-            'post_title' => $user->first_name . ' ' . $arbDate . get_the_title($arbId),
+            'post_title' => $user->user_login . ' - ' . $user->display_name . ' - ' . $arbDate . get_the_title($arbId),
             'post_author' => $userID,
             'meta_input' => array(
                 'arbayiin' => $arbId,

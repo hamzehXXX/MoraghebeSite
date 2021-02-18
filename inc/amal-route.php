@@ -27,22 +27,28 @@ function amalRoute() {
     ));
 
     function manageStartDate($data) {
-        include('classes/CONSTANTS.php');
+        include(get_stylesheet_directory() . '/jdf.php');
         $optionName = sanitize_text_field($data['optionName']);
         $startDate = sanitize_text_field($data['startDate']);
         $arbid = sanitize_text_field($data['arbid']);
         $optionsStartDate = get_option($optionName);
         $duration = get_post_meta($arbid, 'arbayiin-duration', true);
 
-        if (strlen($startDate) <=10 AND strlen($startDate > 3)) {
-            $period = new DatePeriod(
-                new DateTime($startDate), // Start date of the period
-                new DateInterval('P1D'), // Define the intervals as Periods of 1 Day
-                $duration - 1 // Apply the interval $duration times on top of the starting date
-            );
-            foreach ($period as $day) {
-                $days[] = $day -> format('Y/m/d');
-            }
+//        if (strlen($startDate) <=10 AND strlen($startDate > 3)) {
+//            $period = new DatePeriod(
+//                new DateTime($startDate), // Start date of the period
+//                new DateInterval('P1D'), // Define the intervals as Periods of 1 Day
+//                $duration - 1 // Apply the interval $duration times on top of the starting date
+//            );
+//            foreach ($period as $day) {
+//                //$days[] = $day -> format('Y/m/d');
+//            }
+//        }
+
+        $timeArray = explode( '/', $startDate );
+        $timeStamp = jmktime(0,0,0,$timeArray[1], $timeArray[2], $timeArray[0]);
+        for($i = 0; $i < $duration; $i++) {
+            $days[] = jdate('Y/m/d', $timeStamp + $i*86400);
         }
 
         if (isset($optionsStartDate)){
@@ -54,7 +60,7 @@ function amalRoute() {
             add_option($optionName . '-period', $days);
             $output = 'from add: ' . get_option($optionName);
         }
-        return CONSTANTS::getDays(0) ;
+        return  get_option($optionName . '-period');
     }
 
 

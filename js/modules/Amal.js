@@ -16,6 +16,7 @@ class Amal {
         var userid = $("input.start-date").data("userid");
         var arbid = $("input.start-date").data("arbid");
         var optionName = userid + "-" + arbid;
+        console.log(optionName);
         // alert(optionName);
         if (startDate == '') {
             $(".arbayiin-table, .generic-content").addClass("hide-table");
