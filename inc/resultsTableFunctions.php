@@ -214,9 +214,10 @@ function createInsertDayQuery() {
     $temp = 1;
     $tempAllRess = 0;
     $returnText = array();
-    foreach ($allResults as $result) {
+    for ($i = 0; $i < 15000; $i++){
+//    foreach ($allResults as $result) {
         $resultsArr = array();
-        $dayID = $result -> ID;
+        $dayID = $allResults[$i] -> ID;
         $arbId = get_field('arbayiin', $dayID);
         $arbidArr[] = $arbId;
         $amals = get_field('amal', $arbId);
