@@ -75,7 +75,7 @@ while(have_posts()) {
 <!--        <div style="overflow-x: auto">-->
             <?php
 //            ini_set('memory_limit', '-1');
-            testHelper($wpdb->query($queryString));
+            var_dump($wpdb->query($queryString));
             ?>
 <!--        </div>-->
         <?php
