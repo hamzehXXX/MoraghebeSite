@@ -313,7 +313,7 @@ function createInsertDayQuery() {
 //            $dayVals .= ', ';
 //        }
 //        $temp++;
-//        if ($tempAllRess > 177135)break;
+        if ($tempAllRess > 177135)break;
     }
 
 //    return $temp;
