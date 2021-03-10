@@ -40,12 +40,14 @@ while(have_posts()) {
 //    $resultsFromDb = queryAllDaysForArb($currentUserId, $arbayiinID, $repeat);
 //        testHelper($resultsFromDb);
     $resultsOfDay = queryAllResultIDs($wpdb, $currentUserId, $arbayiinID, $repeat);
+//    testHelper($resultsOfDay);
     $result = array();
     foreach ($resultsOfDay as $element) {
         $result[$element->dayid]['date'] = $element->date;
         $result[$element->dayid]['submitdate'] = $element->submitdate;
         $result[$element->dayid]['results'][] = $element;
     }
+    testHelper($result);
 
     $amalSize = sizeof($result);
 //********************************       [ PAGE BANNER ]       ********************************* START >>>>>>
