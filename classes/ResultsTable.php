@@ -128,7 +128,7 @@ private $nameArray;
 
             #insert day of amal submition
             echo ' <div class="resultvalue" style="background-color: #ECECEC; direction: ltr">';
-            echo jdate('Y/m/d H:i:s', $day['submitdate']);
+            echo jdate('Y/m/d H:i', $day['submitdate']);
             echo '</div>';
             echo '</li>';
             $dayCounter++;
