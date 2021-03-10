@@ -38,7 +38,7 @@
                     $amal = get_sub_field('amal_name');
                     $description = get_sub_field('amal_desc');
                     $catID = getOrCreateCatId($amal, 'arbAmal', $description);
-//                    update_sub_field(array('amal', $rowNumber, 'amal_term'), $catID, get_the_ID());
+                    update_sub_field(array('amal', $rowNumber, 'amal_term'), $catID, get_the_ID());
 //                    $amalArray = populateAmalArray($amal, $amalArray);
 
                     $rowNumber++;
