@@ -314,7 +314,7 @@ function createInsertDayQuery() {
 //        }
 //        $temp++;
 //        if ($tempAllRess > 177135)break;
-//    }
+    }
 
 //    return $temp;
 //    return  $returnText;
