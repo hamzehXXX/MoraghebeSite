@@ -1,5 +1,5 @@
 .hero-slider {
-  position: relative;
+  position: absolute;
 
   div {
     outline: none;

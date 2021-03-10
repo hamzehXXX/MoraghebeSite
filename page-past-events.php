@@ -24,7 +24,7 @@
             10 => 'دی',
             11 => 'بهمن',
             12 => 'اسفند');
-        include_once 'jdf.php';
+//        include_once 'jdf.php';
         $today = jdate('n');
         $pastEvents = new WP_Query(array(
             'paged' => get_query_var('paged', 1),

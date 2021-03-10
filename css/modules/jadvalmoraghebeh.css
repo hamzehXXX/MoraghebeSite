@@ -667,11 +667,18 @@ table td .firstcol {
 }
 
 .arbayiin-title{
-    border: 1px solid #c32929;
+    font-family: iranyekanwebregularfanum;
     width: 80%;
     border-radius: 5px;
     font-size: 1.3em;
     padding: 10px;
+
+    &__current {
+         border: 2px solid #82c38a;
+     }
+    &__finished {
+         border: 1px solid #5a55c3;
+     }
 }
 .arbayiin-title a:nth-of-type(even){
     background: #d8226b;

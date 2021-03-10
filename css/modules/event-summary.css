@@ -9,6 +9,7 @@
 
   &__title a {
     color: #173f58;
+  text-decoration: none;
   }
 
   &__date {

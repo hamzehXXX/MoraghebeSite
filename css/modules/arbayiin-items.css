@@ -1,0 +1,18 @@
+.arbayiin-items {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    font-size: 14px;
+    font-family: iranyekanwebregularfanum;
+    background-color: #fffbfc;
+    margin-top: 8px;
+    align-items: center;
+
+    &__child {
+        flex: 50%;
+
+        @mixin atMobile {
+            /*flex: 100%;*/
+        }
+     }
+}

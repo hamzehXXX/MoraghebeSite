@@ -6,7 +6,7 @@ if (!is_user_logged_in() AND ( !(in_array('khadem-mard', $currentUserRoles)) OR 
     exit;
 }
 get_header();
-include_once('jdf.php');
+//include_once('jdf.php');
 //while(have_posts()) {
 //    the_post();
     $name = get_the_title();
@@ -45,6 +45,7 @@ include_once('jdf.php');
                 the_row();
                 // Get parent value.
                 $post = get_sub_field('dastoor_takhsised');
+                $repeat = get_sub_field('repeat');
                 $dastoor_title = $post->post_title;
                 $dastoor_link = $post->guid;
                 $dastoor_ID = $post->ID;
@@ -57,7 +58,18 @@ include_once('jdf.php');
                     <?php
                 setup_postdata($post); // Set the Main Query to the 'arbayiin'
                         $resultsTable = new ResultsTable($salekID);     // Instantiate ResultsTable class
-                        $resultsTable->showResultsTable('');      // Show the results table
+
+//                    $resultsFromDb = queryAllDaysForArb($salekID, $dastoor_ID, $repeat);
+//        testHelper($resultsFromDb);
+                    $resultsOfDay = queryAllResultIDs($wpdb, $salekID, $dastoor_ID, $repeat);
+                    $result = array();
+                    foreach ($resultsOfDay as $element) {
+                        $result[$element->dayid]['date'] = $element->date;
+                        $result[$element->dayid]['submitdate'] = $element->submitdate;
+                        $result[$element->dayid]['results'][] = $element;
+                    }
+
+                        $resultsTable->showResultsTable('', $dastoor_ID, $result);      // Show the results table
                 wp_reset_postdata();                            // Sets the Main Query back to the 'salek'
                     ?>
                     <br/>

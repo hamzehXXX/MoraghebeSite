@@ -42,12 +42,13 @@
 @import "modules/tables.css";
 /*@import "modules/slidebars.css";*/
 @import "modules/star-rating.css";
-@import "modules/fontawesome/css/font-awesome.min.css";
+/*@import "modules/fontawesome/css/font-awesome.min.css";*/
 @import "modules/prism.css";
 @import "modules/persianDatepicker-default.css";
 @import "modules/persianDatepicker-dark.css";
-@import "modules/persianDatepicker-latoja.css";
+/*@import "modules/persianDatepicker-latoja.css";*/
 @import "modules/persianDatepicker-lightorang.css";
 @import "modules/persianDatepicker-melon.css";
 @import "modules/resultstable-grid.css";
 @import "modules/resultvalue.css";
+@import "modules/arbayiin-items.css";

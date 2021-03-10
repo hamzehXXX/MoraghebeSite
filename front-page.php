@@ -4,8 +4,8 @@ if (!is_user_logged_in()) {
     exit;
 }
 get_header();
-include('classes/CONSTANTS.php');
-include_once('jdf.php');
+//include('classes/CONSTANTS.php');
+//include_once('jdf.php');
 ?>
 
     <div class="page-banner">
@@ -85,7 +85,7 @@ if ($iPod || $iPhone) {
                                 </p>
                             </div>
                         </div>
-                    <?php }
+                    <?php } wp_reset_postdata();
                 ?>
 
 
@@ -106,12 +106,12 @@ if ($iPod || $iPhone) {
                     ),
                     'posts_per_page' => -1,
                 ));
-
-                    $counter = 0;
+                $counter = 0;
                     while ($homepagePosts->have_posts()) {
                         $homepagePosts->the_post();
                         $relatedArb = get_field('related_arbayiin', get_the_ID());
-                        if ($relatedArb === ''):;
+
+                        if ($relatedArb == ''):;
                         if (  $counter < 3):;
                         $counter++;
                         ?>
@@ -123,14 +123,14 @@ if ($iPod || $iPhone) {
                             <div class="event-summary__content">
                                 <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
                                 <p><?php if (has_excerpt()) {
-                                    echo esc_html(get_the_excerpt());
+                                    echo (get_the_excerpt());
                                     } else {
                                     echo wp_trim_words(esc_html(get_the_content()), 18);
-                                    } ?><a href="<?php the_permalink(); ?>" class="nu gray"> بیشتر بخوانید </a></p>
+                                    } ?><a href="<?php the_permalink(); ?>" class="nu gray">بیشتر بخوانید</a></p>
                             </div>
                         </div>
-                    <?php 
-                        endif;
+                    <?php
+                    endif;
                     endif;
                     } wp_reset_postdata();
                 ?>
@@ -142,42 +142,5 @@ if ($iPod || $iPhone) {
         </div>
     </div>
 
-  <!--  <div class="hero-slider" dir="ltr">
-        <div class="hero-slider__slide"
-             style="background-image: url(<?php echo get_theme_file_uri('/images/bus.jpg') ?>);">
-            <div class="hero-slider__interior container">
-                <div class="hero-slider__overlay">
-                    <h2 class="headline headline--medium t-center">Free Transportation</h2>
-                    <p class="t-center">All students have free unlimited bus fare.</p>
-                    <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slider__slide"
-             style="background-image: url(<?php echo get_theme_file_uri('/images/apples.jpg'); ?>);">
-            <div class="hero-slider__interior container">
-                <div class="hero-slider__overlay">
-                    <h2 class="headline headline--medium t-center">An Apple a Day</h2>
-                    <p class="t-center">Our dentistry program recommends eating apples.</p>
-                    <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slider__slide"
-             style="background-image: url(<?php echo get_theme_file_uri('/images/bread.jpg'); ?>);">
-            <div class="hero-slider__interior container">
-                <div class="hero-slider__overlay">
-                    <h2 class="headline headline--medium t-center">Free Food</h2>
-                    <p class="t-center">Fictional University offers lunch plans for those in need.</p>
-                    <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
-                </div>
-            </div>
-        </div>
-    </div>  -->
-<!--<pre>-->
-<!--    --><?php
-//    print_r(get_post_type_object('event'));
-//    ?>
-<!--</pre>-->
 <?php get_footer();
 ?>

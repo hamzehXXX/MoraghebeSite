@@ -1,7 +1,7 @@
 <?php
 // in blog hast, ya hamun etelayiye ha
 get_header();
-include('jdf.php');
+//include('jdf.php');
 ?>
     <div class="page-banner">
         <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
@@ -14,6 +14,7 @@ include('jdf.php');
     </div>
 
     <div class="container container--narrow page-section">
+
         <?php
 
         while (have_posts()) {
@@ -46,7 +47,9 @@ include('jdf.php');
 
             $relatedArbs = get_field('related_arbayiin');
             if ($relatedArbs === ''):
-
+//            echo '<pre>';
+//            var_dump($relatedArbs);
+//            echo '</pre>';
             ?>
 
                 <div class="post-item <?php echo $hide;?>">
@@ -64,8 +67,7 @@ include('jdf.php');
 
                 </div>
                 <?php
-                endif;
-
+endif;
         }
         echo paginate_links();
         ?>

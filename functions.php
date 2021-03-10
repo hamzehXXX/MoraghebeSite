@@ -1,5 +1,9 @@
 <?php
 
+require get_theme_file_path('/jdf.php');
+
+require get_theme_file_path('/inc/moraghebehFunctions.php');
+require get_theme_file_path('/inc/resultsTableFunctions.php');
 
 require get_theme_file_path('/inc/post-route.php');
 require get_theme_file_path('/inc/login-route.php');
@@ -12,17 +16,21 @@ require get_theme_file_path('/inc/profile-route.php');
 require get_theme_file_path('/inc/remove_wordpress_traces.php');
 require get_theme_file_path('/inc/results-form-android-route.php');
 
-require get_theme_file_path('/inc/moraghebehFunctions.php');
+
 require get_theme_file_path('/inc/moraghebehHooks.php');
 require get_theme_file_path('/GooglesheetTest.php');
-require get_theme_file_path('/vendor/autoload.php');
+//require get_theme_file_path('/vendor/autoload.php');
 require get_theme_file_path('/classes/ResultsTable.php');
+require get_theme_file_path('/classes/ArchiveArbayiin.php');
+require get_theme_file_path('/classes/CONSTANTS.php');
+
 
 
 function moraghebeh_files() {
-    wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-    $styleVersion = '1.9';
-    $jQueryVersion = '1.6';
+//    wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    wp_enqueue_style('font-awsomesss', get_theme_file_uri('/css/font-awesome/css/font-awesome.min.css'), NULL, '1.2');
+    $styleVersion = '2.4';
+    $jQueryVersion = '2.1';
     wp_enqueue_style('moraghebeh_main_styles', get_stylesheet_uri(), NULL, $styleVersion);
 
 
@@ -62,6 +70,7 @@ function moraghebeh_features() {
 
 
 }
+
 add_action('after_setup_theme', 'moraghebeh_features');
 
 
@@ -185,10 +194,10 @@ function ourLoginTitle() {
 remove_filter( 'authenticate', 'wp_authenticate_email_password', 20 );
 
 
-function reg_cat() {
-    register_taxonomy_for_object_type('category','arbayiin');
-}
-add_action('init', 'reg_cat');
+//function reg_cat() {
+//    register_taxonomy_for_object_type('category','arbayiin');
+//}
+//add_action('init', 'reg_cat');
 
 
 
@@ -267,6 +276,7 @@ function my_page_columns($columns) {
     $columns = array(
         'cb' => '< input type="checkbox" />',
         'title' => 'نام سالک',
+        'salek' => 'سالک',
         'khadem' => 'خادم',
         'arb_after_app' => 'اربعینیات جاری',
         'city' => 'شهر'
@@ -292,6 +302,12 @@ function my_custom_columns($column) {
     } else {
         echo '';
     }
+
+    if($column == 'salek') {
+        echo get_field('salekid', $post->ID)['ID'];
+    } else {
+        echo '';
+    }
 	
 	if($column == 'arb_after_app') {
 		/* echo '<pre>';
@@ -311,7 +327,20 @@ function my_custom_columns($column) {
 add_action("manage_salek_posts_custom_column", "my_custom_columns");
 add_filter("manage_salek_posts_columns", "my_page_columns");
 
-
+add_filter("manage_amal_posts_columns", "my_amal_columns");
+add_action("manage_amal_posts_custom_column", "my_amal_custom_columns");
+function my_amal_columns($columns) {
+    $columns['arbId'] = 'اربعین';
+    return $columns;
+}
+function my_amal_custom_columns($column) {
+    global $post;
+    if($column == 'arbId') {
+        echo get_field('arbayiin', $post->ID);
+    } else {
+        echo '';
+    }
+}
 
 // Force note posts to be private
 add_filter('wp_insert_post_data', 'makeNotePrivate');
@@ -652,7 +681,7 @@ function prefix_get_comment_schema() {
     return $schema;
 }
 // Add the filter to manage the p tags
-add_filter( 'the_content', 'wti_remove_autop_for_image', 0 );
+//add_filter( 'the_content', 'wti_remove_autop_for_image', 0 );
 
 function wti_remove_autop_for_image( $content )
 {
@@ -662,16 +691,6 @@ function wti_remove_autop_for_image( $content )
 
     return $content;
 }
-
-
-// add a unique key to every amal which has been saved
-function my_acf_load_value( $value, $post_id, $field ) {
-
-    return $post_id;
-}
-
- add_filter('acf/load_value/name=saved_amal_id', 'my_acf_load_value', 10, 3);
-
 
 /**
  * Add a widget to the dashboard.
@@ -762,4 +781,174 @@ function my_posts_where( $where ) {
 }
 
 add_filter('posts_where', 'my_posts_where');
+
+//add_action( 'save_post', 'set_post_default_category', 10,3 );
+
+function set_post_default_category( $post_id, $post, $update ) {
+
+    // Only set for post_type = salek!
+    if ( 'salek' !== $post->post_type ) {
+        return;
+    }
+
+    $arbsBeforeApp = get_field('arbayiin', $post_id);
+    $beforeAppArbIDArr = array();
+    foreach ($arbsBeforeApp as $item) {
+        $beforeAppArbIDArr[] = $item->ID;
+    }
+    if( have_rows('arb_after_app', $post_id) ) {
+        $i = 0;
+        $arbIdArray = array();
+        $compeleteMeta = get_complete_meta($post_id,'arb_after_app_%_dastoor_takhsised');
+        while( have_rows('arb_after_app', $post_id) ) {
+            the_row();
+//            $i++;
+//            update_sub_field('caption', "This caption is in row {$i}");
+            $dastoor_takhsised_obj = get_sub_field('dastoor_takhsised');
+            $dastoor_ID = $dastoor_takhsised_obj->ID;
+            $salekidField = get_field('salekid');
+            $salekID = isset($salekidField) ? $salekidField['ID'] : '0';
+            $repeatNum = in_array($dastoor_ID, $arbIdArray)?$dastoor_ID . '-' .array_count_values($arbIdArray)[$dastoor_ID]:$dastoor_ID;
+            $metaByValue = get_meta_by_value($post_id, 'arb_after_app_%_dastoor_takhsised', $dastoor_ID);
+
+            $amalsForSalek = get_posts(array(
+                'post_type' => 'amal',
+                'posts_per_page' => -1,
+                'author' => $salekID,
+                'meta_query' => array(
+                    'key' => 'arbayiin',
+                    'compare' => '=',
+                    'value' => $dastoor_ID
+                )
+            ));
+
+
+
+//            $repeat = -1;
+//            $counter = 1;
+//            $duration = intval(get_field('arbayiin-duration', $dastoor_ID));
+//            sizeof($amalsForSalek/$duration);
+
+            update_sub_field('arbId', 0, $post_id);
+            if (in_array($dastoor_ID, $beforeAppArbIDArr)){
+
+            }
+            $arbIdArray[] = $dastoor_ID;
+            $i++;
+        }
+    }
+
+
+}
+
+
+function get_complete_meta( $post_id, $meta_key ) {
+    global $wpdb;
+    $mid = $wpdb->get_results( $wpdb->prepare("SELECT * FROM $wpdb->postmeta WHERE post_id = %d AND meta_key LIKE %s", $post_id, $meta_key) );
+    if( $mid != '' )
+        return $mid;
+
+    return false;
+}
+
+/**
+ * @param $post_id
+ * @param $meta_key  like arb_after_app_%_dastoor_takhsised
+ * @param $meta_value   arbayiin id
+ * @return array|bool|object|null
+ */
+function get_meta_by_value( $post_id, $meta_key, $meta_value ) {
+    global $wpdb;
+    $mid = $wpdb->get_results( $wpdb->prepare("SELECT * FROM $wpdb->postmeta WHERE post_id = %d AND meta_key LIKE %s AND meta_value = %d",
+        $post_id,
+        $meta_key, $meta_value) );
+    if( $mid != '' )
+        return $mid;
+
+    return false;
+}
+
+
+function change_all_amals_arbayiins() {
+    $query = new WP_Query(array(
+        'post_type' => 'salek',
+        'posts_per_page' => -1,
+    ));
+
+
+    $salekIDArray = array();
+    while ($query->have_posts()) {
+        $query->the_post();
+        if( have_rows('arb_after_app') ):
+                    $arbIdArray = array();
+                        $i = 0;
+//                        $compeleteMeta = get_complete_meta(get_the_ID(),'arb_after_app_%_dastoor_takhsised');
+
+                        while( have_rows('arb_after_app') ) : the_row();
+
+                            // Get parent value.
+                            $dastoor_takhsised_obj = get_sub_field('dastoor_takhsised');
+                            $dastoor_ID = $dastoor_takhsised_obj->ID;
+                            $salekidField = get_field('salekid');
+                            $salekID = isset($salekidField) ? $salekidField['ID'] : '0';
+                            $arbIdForResults = get_sub_field('repeat');
+
+
+                            if ($salekID) {
+
+                                $amalsForSalek = get_posts(array(
+                                    'post_type' => 'amal',
+                                    'posts_per_page' => -1,
+                                    'author' => $salekID,
+                                    'meta_query' => array(
+                                        'key' => 'arbayiin',
+                                        'compare' => '=',
+                                        'value' => $dastoor_ID
+                                    )
+                                ));
+                                $salekIDArray[] = sizeof($amalsForSalek);
+
+//                                if (!empty($amalsForSalek)) {
+//                                update_field('arbayiin', $arbIdForResults, );
+                                    foreach ($amalsForSalek as $post) {
+
+                                        setup_postdata( $post );
+                                        update_field('arbayiin', $arbIdForResults, get_the_ID());
+                                    }
+                                    wp_reset_postdata();
+//                                }
+                            }
+
+
+//                            update_sub_field('arbId', $dastoor_ID . '-' . $compeleteMeta[$i]->meta_id, get_the_ID());
+//                            $i++;
+
+                        endwhile; //have_rows
+
+                    endif; // have_rows
+
+    } wp_reset_postdata();
+}
+//add_action( 'init', 'change_all_amals_arbayiins' );
+
+
+function my_acf_update_value( $value, $post_id, $field, $original ) {
+    if( is_string($value) ) {
+
+        $value = $field;
+    }
+//    if ($value != $original) {
+//        $value = $value . ' - ' . $original;
+//    }
+    return $value;
+}
+
+// Apply to all fields.
+//add_filter('acf/update_value', 'my_acf_update_value', 10, 4);
+
+//if(!is_page(2812)) {
+//    // Not logged in, not the login page and not the dashboard
+//    exit( wp_redirect( home_url( '/construction' ) ) );
+//}
+
 ?>

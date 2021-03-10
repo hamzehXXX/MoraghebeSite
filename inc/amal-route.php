@@ -25,9 +25,13 @@ function amalRoute() {
         'methods' => WP_REST_SERVER::CREATABLE,
         'callback' => 'manageStartDate'
     ));
+    register_rest_route('moraghebeh/v1', 'deleteResults', array(
+        'methods' => WP_REST_SERVER::DELETABLE,
+        'callback' => 'deleteResults'
+    ));
 
     function manageStartDate($data) {
-        include(get_stylesheet_directory() . '/jdf.php');
+//        include(get_stylesheet_directory() . '/jdf.php');
         $optionName = sanitize_text_field($data['optionName']);
         $startDate = sanitize_text_field($data['startDate']);
         $arbid = sanitize_text_field($data['arbid']);
@@ -67,26 +71,76 @@ function amalRoute() {
     function createAmal($data) {
 //        var_dump(1);
 //        if (is_user_logged_in()) {
+            global $wpdb;
             $day = sanitize_text_field($data['day']);
             $arbayiin = sanitize_text_field($data['arbayiin']);
             $results = sanitize_text_field($data['results']);
+            $resultType = ($data['resulttype']);
+            $resultsArray = ($data['resultsArray']);
+            $arbrepeat = ($data['repeat']);
             $author = ($data['author']);
             // get the user info by author id, to display the first name in the post_title
             $user = get_user_by( 'id', $author );
+            $amals = ($data['amals']);
+        $returnArray = array();
+        $returnString = '';
+//        if ($resultsArray AND sizeof($resultsArray) == sizeof($amals)){
+        $userid = get_current_user_id();
+        insertDayIntoDB($wpdb, $userid, $arbayiin,$arbrepeat, getTimestampOfDayField($day), getNowTimestamp());
+        $insertedID = $wpdb->insert_id;
+//        $dateID = getDayIdByDateFromDB($wpdb, $userid, $arbayiin, 1);
+            $rowNumber = 0;
+            foreach ($amals as $amal) {
+
+                $currentResult = $resultsArray[$rowNumber];
+                if ($resultType[$rowNumber] == 'متنی') {
+                    $resultMatni = $currentResult;
+                    $resultPoint = 3;
+                    if ($currentResult === '0') {
+                        $resultMatni = NULL;
+                        $resultPoint = 0;
+                    }
+                } else {
+                    $resultMatni = NULL;
+                    $resultPoint = $currentResult;
+                }
+
+                $returnArray[] = insertSingleResultIntoDB($wpdb, $insertedID,$amal, $resultMatni, $resultPoint);
+                $rowNumber++;
+            }
+//        }
+        wp_insert_post(array(
+            'post_type' => 'amal',
+            'post_status' => 'publish',
+            'post_title' => $user->first_name . ' ' . $day . ' ' . get_the_title($arbayiin),
+            'post_author' => $author,
+            'meta_input' => array(
+                'arbayiin' => $arbayiin,
+                'day' => $day,
+                'results' => $results
+            )
+
+        ));
 
 
-                return wp_insert_post(array(
-                    'post_type' => 'amal',
-                    'post_status' => 'publish',
-                    'post_title' => $user->first_name . ' ' . $day . ' ' . get_the_title($arbayiin),
-                    'post_author' => $author,
-                    'meta_input' => array(
-                        'arbayiin' => $arbayiin,
-                        'day' => $day,
-                        'results' => $results
-                    )
 
-                ));
+        return $returnArray;
+
+//        insertSingleResultIntoDB($wpdb, $author, $arbayiin, );
+//                return wp_insert_post(array(
+//                    'post_type' => 'amal',
+//                    'post_status' => 'publish',
+//                    'post_title' => $user->first_name . ' ' . $day . ' ' . get_the_title($arbayiin),
+//                    'post_author' => $author,
+//                    'meta_input' => array(
+//                        'arbayiin' => $arbayiin,
+//                        'day' => $day,
+//                        'results' => $results
+//                    )
+//
+//                ));
+
+
 
 //        } else {
 //            die("Only logged in users can create a like.");
@@ -117,7 +171,9 @@ function amalRoute() {
 
                 while ( have_rows('amal')) {
                     the_row();
-                    $name = get_sub_field('amal_name');
+//                    $name = get_sub_field('amal_name');
+                    $amalTerm = get_sub_field('amal_term');
+                    $name = $amalTerm->name;
                     $content = get_sub_field('amal_desc');
                     $repeat = get_sub_field('amal_repeat');
                     $resultType = get_sub_field('result_type');
@@ -220,6 +276,35 @@ function amalRoute() {
 //        $response[1] = $amal_data;
 //        $i++;
         return $response;
+    }
+
+    function deleteResults($dayArray) {
+        global $wpdb;
+//        deleteAllResultsFromDB($wpdb, 1, 607, 1);
+        $amalResults =get_posts(array(
+            'post_type' => 'amal',
+            'posts_per_page' => -1,
+            'author' => get_current_user_id(),
+            'meta_key' => 'arbayiin',
+            'meta_query' => array(
+                'key' => 'arbayiin',
+                'compare' => '=',
+                'value' => $dayArray['arbid']
+            )));
+
+        $deletedResults = array();
+
+        foreach ($amalResults as $amalResult) {
+            $deletedResults[] = wp_delete_post($amalResult->ID);
+        }
+
+        $userid = get_current_user_id();
+        $arbid = $dayArray['arbid'];
+        $arbrepeat = $dayArray['arbrepeat'];
+        global $wpdb;
+        $deletedResults = deleteAllResultsForArb($wpdb, $userid, $arbid, $arbrepeat);
+        $deletedDays = deleteDaysByUserAndArbIdFromDB($wpdb, $userid, $arbid, $arbrepeat);
+        return $deletedDays;
     }
 
     function getResultArray($results) {

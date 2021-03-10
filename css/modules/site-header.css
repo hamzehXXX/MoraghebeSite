@@ -1,5 +1,5 @@
 .site-header {
-
+  /*z-index: 3;*/
   position: absolute;
   top: 0;
   left: 0;
@@ -19,8 +19,9 @@
   }
 
   &__menu {
+  z-index: 5;
     visibility: hidden;
-    position: relative;
+    position: absolute;
     background-color: color($mainBlue a(89%) b(+3%));
     left: 0;
     right: 0;

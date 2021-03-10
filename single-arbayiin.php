@@ -1,25 +1,32 @@
 <?php get_header();
-include_once('jdf.php');
-include('classes/CONSTANTS.php');
+//include_once('jdf.php');
+//include('classes/CONSTANTS.php');
+//echo phpinfo(); die;
 while(have_posts()) {
     the_post();
-
-
+    global $wpdb;
+ $start = microtime(true);
+ $currentUserId = get_current_user_id();
+//var_dump(function_exists('wp_filter_content_tags'));
     $duration = get_field('arbayiin-duration');
     $ruz = "روز";
     $nthday = CONSTANTS::getDays();
+    $arbayiinID = get_the_ID();
     // GET AMALS WHERE CURRENT USER ID HAVE POSTED FOR CURRENT ARBAYIIN ================================================================================================
     $amalResults = new WP_Query(array(
         'post_type' => 'amal',
         'posts_per_page' => -1,
         'order' => 'ASC',
-        'author' => get_current_user_id(),
+        'author' => $currentUserId,
         'meta_key' => 'arbayiin',
         'meta_query' => array(
             'key' => 'arbayiin',
             'compare' => '=',
-            'value' => get_the_ID()
+            'value' => $arbayiinID
         )));
+
+
+
     $amalSize = $amalResults -> found_posts;
     $today = jdate('Y-m-d');
 
@@ -28,22 +35,19 @@ while(have_posts()) {
     $days = [];
     $currentDayDate = '';
     $currentDayTimeStamp = '';
-//    if ($amalSize) {
-//        $startAmal = get_the_date('Y-m-d', $amalResults -> posts[0] -> ID); // get the date of the first submitted amal results
-//        var_dump($startAmal);
-//        $period = new DatePeriod(
-//            new DateTime($startAmal), // Start date of the period
-//            new DateInterval('P1D'), // Define the intervals as Periods of 1 Day
-//            $duration // Apply the interval $duration times on top of the starting date
-//        );
-//
-//        foreach ($period as $day) {
-//            $days[] = $day -> format('Y-m-d');
-//        }
-//        $currentDayTimeStamp = strtotime($days[$amalSize]);
-//        $currentDayDate = jdate('Y/m/d', $currentDayTimeStamp);
-//    }
+    $repeat = $_GET['arbrepeat'];
+    //    $dayIDs = queryAllDayIDs($wpdb, $currentUserId, $arbayiinID, $repeat);
+//    $resultsFromDb = queryAllDaysForArb($currentUserId, $arbayiinID, $repeat);
+//        testHelper($resultsFromDb);
+    $resultsOfDay = queryAllResultIDs($wpdb, $currentUserId, $arbayiinID, $repeat);
+    $result = array();
+    foreach ($resultsOfDay as $element) {
+        $result[$element->dayid]['date'] = $element->date;
+        $result[$element->dayid]['submitdate'] = $element->submitdate;
+        $result[$element->dayid]['results'][] = $element;
+    }
 
+    $amalSize = sizeof($result);
 //********************************       [ PAGE BANNER ]       ********************************* START >>>>>>
     ?>
 
@@ -51,7 +55,7 @@ while(have_posts()) {
         <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
         <div class="page-banner__content container container--narrow">
             <h1 class="page-banner__title"><?php the_title(); ?></h1>
-            <div class="page-banner__intro"><?php echo 'روز ' . $nthday[$amalSize];?>
+            <div class="page-banner__intro"><?php echo $amalSize!=$duration?'روز ' . $nthday[$amalSize]:'پایان اربعین';?>
             </div>
         </div>
     </div>
@@ -61,14 +65,49 @@ while(have_posts()) {
     <!--    // CONTAINER - PAGE SECTION -->
     <!--    //======================================================================-->
     <?php
-    $month = CONSTANTS::$month_array;
-    $daysArray = CONSTANTS::getDays();
-    $year = CONSTANTS::year();
+//    $month = CONSTANTS::$month_array;
+//    $daysArray = CONSTANTS::getDays();
+//    $year = CONSTANTS::year();
+//    $queryString = createInsertDayQuery();
     ?>
 
     <div class="container container--narrow page-section">
+<!--        <div style="overflow-x: auto">-->
+            <?php
+//            ini_set('memory_limit', '-1');
+//            testHelper($wpdb->query($queryString));
+            ?>
+<!--        </div>-->
         <?php
 
+
+
+//        testHelper($queryString); die;
+
+//        $dayVals = " (1, 607, 1, 1614613800, 1615072915), (1, 607, 1, 1614713800, 1615073415)";
+
+//        testHelper($queryString); die;
+//        echo $queryString;
+
+
+//        testHelper(queryDayIdFromAmalDay($wpdb));
+//        var_dump(deleteDaysByArbIdFromDB($wpdb, 0));
+//        var_dump(deleteAllDays($wpdb));
+//        var_dump(deleteAllResults($wpdb));
+echo '<hr/>';
+
+
+
+//        testHelper(($result));
+//        echo '<hr/>';
+        $myjdate = jdate('H/i/s/m/d/y');
+//        testHelper($myjdate);
+//        testHelper(explode('/', $myjdate));
+
+        $timestamp = jmktime(jdate('H'), jdate('i'), jdate('s'), jdate('m'), jdate('d'), jdate('Y'));
+        $timestamp += 315360000*2;
+//        echo $timestamp;
+//        echo jdate('l, d-m-Y H:i:s', $timestamp);
         ?>
 <!--        //------------------------------------------------------->
 <!--        // Meta-Box-->
@@ -77,29 +116,30 @@ while(have_posts()) {
         <div class="metabox metabox--position-up metabox--with-home-link">
             <p><a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('arbayiin'); ?>"><i class="fa fa-home" aria-hidden="true"></i> اربعینیات </a> <span>مدت اربعین:</span><span class="metabox__main"><?php  echo $duration; ?></span></p>
         </div>
+
+
         <?php
+        $testDate = new DateTime();
+
         $startDate = '';
       ?>
         <?php
         $display = '';
+        $optionName = $currentUserId . '-' . $arbayiinID . '-period';
+//        var_dump(delete_option($optionName));
+//        var_dump(get_option($optionName));
 
-        if (!$amalSize){
+//        $distinctDates = $wpdb->get_results(
+//            $wpdb->prepare("SELECT COUNT(*) FROM result_days WHERE userid = %d AND arbid = %d", 1, $arbayiinID),
+//            OBJECT
+//        );
+//        testHelper($distinctDates);
+        if (empty($resultsOfDay)){
             $display = 'hide-table';
             $startDate = apply_filters('arbayiin_startDate', $amalSize);
-            echo '<br/>'  . '<br/>';
+//            echo '<br/>'  . '<br/>';
         }
 
-        if (strlen($startDate) <=10){
-            $period = new DatePeriod(
-                new DateTime($startDate), // Start date of the period
-                new DateInterval('P1D'), // Define the intervals as Periods of 1 Day
-                $duration-1 // Apply the interval $duration times on top of the starting date
-            );
-            foreach ($period as $day) {
-                $days[] = $day -> format('Y/m/d');
-            }
-
-        }
         if (strlen($startDate) <=10 && strlen($startDate) != 0){
             $display = '';
         }
@@ -117,19 +157,24 @@ while(have_posts()) {
 
             <!--    Header Table -->
             <?php
+//            echo '<pre>';
+//            print_r(get_complete_meta($$arbayiinID, 'amal%amal_name'));
+//            echo '</pre>';
+
             $argsArray = array(
                 'title' => get_the_title(),
                 "amalSize" => $amalSize,
                 'duration' => $duration,
-                'ID' => get_the_ID(),
-                'userID' => get_current_user_id(),
+                'ID' => $arbayiinID,
+                'userID' => $currentUserId,
                 'rows' => get_field('amal'),
                 'days' => $days,
                 'currentDayTimeStamp' => $currentDayTimeStamp,
                 "startDate" => $startDate,
+                "amalID" => get_sub_field('amal_term'),
+                "arbrepeat" => $repeat
             ); ?>
                 <div class='some-page-wrapper'>
-
                     <?php
                     /**
                      * Functions hooked into after_some-page_wrapper
@@ -155,12 +200,12 @@ while(have_posts()) {
         $resultsForm = new WP_Query(array(
               'post_type' => 'resultform',
               'posts_per_page' => -1,
-                'author' => get_current_user_id(),
+                'author' => $currentUserId,
                  'meta_key' => 'arbayiinid',
                  'meta_query' => array(
                     'key' => 'arbayiinid',
                 'compare' => '=',
-                'value' =>  get_the_ID()
+                'value' =>  $arbayiinID
             )
             ));
  ?>
@@ -183,7 +228,7 @@ while(have_posts()) {
 
             <textarea class="new-note-body field-long field-textarea results-form__textarea" id="khab" placeholder=""></textarea>
             </div>
-            <span class="results-form__submit" data-arbayiinid="<?php echo get_the_ID(); ?>">ثبت نتایج</span>
+            <span class="results-form__submit" data-arbayiinid="<?php echo $arbayiinID; ?>">ثبت نتایج</span>
         </div>
         <?php endif; ?>
 
@@ -200,15 +245,28 @@ while(have_posts()) {
  *
 */
 ?>
-        <div class="arbayiin-results-title <?php echo $display;?>">نتایج اربعین</div>
+        <div>
+            <span class="arbayiin-results-title <?php echo $display;?>">نتایج اربعین</span>
+              </div>
+
 
 <?php
                 //-----------------------------------------------------
                 // First Column of the Table -- NUMBERS
                 //-----------------------------------------------------
-$resultsTable = new ResultsTable(get_current_user_id());     // Instantiate ResultsTable class
-$resultsTable->showResultsTable($display);
 
+$resultsTable = new ResultsTable($currentUserId);     // Instantiate ResultsTable class
+$resultsTable->showResultsTable($display, $arbayiinID, $result);
+if ($duration != $amalSize):
+?>
+
+<hr/>
+        <span class="delete-results btn btn--blue btn--small block <?php echo $display;?>"
+              data-arbid="<?php echo $arbayiinID;?>"
+              data-arbrepeat="<?php echo $repeat;?>" style="position: absolute; left: 0px; color: red">حذف نتایج</span>
+
+        <?php
+endif;
         //********************************       [ RESULTS FORM ]       ********************************* START >>>>>>
 
 
@@ -221,7 +279,7 @@ $resultsTable->showResultsTable($display);
         <h5>خواب ها و رویاهای صادقه (در صورت رخ دادن)</h5><p><?php esc_attr(the_field('khab')) ?></p>
         </div>
         <?php
-}
+} wp_reset_postdata();
        //############################### END <<<<<<<<<<<<<<<<<<
  ?>
                 <hr class="section-break"/>
@@ -236,7 +294,7 @@ $resultsTable->showResultsTable($display);
             'meta_query' => array(
                     'key' => 'related_arbayiin',
                 'compare' => 'LIKE',
-                'value' => '"' . get_the_ID() . '"'
+                'value' => '"' . $arbayiinID . '"'
             )
         ));
         if ($homepagePosts->have_posts()) {
@@ -269,6 +327,7 @@ $resultsTable->showResultsTable($display);
     </div>
 
 <?php } wp_reset_postdata();
+//echo microtime(true) - $start;
 get_footer();
 ?>
 

@@ -4,7 +4,7 @@
 // Second Column of the Table -- NAMES
 //-----------------------------------------------------
 
-include_once('jdf.php');
+//include_once('jdf.php');
 
 global $userID;
 global $arbayiinID;
@@ -57,7 +57,9 @@ if ($amalSize) {
     $taskCount = 1;
     while (have_rows('amal')): the_row();
         // vars
-        $name = get_sub_field('amal_name');
+//        $name = get_sub_field('amal_name');
+        $amalTerm = get_sub_field('amal_term');
+        $name = $amalTerm->name;
         $content = get_sub_field('amal_desc');
         $repeat = get_sub_field('amal_repeat');
         $weekDay = get_sub_field('weekday');
@@ -74,7 +76,9 @@ if ($amalSize) {
     $taskCount = 1;
     while (have_rows('amal')): the_row();
         // vars
-        $name = get_sub_field('amal_name');
+//        $name = get_sub_field('amal_name');
+        $amalTerm = get_sub_field('amal_term');
+        $name = $amalTerm->name;
         $content = get_sub_field('amal_desc');
         $repeat = get_sub_field('amal_repeat');
         $weekDay = get_sub_field('weekday');

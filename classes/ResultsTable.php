@@ -16,13 +16,16 @@ private $nameArray;
     /**
      * Method to be called in order to display the ResultsTable
      */
-    public function showResultsTable($display){
+    public function showResultsTable($display, $arbId, $days){
         echo "<div class='arbayiin-table $display'>"; //block start
+
         echo '<ul class="min-list" style="display: inline-table" id="results">';
+
         $taskCount = $this->numbersColumn(); // echo out first column
         $this->namesColumn(); // echo out second column
-        $this->resultsColumn($taskCount);
+        $this->resultsColumn($taskCount, $arbId, 1, $days);
         echo '</ul></div>'; // block end
+
         $this->popUpPlaceHolder();
     }
 
@@ -56,12 +59,22 @@ private $nameArray;
         $this->nameArray = array();
         while (have_rows('amal')) {
             the_row();
-            $name = get_sub_field('amal_name');
+//            $name = get_sub_field('amal_name');
+            $amalTerm = get_sub_field('amal_term');
+            $name = $amalTerm->name;
             $content = get_sub_field('amal_desc');
             $this->nameArray[] = $name;
+            // For using HTML tags inside data attribute of amal-js
+            // This is because amal_desc is a WYSWYG text editor field in acf
+            $needleArr = array('<', '>', '"');
+            $replaceArr = array('&lt;', '&gt;', '&quot;');
+            $content = str_replace($needleArr, $replaceArr ,$content);
             ?>
             <div class="resultname amal-js" data-content="<?php echo $content; ?>" data-name="<?php echo $name; ?>" >
             <?php
+//            echo '<pre>';
+//            print_r(get_sub_field_object('amal_name')['ID']);
+//            echo '</pre>';
             echo $name;
             echo '</div>';
         }
@@ -71,50 +84,41 @@ private $nameArray;
         echo '</li>'; // end of the second column;
     }
 
-    private function resultsColumn($taskCount){
-        $amalResults = $this->getAmalResults();
+    private function resultsColumn($taskCount, $arbID, $arbrepeat, $days){
 
-        while ($amalResults -> have_posts()) {
-            $amalResults -> the_post();
-            echo '<li class="row" style="display: table-cell; " >'; // start result column
-
-            #header(day)
+        // depict day columns in row
+        $dbDate=0;
+        $dayCounter = 0;
+        foreach ($days as $day){
+//            echo $day->ID;
+            echo '<li class="row" style="display: table-cell;">';
             echo '<div class="t-header" >';
-            echo get_field('day');
+            echo 'روز' . CONSTANTS::getDays()[$dayCounter];
+            echo '(' . jdate('l, Y/m/d', $day['date']) . ')';
             echo '</div>';
-            $results = get_field('results'); // Get results field which is a string separating each result by a ','
-            $array = explode('!@#', $results);  // explode result's String into an Array
+
+
+//            $resultVals = $GLOBALS['wpdb']->get_results(
+//                "SELECT * FROM amal_results WHERE dayid = $day->ID", OBJECT
+//            );
+            $resultVals = $day['results'];
+//            testHelper($resultVals);
+
+            // results of each day column
             $sumDayPoints = 0;  // Initialize the sum of the day's result points
-            $dayCounter = 0;
-            unset($array[sizeof($array)-1]); // remove the last element of array which is empty
-            foreach($array as $item) { // Loop through result's array
-			$singlePoint = intval($item);
-                //preg_match_all('!\d+!', $item, $matches); // we get only numbers in each result from the array and store them into an array called $matches
-
-				if($singlePoint > 3 or strlen($item) > 1) {
-					$singlePoint = 3;
-				} 
-			
-                $sumDayPoints += $singlePoint;
-                $item = esc_html($item);
-                $resultStringArray = $this -> getResultString($item);
-                $resultString = $resultStringArray[0];
-                $resultvalue__background = $resultStringArray[1];
-
-                if (strlen($item) > 1) {  // Check weather it is matni or nomreyii, nomreyii's length is '1'
-                    $resultvalue__background = 'resultvalue__text';
-                    $myResult = $item;
-                } else {
-                    $myResult = $resultString;
-                }
-                $amalName = $this->nameArray[$dayCounter];
-                echo "<div class='resultvalue $resultvalue__background' data-result='$item' data-name='$amalName' >";
-                echo $myResult;
+            $amalCounter = 0;
+            foreach ($resultVals as $resVal){
+                $sumDayPoints += $resVal->result_point;
+                $point = $resVal->result_point;
+                $matn = $resVal->result_matni;
+                $myval = $this->getResultString($point);
+                $amalName = $this->nameArray[$amalCounter];
+                $displayRes = $matn == NULL?$myval[0]:$matn;
+                echo "<div class='resultvalue $myval[1]' data-result='$displayRes' data-name='$amalName'>";
+                echo $displayRes;
                 echo '</div>';
-
-                $dayCounter++;
-            } // foreach end
-
+                $amalCounter++;
+            }
             #set color for sum points cell
             $sumPointsColor = $this ->resultsColorGrading($sumDayPoints, $taskCount);
 
@@ -124,11 +128,29 @@ private $nameArray;
 
             #insert day of amal submition
             echo ' <div class="resultvalue" style="background-color: #ECECEC; direction: ltr">';
-            echo jdate('Y-m-d',strtotime(get_the_date()));
+            echo jdate('Y/m/d H:i:s', $day['submitdate']);
             echo '</div>';
+            echo '</li>';
+            $dayCounter++;
+        }
 
-            echo '</li>'; // end result column
-        } wp_reset_postdata(); // while loop end
+    }
+
+    private function dbResultsColumn() {
+        $dbResults = $GLOBALS['wpdb']->get_results(
+            "SELECT * FROM wp_amalresults WHERE userid = 11 AND arbid = 210 AND arbrepeat = 0", OBJECT
+        );
+
+        foreach ($dbResults as $result){
+            echo '<li class="row" style="display: table-cell; " >'; // start result column
+            #header(day)
+            echo '<div class="t-header" >';
+            echo jdate('Y/m/d H:i:s', $result->date);
+            echo '</div>';
+        }
+
+
+
     }
 
     /**
@@ -148,7 +170,7 @@ private $nameArray;
 
     }
 
-    private function getResultString($item) {
+    public function getResultString($item) {
         $resultString = '';
         $resultvalue__background = 'resultvalue__green';
         switch ($item){
@@ -179,21 +201,22 @@ private $nameArray;
      * Returns WP_Query object
      * @return WP_Query
      */
-    private function getAmalResults() {
-        return new WP_Query(array(
-            'post_type' => 'amal',
-            'posts_per_page' => -1,
-            'order' => 'ASC',
-            'author' => $this->salekID,
-            'meta_key' => 'arbayiin',
-            'meta_query' => array(
-                'key' => 'arbayiin',
-                'compare' => '=',
-                'value' => get_the_ID()
-            )));
-    }
+//    private function getAmalResults($amalId) {
+//        return new WP_Query(array(
+//            'post_type' => 'amal',
+//            'posts_per_page' => -1,
+//            'order' => 'ASC',
+//            'author' => $this->salekID,
+//            'meta_key' => 'arbayiin',
+//            'meta_query' => array(
+//                'key' => 'arbayiin',
+//                'compare' => '=',
+//                'value' => $amalId
+//            )));
+//    }
 
     private function popUpPlaceHolder() {
         get_template_part('template-parts/content', 'popup');
     }
+
 }

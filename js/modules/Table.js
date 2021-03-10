@@ -2,7 +2,7 @@ import $ from 'jquery';
 class Table {
 
     constructor() {
-        this.moveDescLeft();
+        // this.moveDescLeft();
         this.events();
 
     }
@@ -23,7 +23,7 @@ class Table {
         var amaldesc = $(".amalDesc").text();
         var content = $(".amal-js").data("content");
         $("table").find('tr').each(function () {
-            console.log('content: ' + content);
+            // console.log('content: ' + content);
         });
         $(".amal-js").each(function () {
             console.log('content: ' + content);

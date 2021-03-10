@@ -1,5 +1,5 @@
 <?php get_header();
-include_once('jdf.php');
+//include_once('jdf.php');
 while(have_posts()) {
     the_post(); ?>
     <div class="page-banner">
@@ -19,9 +19,24 @@ while(have_posts()) {
 
         <div>
 
-            <?php  the_content(); ?>
-            </div>
+            <?php  the_content(); ?></div>
+    <?php
+    $relatetArbayiin = get_field('related_arbayiin');
+    if ($relatetArbayiin) {
+        echo '<hr class="section-break">';
+        echo '<h2 class="headline headline--medium">اربعین های مربوطه</h2>';
+        echo '<ul class="link-list min-list">';
+        foreach($relatetArbayiin as $arbayiin) { ?>
+            <li>
+                    <?php echo get_the_title($arbayiin); ?>
+            </li>
+            <?php
 
+        }
+        echo '</ul>';
+    }
+
+    ?>
     </div>
 
 <?php }

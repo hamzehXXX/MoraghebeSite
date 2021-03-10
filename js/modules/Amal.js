@@ -7,6 +7,8 @@ class Amal {
 
     events() {
         $("#submit-amal").on("click",  this.sabtAmal.bind(this));
+        $(".delete-results").on("click",  this.deleteDispatcher.bind(this));
+
         $("button#submit-date").on("click",  this.sabtDate.bind(this));
 
     }
@@ -23,7 +25,7 @@ class Amal {
             $(".start-date__alert").text('لطفا تاریخ شروع را مشخص بفرمایید');
         } else {
             $(".arbayiin-table, .generic-content").removeClass("hide-table");
-            $(".start-date__alert").text(startDate);
+            // $(".start-date__alert").text(startDate);
             $(".current-date").text('روز اوّل' + ' (' + startDate + ')');
         }
 
@@ -41,6 +43,8 @@ class Amal {
             data: startDateInfo,
             success: (response) => {
                 console.log(response);
+                location.reload();
+
                 // alert(response);
             },
             error: (response) => {
@@ -48,6 +52,8 @@ class Amal {
                 // alert("nope");
             }
         });
+
+        $(".start-date__alert").text(startDate);
     }
 
     datepicker() {
@@ -66,14 +72,6 @@ class Amal {
   }
 
     sabtAmal() {
-        var inputVal = $('input[name="result-1"]:checked').val();
-
-        var day = "روز";
-        var ruz = $(".ruz").text();
-        var amalsize = $(".jsResults").data('amalsize');
-        var author = $(".ruz").data('author');
-
-
         var nthday = [
             "اول", "دوم", "سوم", "چهارم","پنجم","ششم", "هفتم", "هشتم", "نهم", "دهم",
             "یازدهم", "دوازدهم", "سیزدهم", "چهاردهم", "سیزدهم", "چهاردهم", "پانزدهم", "شانزدهم",
@@ -84,124 +82,145 @@ class Amal {
         ];
 
         let myList = [];
-        // zakhire amale sabt shod dar yek string ba joda konandeye ',' ke dar amal-route b surate array begirimesh ba explode
-
-        // $(".select-css option:selected").each(function () {
-        //     myList.push($(this).text());
-        //     myList.push($("#resultmatni").val());
-        //     str += $(this).text() + ',';
-        //     // if ($(this).data('matni') === true){
-        //         str += $(this).val() + ',';
-        //     // }
-        //
-        // });
         var str = '';
-        // $(".selector").each(function () {
-        //     var thisval = $(this).val();
-        //     var childTagName = $(this).children().first().prop("tagName");
-        //     var rowNumber = $(this).data('rownumber');
-        //     console.log(childTagName + '- ' + rowNumber);
-        //     var myName = 'result-' + rowNumber;
-        //
-        //
-        //     switch (childTagName) {
-        //         case 'DIV':
-        //             str += ($(".resultInput-"+rowNumber +":checked").val() + ',');
-        //             // console.log('dd: ' + thisval);
-        //             break;
-        //         default:
-        //             var textInput = $('textarea#textarea-'+rowNumber).val();
-        //             console.log('textInput: ' + textInput);
-        //             if (textInput === ''){
-        //                 str += '0,';
-        //                 break;
-        //             }
-        //             str += textInput + ',';
-        //             break;
-        //     }
-        //
-        //     console.log('rn: ' + str);
-        // });
-
-
+        $("#submit-amal").addClass("hide");
+        var arbId = $(".amal-table").data('arbid');
+        var author = $(".amal-table").data('author');
+        var day = $(".amal-table").data('day');
+        var repeat = $(".amal-table").data('arbrepeat');
+        // var repeat = $(".amal-table").data('arbrepeat');
+        // var amals = $(".amal-table").data('amal');
+        // console.log(amals);
+        var rowNumber = 0;
+        let amalidArr = [];
+        var amalid = 0;
+        var resultType = '';
+        let resultTypes = [];
         $(".selector").each(function () {
             var thisval = $(this).val();
             var childTagName = $(this).children().first().prop("tagName");
-            var rowNumber = $(this).data('rownumber');
-            console.log(childTagName + '- ' + rowNumber);
+            rowNumber = $(this).data('rownumber');
+             amalid = $(this).data('amalid');
+             resultType = $(this).data('resulttype');
+            console.log('myamalid: ' + amalid);
+            console.log('resType: ' + resultType);
+            resultTypes.push(resultType);
+            amalidArr.push(amalid);
+            var arbayiinId = $(this).data('arbid');
+            // console.log(childTagName + '- ' + rowNumber);
             var myName = 'result-' + rowNumber;
-
 
             switch (childTagName) {
                 case 'DIV':
                     var resultValue = $(".resultInput-"+rowNumber +":checked").val();
+                    console.log('result number ' + rowNumber + ': ' + resultValue);
                     str += (resultValue + '!@#');
-                    myList.push(resultValue);
+                    myList.push(parseInt(resultValue));
                     // console.log('dd: ' + thisval);
                     break;
                 default:
                     var textInput = $('#textarea-'+rowNumber).val();
-                    console.log('textInput: ' + textInput);
+                    // console.log('textInput: ' + textInput);
+                    console.log('result number ' + rowNumber + ': ' + textInput);
                     if (textInput === ''){
                         str += '0!@#';
-                        myList.push('0');
+                        myList.push(0);
                         break;
                     }
                     myList.push(textInput);
                     str += textInput + '!@#';
                     break;
             }
-            console.log(myList);
-            console.log('rn: ' + str);
-            // console.log($(this).prop("tagName"));
-            // $(this).val()===''?str += '0,':str += ($(this).text() + ',');
+
+            console.log('resultString: ' + str);
 
         });
+        console.log('arbid: ' + arbId);
+        console.log('author: ' + author);
+        console.log('day: ' + day);
+        console.log('amals: ' + amalidArr);
+        console.log('rowszh counts: ' + rowNumber);
+        console.log('repeats: ' + repeat);
+        console.log(myList);
 
         var amaleruz = {
             'results': str,
-            'arbayiin': $(".ruz").data('arbayiin-id'),
-            'day': ruz,
-            'author': author
+            'arbayiin': arbId,
+            'day': day,
+            'author': author,
+            'amals' : amalidArr,
+            'resultsArray' : myList,
+            'resulttype' : resultTypes,
+            'repeat' : repeat
         }
+        // alert("اعمال روز "+day + " با موفقیت ثبت شد.");
+        $.ajax({
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader('X-WP-Nonce', moraghebehData.nonce);
+            },
+            url: moraghebehData.root_url + '/wp-json/moraghebeh/v1/createAmal/',
+            type: 'POST',
+            data: amaleruz,
+            success: (response) => {
+                console.log("Congrats");
+                // console.log('response: ' +response);
+                // var dayCounter = parseInt($(".ruz").data('daycount'), 10);
+                // dayCounter++;
+                // $(".ruz").html(nthday[dayCounter]);
 
-        // $.ajax({
-        //     beforeSend: (xhr) => {
-        //         xhr.setRequestHeader('X-WP-Nonce', moraghebehData.nonce);
-        //     },
-        //     url: moraghebehData.root_url + '/wp-json/moraghebeh/v1/createAmal/',
-        //     type: 'POST',
-        //     data: amaleruz,
-        //     success: (response) => {
-        //         // $(`     <li style="float: right; border: 1px solid #ECECEC;" class="selected-vendor" >
-        //         //     <div class="dday" style="background: #ECECEC; border: 1px solid #ECECEC;">${ruz}</div>`).appendTo("#results").show().slideDown();
-        //         // $(".dday").addClass("mday");
-        //         // for (let i = 0; i < myList.length; ++i) {
-        //         //     $(`
-        //         //                 <div style="background: #ECECEC; border: 1px solid #ECECEC;">${myList[i]}</div>
-        //         // </li>
-        //         // `).appendTo('.mday').show().slideDown();
-        //         // }
-        //         // $(".dday").removeClass('mday');
-        //         // $(".dday").removeClass('dday');
-        //
-        //         setTimeout(function() {
-        //             console.log('response: ' +response);
-        //         }, 5000);
-        //         console.log("Congrats");
-        //         console.log('response: ' +response);
-        //         var dayCounter = parseInt($(".ruz").data('daycount'), 10);
-        //         // dayCounter++;
-        //         // $(".ruz").html(nthday[dayCounter]);
-        //         alert("اعمال روز "+nthday[dayCounter] + " با موفقیت ثبت شد.")
-        //         // location.reload();
-        //         location.reload();
-        //     },
-        //     error: (response) => {
-        //         console.log("Sorry");
-        //         console.log(response);
-        //     }
-        // });
+                console.log(JSON.stringify(response));
+                location.reload();
+            },
+            error: (response) => {
+                console.log("Sorry");
+                console.log(response);
+            }
+        });
+    }
+
+    deleteDispatcher(e) {
+
+        $("body").addClass("body-no-scroll");
+        $(".pop-outer h5").html(`<span>آیا برای حذف تمام نتایج مطمئن هستید؟</span>`);
+        $(".pop-inner p").html(``);
+        $(".pop-inner p").html(`<div>همه ی نتایج این اربعین حذف خواهند شد</div><br/><div class="cancel-delete btn btn--blue">انصراف</div>  <div class="confirm-delete btn btn--orange btn-outline-warning">حذف</div>`);
+        $(".pop-outer").fadeIn("slow");
+        $(".confirm-delete").on("click",  this.deleteResults.bind(this));
+        $(".cancel-delete").on("click",  this.cancelDelete.bind(this));
+    }
+
+    cancelDelete(e) {
+        $("body").removeClass("body-no-scroll");
+        $(".pop-outer").fadeOut("slow");
+    }
+
+    deleteResults(e) {
+        // console.log(e.currentTarget.data('arbid'));
+        var arbId = $("span.delete-results").data("arbid");
+        var arbrepeat = $("span.delete-results").data("arbrepeat");
+        alert("نتایج این اربعین با موفقیت حذف شد.");
+        console.log("repeatjgd: " + arbrepeat);
+        var arbIdArray = {
+            'arbid' : arbId,
+            'arbrepeat' : arbrepeat
+        }
+        $.ajax({
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader('X-WP-Nonce', moraghebehData.nonce);
+            },
+            url: moraghebehData.root_url + '/wp-json/moraghebeh/v1/deleteResults/',
+            type: 'DELETE',
+            data: arbIdArray,
+            success: (response) => {
+                console.log(JSON.stringify(response));
+                location.reload();
+                // alert(response);
+            },
+            error: (response) => {
+                console.log(response);
+                // alert("nope");
+            }
+        });
     }
     ajax_delay(str){
         setTimeout("str",2000);
