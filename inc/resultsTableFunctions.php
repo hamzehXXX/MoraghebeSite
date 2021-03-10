@@ -214,7 +214,7 @@ function createInsertDayQuery() {
     $temp = 1;
     $tempAllRess = 0;
     $returnText = array();
-    for ($i = 0; $i < 15000; $i++){
+    for ($i = 15000; $i < sizeof($allResults); $i++){
 //    foreach ($allResults as $result) {
         $resultsArr = array();
         $dayID = $allResults[$i] -> ID;
