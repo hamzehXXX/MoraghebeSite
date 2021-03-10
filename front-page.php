@@ -98,11 +98,22 @@ if ($iPod || $iPhone) {
                 <h2 class="headline headline--small-plus t-center">اطلاعیه ها</h2>
                 <?php
                 $homepagePosts = new WP_Query(array(
-                        'posts_per_page' => 2
+                    'post_type' => 'post',
+                    'meta_query' => array(
+                        'key' => 'related_arbayiin',
+                        'compare' => '=',
+                        'value' => ''
+                    ),
+                    'posts_per_page' => -1,
                 ));
 
+                    $counter = 0;
                     while ($homepagePosts->have_posts()) {
                         $homepagePosts->the_post();
+                        $relatedArb = get_field('related_arbayiin', get_the_ID());
+                        if ($relatedArb === ''):;
+                        if (  $counter < 3):;
+                        $counter++;
                         ?>
                         <div class="event-summary">
                             <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink(); ?>">
@@ -115,10 +126,13 @@ if ($iPod || $iPhone) {
                                     echo esc_html(get_the_excerpt());
                                     } else {
                                     echo wp_trim_words(esc_html(get_the_content()), 18);
-                                    } ?><a href="<?php the_permalink(); ?>" class="nu gray">بیشتر بخوانید</a></p>
+                                    } ?><a href="<?php the_permalink(); ?>" class="nu gray"> بیشتر بخوانید </a></p>
                             </div>
                         </div>
-                    <?php } wp_reset_postdata();
+                    <?php 
+                        endif;
+                    endif;
+                    } wp_reset_postdata();
                 ?>
 
 

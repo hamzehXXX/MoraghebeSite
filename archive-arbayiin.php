@@ -12,6 +12,50 @@
     <div class="container container--narrow page-section">
         <div class="generic-content">
 
+<?php
+if(get_current_user_id() == 1 OR get_current_user_id()==93) {
+    
+    $amalArray = array();
+            while (have_posts()){
+                the_post();
+                while (have_rows('amal')){
+                    the_row('amal');
+                    $amal = get_sub_field('amal_name');
+                    if (array_key_exists($amal, $amalArray)){
+                        if (is_string($amalArray[$amal])){
+                            $amalArray[$amal] = array($amalArray[$amal], get_the_title());
+                        } else if (is_array($amalArray[$amal])) {
+                            $amalArray[$amal][] = get_the_title();
+                        }
+
+
+//                        $amalArray[$amal][] =  get_the_title();
+                    } else {
+                        $amalArray[$amal] = get_the_title();
+                    }
+                }
+
+
+            }wp_reset_postdata();
+            echo 'تعداد اعمال: ' . sizeof($amalArray) . '<br/>';
+            foreach ($amalArray as $amalName => $arbName) {
+                echo $amalName;
+                echo '<ul>';
+                if (is_array($arbName)){
+                    foreach ($arbName as $value){
+                        echo '<li>';
+                        echo $value;
+                        echo '</li>';
+                    }
+                } else {
+                    echo '<li>';
+                    echo $arbName;
+                    echo '</li>';
+                }
+                echo '</ul>';
+            }
+}
+?>
             <h4 class="headline--post-title">اربعین های جاری من</h4>
             <ul class="" id="my-arbayiin">
             <?php //################################################### NEW ARBAYIINS################################
@@ -147,15 +191,12 @@
 
         </ul>
 
-            <?php
-
-            if( have_rows('arb_after_app') ) {
-                echo 'dkjiii';
-            }
-            ?>
+ 
 <?php } wp_reset_postdata(); ?>
 
+<?php
 
+?>
 
 <?php
 echo paginate_links();

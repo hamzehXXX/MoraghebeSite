@@ -29,16 +29,23 @@ include('jdf.php');
                     $termIds[] = $customTerm -> slug;
                 }
 
-                $hide = '';
+            $hide = 'hide';
             if (has_term('خواهران', 'group', get_the_ID())) {
-                if (!in_array('salek-zan', $currentUserRoles) AND !in_array('khadem-zan', $currentUserRoles))
-                $hide = 'hide';
+                if (in_array('salek-zan', $currentUserRoles) OR in_array('khadem-zan', $currentUserRoles))
+                    $hide = '';
             }
 
             if (has_term('برادران', 'group', get_the_ID())) {
-                if (!in_array('salek-mard', $currentUserRoles) AND !in_array('khadem-mard', $currentUserRoles))
-                    $hide = 'hide';
+                if (in_array('salek-mard', $currentUserRoles) OR in_array('khadem-mard', $currentUserRoles))
+                    $hide = '';
             }
+
+            if (has_term('عمومی', 'category', get_the_ID())){
+            $hide='';
+        }
+
+            $relatedArbs = get_field('related_arbayiin');
+            if ($relatedArbs === ''):
 
             ?>
 
@@ -57,6 +64,7 @@ include('jdf.php');
 
                 </div>
                 <?php
+                endif;
 
         }
         echo paginate_links();

@@ -7,11 +7,18 @@ function setStartDate() {
     $startDate = get_option($optionName);
     // display startDate select datepicker if not set yet
 //    echo '<form method="post">';
-    echo '<label for="startDate" >تاریخ شروع: </label>';
+    // echo '<label for="startDate" >تاریخ شروع: </label>';
     ?>
+    <div>برای انتخاب تاریخ شروع اربعین:</div>
+    <ol style="font-family: iranyekanwebregularfanum;">
+        <li>روی کادر خالی کلیک کنید تا تقویم نمایان شود</li>
+        <li>تاریخ شروع را از روی تقویم انتخاب کرده تا در کادر خالی نمایان شود</li>
+        <li>سپس دکمه ی انتخاب را بزنید.</li>
+    </ol>
+    <label for="startDate" >تاریخ شروع: </label>
     <input class="start-date" type="text" id="startDate" name="drddd" autocomplete="off" value=""
             data-userid = "<?php echo get_current_user_id(); ?>"  onkeydown="return false" 
-            data-arbid = "<?php the_ID(); ?>">
+            data-arbid = "<?php the_ID(); ?>" readonly>
     <?php
     echo '<button name="sbmt" id="submit-date" >انتخاب</button>';
 //    echo '</form>';
