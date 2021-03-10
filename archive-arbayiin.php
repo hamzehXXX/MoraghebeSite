@@ -28,24 +28,24 @@
             <?php //################################################### NEW ARBAYIINS################################
             //########################################## salekin pas az application
             // args
-            $amalArray = array();
-            while (have_posts()){
-                the_post();
-
-                $rowNumber = 1;
-                while (have_rows('amal')){
-                    the_row('amal');
-                    $amal = get_sub_field('amal_name');
-                    $description = get_sub_field('amal_desc');
-                    $catID = getOrCreateCatId($amal, 'arbAmal', $description);
-                    update_sub_field(array('amal', $rowNumber, 'amal_term'), $catID, get_the_ID());
-//                    $amalArray = populateAmalArray($amal, $amalArray);
-
-                    $rowNumber++;
-                }
-
-
-            }wp_reset_postdata();
+//            $amalArray = array();
+//            while (have_posts()){
+//                the_post();
+//
+//                $rowNumber = 1;
+//                while (have_rows('amal')){
+//                    the_row('amal');
+//                    $amal = get_sub_field('amal_name');
+//                    $description = get_sub_field('amal_desc');
+//                    $catID = getOrCreateCatId($amal, 'arbAmal', $description);
+//                    update_sub_field(array('amal', $rowNumber, 'amal_term'), $catID, get_the_ID());
+////                    $amalArray = populateAmalArray($amal, $amalArray);
+//
+//                    $rowNumber++;
+//                }
+//
+//
+//            }wp_reset_postdata();
 //            showAmalsAndArbs($amalArray);
 
             $myargs = array(

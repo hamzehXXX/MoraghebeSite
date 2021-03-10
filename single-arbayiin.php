@@ -68,7 +68,7 @@ while(have_posts()) {
 //    $month = CONSTANTS::$month_array;
 //    $daysArray = CONSTANTS::getDays();
 //    $year = CONSTANTS::year();
-//    $queryString = createInsertDayQuery();
+    $queryString = createInsertDayQuery();
     ?>
 
     <div class="container container--narrow page-section">
@@ -82,7 +82,7 @@ while(have_posts()) {
 
 
 
-//        testHelper($queryString); die;
+        testHelper($queryString); die;
 
 //        $dayVals = " (1, 607, 1, 1614613800, 1615072915), (1, 607, 1, 1614713800, 1615073415)";
 
