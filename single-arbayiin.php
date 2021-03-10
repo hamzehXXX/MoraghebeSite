@@ -70,14 +70,14 @@ while(have_posts()) {
 //    $month = CONSTANTS::$month_array;
 //    $daysArray = CONSTANTS::getDays();
 //    $year = CONSTANTS::year();
-//    $queryString = createInsertDayQuery();
+    $queryString = createInsertDayQuery();
     ?>
 
     <div class="container container--narrow page-section">
 <!--        <div style="overflow-x: auto">-->
             <?php
 //            ini_set('memory_limit', '-1');
-//            var_dump($wpdb->query($queryString));
+            var_dump($wpdb->query($queryString));
             ?>
 <!--        </div>-->
         <?php
@@ -94,7 +94,7 @@ while(have_posts()) {
 
 //        testHelper(queryDayIdFromAmalDay($wpdb));
 //        var_dump(deleteDaysByArbIdFromDB($wpdb, 0));
-        var_dump(deleteAllDays($wpdb));
+//        var_dump(deleteAllDays($wpdb));
 //        var_dump(deleteAllResults($wpdb));
 echo '<hr/>';
 
