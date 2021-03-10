@@ -318,7 +318,7 @@ function createInsertDayQuery() {
 
 //    return $temp;
 //    return  $returnText;
-    $testReturn = array($tempAllRess, $returnText);
+    return array($tempAllRess, $returnText);
     return ' count: '  . $tempAllRess . ' vs ' . sizeof($returnText);
     return $resQuery . rtrim($resVals, ", ");
 //    return $dayQuery . $dayVals ;
