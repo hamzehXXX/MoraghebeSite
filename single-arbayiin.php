@@ -75,16 +75,14 @@ while(have_posts()) {
 <!--        <div style="overflow-x: auto">-->
             <?php
 //            ini_set('memory_limit', '-1');
-//            testHelper($wpdb->query($queryString));
+            testHelper($wpdb->query($queryString));
             ?>
 <!--        </div>-->
         <?php
 
-
-
-        testHelper($queryString[0]);
-        testHelper($queryString[1]);
-        die;
+//        testHelper($queryString[0]);
+//        testHelper($queryString[1]);
+//        die;
 
 //        $dayVals = " (1, 607, 1, 1614613800, 1615072915), (1, 607, 1, 1614713800, 1615073415)";
 
