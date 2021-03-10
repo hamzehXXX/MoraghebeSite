@@ -48,6 +48,7 @@
 //            }wp_reset_postdata();
 //            showAmalsAndArbs($amalArray);
 
+            var_dump(deleteAllResults($wpdb));
             $myargs = array(
                 'numberposts'	=> -1,
                 'posts_per_page'	=> -1,
