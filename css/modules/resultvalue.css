@@ -16,7 +16,6 @@
     @mixin atMobile {
         font-size: 14px;
         padding: 0 .31em;
-        border-top: #999 solid 1px;
         /*border-collapse: collapse;*/
         text-align: center;
         font-family:iranyekanwebregularfanum;

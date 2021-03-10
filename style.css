@@ -1914,7 +1914,6 @@ tbody th {
     outline: 1px solid #ddd;
     text-align: center;
     font-weight: 300;
-    position: -webkit-sticky;
     position: sticky;
     right: 0;
 }
@@ -1942,7 +1941,6 @@ td{
 
 }
 table td .firstcol {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
 }
@@ -2233,7 +2231,6 @@ table td .firstcol {
 @media (max-width: 360px) {
     .resultname{
         padding: 0 .31em;
-        position: -webkit-sticky;
         position: sticky;
         line-height: 45px;
         right: 0;
@@ -2244,7 +2241,6 @@ table td .firstcol {
         font-size:14px;
         background-color: #0d3b66;
         color: white;
-        border-top: #999 solid 1px;
         border-collapse: collapse;
         font-family:iranyekanwebregularfanum;
 
@@ -2253,7 +2249,6 @@ table td .firstcol {
     .table-num{
         background-color: #f3f3f3;
         color: #0d3b66;
-        position: -webkit-sticky;
         position: sticky;
         right: 0;
         line-height: 45px;
@@ -2274,7 +2269,6 @@ table td .firstcol {
 
 }
 .ddd{
-     position: -webkit-sticky;
      position: sticky;
      /*position: -webkit-sticky;*/
      right: 0;
@@ -3916,7 +3910,6 @@ pre[class*="language-"] {
 .resultvalue{
         font-size: 14px;
         padding: 0 .31em;
-        border-top: #999 solid 1px;
         /*border-collapse: collapse;*/
         text-align: center;
         font-family:iranyekanwebregularfanum;
