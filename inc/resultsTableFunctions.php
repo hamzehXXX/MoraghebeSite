@@ -316,11 +316,11 @@ function createInsertDayQuery() {
         if ($tempAllRess > 177135)break;
     }
 
-    return $temp;
-    return  $returnText;
-    return ' count: '  . $tempAllRess;
+//    return $temp;
+//    return  $returnText;
+//    return ' count: '  . $tempAllRess;
 //    return $resQuery . rtrim($resVals, ", ");
-//    return $dayQuery . $dayVals ;
+    return $dayQuery . $dayVals ;
 }
 
 function queryDayIdFromAmalDay($wpdb) {
