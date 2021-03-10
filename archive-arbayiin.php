@@ -128,8 +128,8 @@
                             $dastoor_link = $dastoor_takhsised_obj->guid;
                             $dastoor_ID = $dastoor_takhsised_obj->ID;
                             $arbrepeat = get_sub_field('repeat');
-                            $amalsForSalek = ArchiveArbayiin::getAmals($salekID, $dastoor_ID);
-                            $amalsSize = sizeof($amalsForSalek);
+//                            $amalsForSalek = ArchiveArbayiin::getAmals($salekID, $dastoor_ID);
+//                            $amalsSize = sizeof($amalsForSalek);
                             $arbDuration = intval(get_field('arbayiin-duration', $dastoor_ID));
 
 //                            if ($amalsSize == $arbDuration) {
@@ -146,7 +146,7 @@
 //                                if (in_array($dastoor_ID, $arbIdArray)) {
 //                                    delete_row('arb_after_app', $rowNum, get_the_ID());
 //                                }
-                                $repeatNum = in_array($dastoor_ID, $arbIdArray)?' (' . 'تکرار ' . array_count_values($arbIdArray)[$dastoor_ID]. ')':'';
+                                $repeatNum = $arbrepeat>1?' (' . 'تکرار ' . $arbrepeat. ')':'';
 //                            echo get_permalink($dastoor_ID);
                             $newLink = esc_url( add_query_arg( 'arbrepeat', $arbrepeat, get_permalink( $dastoor_ID ) ) );
 //                            echo '<br/>' . $newLink;
@@ -156,7 +156,7 @@
                                 ?>
                                 <li class="arbayiin-title arbayiin-title__current" data-id="<?php echo $dastoor_ID; ?>">
                                     <a class="" href="<?php echo $newLink; ?>">
-                                        <strong><?php echo esc_html($dastoor_title) . $repeatNum . ' ' . $arbrepeat; ?></strong></a>
+                                        <strong><?php echo esc_html($dastoor_title) . $repeatNum; ?></strong></a>
                                     <div class="arbayiin-items">
                                         <?php
                                         if (!($submitedDayCount)) {
@@ -211,7 +211,7 @@
 
                         $permaLink = esc_url( add_query_arg( 'arbrepeat', $item->ID, get_permalink( $item->ID ) ) );
                         $duration = get_field('arbayiin-duration', $item->ID);
-                        $amalsOfSabegh = ArchiveArbayiin::getAmals($salekID, $item->ID);
+//                        $amalsOfSabegh = ArchiveArbayiin::getAmals($salekID, $item->ID);
 
                         ?>
                     <li class="arbayiin-title_sabegh" data-id="<?php echo $item -> ID; ?>">

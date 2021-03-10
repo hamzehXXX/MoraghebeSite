@@ -6,8 +6,8 @@ add_action('after_some-page_wrapper', 'insertResults');
 
 add_filter( 'arbayiin_startDate', 'setStartDate');
 
-add_action('admin_init', 'redirectToUnderConstruction');
-add_action('wp', 'redirectToUnderConstruction');
+//add_action('admin_init', 'redirectToUnderConstruction');
+//add_action('wp', 'redirectToUnderConstruction');
 
 function redirectToUnderConstruction() {
 

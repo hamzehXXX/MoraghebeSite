@@ -89,42 +89,53 @@ function amalRoute() {
         insertDayIntoDB($wpdb, $userid, $arbayiin,$arbrepeat, getTimestampOfDayField($day), getNowTimestamp());
         $insertedID = $wpdb->insert_id;
 //        $dateID = getDayIdByDateFromDB($wpdb, $userid, $arbayiin, 1);
+        $resQuery = "INSERT INTO amal_results (dayid, amalid, result_matni, result_point) VALUES";
             $rowNumber = 0;
-            foreach ($amals as $amal) {
+            $resVals = " ";
+            foreach ($amals as $amalid) {
 
-                $currentResult = $resultsArray[$rowNumber];
-                if ($resultType[$rowNumber] == 'متنی') {
-                    $resultMatni = $currentResult;
-                    $resultPoint = 3;
-                    if ($currentResult === '0') {
-                        $resultMatni = NULL;
+                $resultPoint = $resultsArray[$rowNumber];
+                if ($resultType[$rowNumber] != 'متنی') {
+                    $resultMatni = "NULL";
+                } else {
+                    if (strlen($resultPoint) >= 2){
+                        $matni = esc_sql($resultPoint);
+                        $resultMatni = "'$matni'";
+                        $resultPoint = 3;
+                    }
+                    else {
+                        $resultMatni = "NULL";
                         $resultPoint = 0;
                     }
-                } else {
-                    $resultMatni = NULL;
-                    $resultPoint = $currentResult;
                 }
-
-                $returnArray[] = insertSingleResultIntoDB($wpdb, $insertedID,$amal, $resultMatni, $resultPoint);
                 $rowNumber++;
+                $resVals .= "(" . $insertedID . ', ' . $amalid . ', ' . $resultMatni . ', ' . $resultPoint .  ")";
+                if ($rowNumber < sizeof($amals)){
+                    $resVals .= ', ';
+                }
+//                $returnArray[] = insertSingleResultIntoDB($wpdb, $insertedID,$amal, $resultMatni, $resultPoint);
+
             }
+
+            $resInsertionQuery = $resQuery . $resVals;
+        $resultsInsertedCount = $wpdb->query($resInsertionQuery);
 //        }
-        wp_insert_post(array(
-            'post_type' => 'amal',
-            'post_status' => 'publish',
-            'post_title' => $user->first_name . ' ' . $day . ' ' . get_the_title($arbayiin),
-            'post_author' => $author,
-            'meta_input' => array(
-                'arbayiin' => $arbayiin,
-                'day' => $day,
-                'results' => $results
-            )
+//        wp_insert_post(array(
+//            'post_type' => 'amal',
+//            'post_status' => 'publish',
+//            'post_title' => $user->first_name . ' ' . $day . ' ' . get_the_title($arbayiin),
+//            'post_author' => $author,
+//            'meta_input' => array(
+//                'arbayiin' => $arbayiin,
+//                'day' => $day,
+//                'results' => $results
+//            )
+//
+//        ));
 
-        ));
 
 
-
-        return $returnArray;
+        return $resultsInsertedCount;
 
 //        insertSingleResultIntoDB($wpdb, $author, $arbayiin, );
 //                return wp_insert_post(array(
@@ -281,22 +292,22 @@ function amalRoute() {
     function deleteResults($dayArray) {
         global $wpdb;
 //        deleteAllResultsFromDB($wpdb, 1, 607, 1);
-        $amalResults =get_posts(array(
-            'post_type' => 'amal',
-            'posts_per_page' => -1,
-            'author' => get_current_user_id(),
-            'meta_key' => 'arbayiin',
-            'meta_query' => array(
-                'key' => 'arbayiin',
-                'compare' => '=',
-                'value' => $dayArray['arbid']
-            )));
+//        $amalResults =get_posts(array(
+//            'post_type' => 'amal',
+//            'posts_per_page' => -1,
+//            'author' => get_current_user_id(),
+//            'meta_key' => 'arbayiin',
+//            'meta_query' => array(
+//                'key' => 'arbayiin',
+//                'compare' => '=',
+//                'value' => $dayArray['arbid']
+//            )));
 
-        $deletedResults = array();
+//        $deletedResults = array();
 
-        foreach ($amalResults as $amalResult) {
-            $deletedResults[] = wp_delete_post($amalResult->ID);
-        }
+//        foreach ($amalResults as $amalResult) {
+//            $deletedResults[] = wp_delete_post($amalResult->ID);
+//        }
 
         $userid = get_current_user_id();
         $arbid = $dayArray['arbid'];
@@ -304,6 +315,7 @@ function amalRoute() {
         global $wpdb;
         $deletedResults = deleteAllResultsForArb($wpdb, $userid, $arbid, $arbrepeat);
         $deletedDays = deleteDaysByUserAndArbIdFromDB($wpdb, $userid, $arbid, $arbrepeat);
+
         return $deletedDays;
     }
 
