@@ -224,105 +224,105 @@ function createInsertDayQuery() {
 
 //         POPULATE amal_results VALUES
 
-        $points = get_field('results', $dayID);
-        $resultsArr = explode('!@#', $points);
-        unset($resultsArr[sizeof($resultsArr)-1]);
-//        for ($i = 0; $i <= abs(sizeof($amals)-sizeof($resultsArr)); $i++){
-//            array_push($resultsArr, 3);
-//        }
-        $amalTermARr = array();
-        if ($amals) {
-            if (sizeof($resultsArr) == sizeof($amals)) {
-                $resTemp = 0;
-                foreach ($amals as $amal) {
-                    $tempAllRess++;
-                    $amalTerm = $amal['amal_term'];
-                    $resType = $amal['result_type'];
-                    $amalid = $amalTerm -> term_id;
-//                    $amalTermARr[] = $amalTerm;
-//                    if ($resTemp == 300) return $amalTermARr;
-//                    $result_matni = "";
-                    $result_point = isset($resultsArr[$resTemp])?$resultsArr[$resTemp]:3;
-                    if ($resType!='متنی') {
-                        $result_matni = "NULL";
-
-                    } else {
-                        if (strlen($result_point) < 3){
-                            $result_matni = "NULL";
-                            $result_point = 0;
-                        } else{
-                            $matni = esc_sql($result_point);
-                            $result_matni = "'$matni'";
-                            $result_point = 3;
-                        }
-
-                    }
-                    $resVals .= "(" . $dayID . ", " . $amalid . ", " . $result_matni . ", " . $result_point . "),";
-//                if (($tempAllRess) == 1000) return $resQuery.$resVals;
-//                    if ($resTemp < sizeof($amals) - 1) {
-//                        $resVals .= ", ";
+//        $points = get_field('results', $dayID);
+//        $resultsArr = explode('!@#', $points);
+//        unset($resultsArr[sizeof($resultsArr)-1]);
+////        for ($i = 0; $i <= abs(sizeof($amals)-sizeof($resultsArr)); $i++){
+////            array_push($resultsArr, 3);
+////        }
+//        $amalTermARr = array();
+//        if ($amals) {
+//            if (sizeof($resultsArr) == sizeof($amals)) {
+//                $resTemp = 0;
+//                foreach ($amals as $amal) {
+//                    $tempAllRess++;
+//                    $amalTerm = $amal['amal_term'];
+//                    $resType = $amal['result_type'];
+//                    $amalid = $amalTerm -> term_id;
+////                    $amalTermARr[] = $amalTerm;
+////                    if ($resTemp == 300) return $amalTermARr;
+////                    $result_matni = "";
+//                    $result_point = isset($resultsArr[$resTemp])?$resultsArr[$resTemp]:3;
+//                    if ($resType!='متنی') {
+//                        $result_matni = "NULL";
+//
+//                    } else {
+//                        if (strlen($result_point) < 3){
+//                            $result_matni = "NULL";
+//                            $result_point = 0;
+//                        } else{
+//                            $matni = esc_sql($result_point);
+//                            $result_matni = "'$matni'";
+//                            $result_point = 3;
+//                        }
+//
 //                    }
-                    $resTemp++;
-                }
-            }
-            else {
-                $returnText[] = "notEqualSize: ". $arbId;
-            }
-
-
-        } else {
-            $returnText[] = "noAmal";
-        }
-
-        // POPULATE result_days VALUES
-//        $dayField = get_field('day', $dayID);
-//
-////            testHelper($dayField . '- ' . $dayID);
-//        if (strlen($dayField) > 10) {
-//            if (strpos($dayField, 'شنبه') !== false) {
-//                $amalTimeStamp = getTimestampOfDayField($dayField);
-//            }
-//            else if (strpos($dayField, 'یکشنبه') !== false) {
-//                $amalTimeStamp = getTimestampOfDayField($dayField);
-//            }
-//            else if (strpos($dayField, 'دوشنبه') !== false) {
-//                $amalTimeStamp = getTimestampOfDayField($dayField);
-//            }
-//            else if (strpos($dayField, 'سه شنبه') !== false) {
-//                $amalTimeStamp = getTimestampOfDayField($dayField);
-//            }
-//
-//            else if (strpos($dayField, 'چهارشنبه') !== false) {
-//                $amalTimeStamp = getTimestampOfDayField($dayField);
-//            }
-//            else if (strpos($dayField, 'پنجشنبه') !== false) {
-//                $amalTimeStamp = getTimestampOfDayField($dayField);
-//            }
-//            else if (strpos($dayField, 'جمعه') !== false) {
-//                $amalTimeStamp = getTimestampOfDayField($dayField);
+//                    $resVals .= "(" . $dayID . ", " . $amalid . ", " . $result_matni . ", " . $result_point . "),";
+////                if (($tempAllRess) == 1000) return $resQuery.$resVals;
+////                    if ($resTemp < sizeof($amals) - 1) {
+////                        $resVals .= ", ";
+////                    }
+//                    $resTemp++;
+//                }
 //            }
 //            else {
-//                $amalTimeStamp = 0;
+//                $returnText[] = "notEqualSize: ". $arbId;
 //            }
-//        } else {
-//            $amalTimeStamp = 0;
-//        }
 //
-////            $amalTimeStamp = strlen($dayField) > 10?getTimestampOfDayField($dayField):0;
-//        $dayVals .= "(" . $dayID . ', ' . $result->post_author . ', ' . intval(get_field('arbayiin', $dayID)) . ', ' . 1 . ', ' . $amalTimeStamp . ', ' . strtotime($allResults[0]->post_date) . ")";
-//        if ($temp < sizeof($allResults)){
-//            $dayVals .= ', ';
+//
+//        } else {
+//            $returnText[] = "noAmal";
 //        }
-//        $temp++;
-//        if ($tempAllRess > 177135)break;
+
+        // POPULATE result_days VALUES
+        $dayField = get_field('day', $dayID);
+
+//            testHelper($dayField . '- ' . $dayID);
+        if (strlen($dayField) > 10) {
+            if (strpos($dayField, 'شنبه') !== false) {
+                $amalTimeStamp = getTimestampOfDayField($dayField);
+            }
+            else if (strpos($dayField, 'یکشنبه') !== false) {
+                $amalTimeStamp = getTimestampOfDayField($dayField);
+            }
+            else if (strpos($dayField, 'دوشنبه') !== false) {
+                $amalTimeStamp = getTimestampOfDayField($dayField);
+            }
+            else if (strpos($dayField, 'سه شنبه') !== false) {
+                $amalTimeStamp = getTimestampOfDayField($dayField);
+            }
+
+            else if (strpos($dayField, 'چهارشنبه') !== false) {
+                $amalTimeStamp = getTimestampOfDayField($dayField);
+            }
+            else if (strpos($dayField, 'پنجشنبه') !== false) {
+                $amalTimeStamp = getTimestampOfDayField($dayField);
+            }
+            else if (strpos($dayField, 'جمعه') !== false) {
+                $amalTimeStamp = getTimestampOfDayField($dayField);
+            }
+            else {
+                $amalTimeStamp = 0;
+            }
+        } else {
+            $amalTimeStamp = 0;
+        }
+
+//            $amalTimeStamp = strlen($dayField) > 10?getTimestampOfDayField($dayField):0;
+        $dayVals .= "(" . $dayID . ', ' . $result->post_author . ', ' . intval(get_field('arbayiin', $dayID)) . ', ' . 1 . ', ' . $amalTimeStamp . ', ' . strtotime($result->post_date) . ")";
+        if ($temp < sizeof($allResults)){
+            $dayVals .= ', ';
+        }
+        $temp++;
+        if ($tempAllRess > 177135)break;
     }
 
 //    return $temp;
 //    return  $returnText;
 //    return array($tempAllRess, $returnText);
 //    return ' count: '  . $tempAllRess . ' vs ' . sizeof($returnText);
-    return $resQuery . rtrim($resVals, ", ");
-//    return $dayQuery . $dayVals ;
+//    return $resQuery . rtrim($resVals, ", ");
+    return $dayQuery . $dayVals ;
 }
 
 function queryDayIdFromAmalDay($wpdb) {

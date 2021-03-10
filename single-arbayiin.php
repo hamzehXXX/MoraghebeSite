@@ -47,7 +47,7 @@ while(have_posts()) {
         $result[$element->dayid]['submitdate'] = $element->submitdate;
         $result[$element->dayid]['results'][] = $element;
     }
-    testHelper($result);
+//    testHelper($result);
 
     $amalSize = sizeof($result);
 //********************************       [ PAGE BANNER ]       ********************************* START >>>>>>
@@ -94,7 +94,7 @@ while(have_posts()) {
 
 //        testHelper(queryDayIdFromAmalDay($wpdb));
 //        var_dump(deleteDaysByArbIdFromDB($wpdb, 0));
-//        var_dump(deleteAllDays($wpdb));
+        var_dump(deleteAllDays($wpdb));
 //        var_dump(deleteAllResults($wpdb));
 echo '<hr/>';
 

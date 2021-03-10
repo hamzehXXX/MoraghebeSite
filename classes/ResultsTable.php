@@ -85,7 +85,7 @@ private $nameArray;
     }
 
     private function resultsColumn($taskCount, $arbID, $arbrepeat, $days){
-            testHelper($days);
+//            testHelper($days);
         // depict day columns in row
         $dbDate=0;
         $dayCounter = 0;
