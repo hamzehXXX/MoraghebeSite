@@ -281,6 +281,7 @@ $resultsTable->showResultsTable($display, $arbayiinID, $result);
         //======================================================================
         // RELATED POSTS
         //======================================================================
+        $currentUserRoles = wp_get_current_user() -> roles;
         $homepagePosts = new WP_Query(array(
             'posts_per_page' => -1,
             'meta_key' => 'related_arbayiin',
@@ -296,17 +297,32 @@ $resultsTable->showResultsTable($display, $arbayiinID, $result);
 
             while ($homepagePosts->have_posts()) {
                 $homepagePosts->the_post();
+
+                $hide = 'hide';
+                if (has_term('خواهران', 'group', get_the_ID())) {
+                    if (in_array('salek-zan', $currentUserRoles) OR in_array('khadem-zan', $currentUserRoles))
+                        $hide = '';
+                }
+
+                if (has_term('برادران', 'group', get_the_ID())) {
+                    if (in_array('salek-mard', $currentUserRoles) OR in_array('khadem-mard', $currentUserRoles))
+                        $hide = '';
+                }
+
+//                if (has_term('عمومی', 'category', get_the_ID())){
+//                    $hide='';
+//                }
 //                echo the_date();
 //                echo strtotime(get_the_date());
-                echo jdate('F', strtotime(get_the_date()));
+//                echo jdate('F', strtotime(get_the_date()));
                 ?>
-                <div class="event-summary">
+                <div class="event-summary <?php echo $hide;?>">
                     <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink(); ?>">
                         <span class="event-summary__month"><?php echo jdate('F', strtotime(get_the_date())); ?></span>
                         <span class="event-summary__day"><?php echo jdate('d', strtotime(get_the_date())); ?></span>
                     </a>
                     <div class="event-summary__content">
-                        <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+                        <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></h5>
                         <p><?php if (has_excerpt()) {
                                 echo get_the_excerpt();
                             } else {
@@ -314,14 +330,16 @@ $resultsTable->showResultsTable($display, $arbayiinID, $result);
                             } ?><a href="<?php the_permalink(); ?>" class="nu gray">بیشتر بخوانید</a></p>
                     </div>
                 </div>
-            <?php } wp_reset_postdata();
+            <?php
+                echo $hide='hide'?'اطلاعیه ای موجود نیست':'';
+            } wp_reset_postdata();
         }
 
 
         if ($duration != $amalSize):
             ?>
 
-            <hr/>
+            <hr class="section-break"/>
           <h4 style="font-family: iranyekanwebregularfanum">حذف کلیه نتایج اربعین</h4>
           <h5 style="font-family: iranyekanwebregularfanum;">با حذف نتایج، کلیه نتایجی که برای این اربعین ثبت کرده اید حذف خواهند شد و دیگر قابل بازگشت  نخواهد بود. لطفا دقت لازم را مبذول بفرمایید.</h5>
 
