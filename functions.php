@@ -932,16 +932,16 @@ function change_all_amals_arbayiins() {
 //add_action( 'init', 'change_all_amals_arbayiins' );
 
 
-function my_acf_update_value( $value, $post_id, $field, $original ) {
-    if( is_string($value) ) {
-
-        $value = $field;
-    }
-//    if ($value != $original) {
-//        $value = $value . ' - ' . $original;
+//function my_acf_update_value( $value, $post_id, $field, $original ) {
+//    if( is_string($value) ) {
+//
+//        $value = $field;
 //    }
-    return $value;
-}
+////    if ($value != $original) {
+////        $value = $value . ' - ' . $original;
+////    }
+//    return $value;
+//}
 
 // Apply to all fields.
 //add_filter('acf/update_value', 'my_acf_update_value', 10, 4);
@@ -961,25 +961,6 @@ function my_acf_update_value( $value, $post_id, $field, $original ) {
 //    return $actions;
 //}
 
-//add_action( 'admin_head', function () {
-//    $current_screen = get_current_screen();
-//
-//    // Hides the "Move to Trash" link on the post edit page.
-////    if ( 'arbAmal' === $current_screen->taxonomy &&
-////    'arbayiin' === $current_screen->post_type ) :
-////    ?>
-<!--<!--        <style>#delete-link { display: none; }</style>-->-->
-<!--<!--    -->--><?php
-////    endif;
-//
-//    // Hides the "Delete" link on the term edit page.
-//    if ( 'term' === $current_screen->base &&
-//    'arbAmal' === $current_screen->taxonomy ) :
-//    ?>
-<!--        <style>#delete-link { display: none; }</style>-->
-<!--    --><?php
-//    endif;
-//} );
 
 
 //        add_action( 'pre_delete_term', 'restrict_taxonomy_deletion', 10, 2 );
