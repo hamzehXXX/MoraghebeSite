@@ -327,12 +327,40 @@ function my_custom_columns($column) {
 add_action("manage_salek_posts_custom_column", "my_custom_columns");
 add_filter("manage_salek_posts_columns", "my_page_columns");
 
-add_filter("manage_amal_posts_columns", "my_amal_columns");
-add_action("manage_amal_posts_custom_column", "my_amal_custom_columns");
+
+function arbayiin_columns($columns) {
+    $columns = array(
+        'cb' => '< input type="checkbox" />',
+        'title' => 'نام دستور',
+        'duration' => 'مدت',
+        
+
+    );
+    return $columns;
+}
+
+add_filter("manage_arbayiin_posts_columns", "arbayiin_columns");
+
+
+function arbayiin_custom_columns($column) {
+    global $post;
+    if($column == 'duration') {
+        echo get_field('arbayiin-duration', $post->ID);
+    } else {
+        echo '';
+    }
+}
+add_action("manage_arbayiin_posts_custom_column", "arbayiin_custom_columns");
+
+//add_filter("manage_amal_posts_columns", "my_amal_columns");
+//add_action("manage_amal_posts_custom_column", "my_amal_custom_columns");
+
+
 function my_amal_columns($columns) {
     $columns['arbId'] = 'اربعین';
     return $columns;
 }
+
 function my_amal_custom_columns($column) {
     global $post;
     if($column == 'arbId') {
