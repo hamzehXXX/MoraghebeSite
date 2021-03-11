@@ -45,7 +45,8 @@ while(have_posts()) {
     foreach ($resultsOfDay as $element) {
         $result[$element->dayid]['date'] = $element->date;
         $result[$element->dayid]['submitdate'] = $element->submitdate;
-        $result[$element->dayid]['results'][] = $element;
+        $result[$element->dayid]['results'][$element->amalid]['result_point'] = $element->result_point;
+        $result[$element->dayid]['results'][$element->amalid]['result_matni'] = $element->result_matni;
     }
 //    testHelper($result);
 
@@ -96,7 +97,7 @@ while(have_posts()) {
 //        var_dump(deleteDaysByArbIdFromDB($wpdb, 0));
 //        var_dump(deleteAllDays($wpdb));
 //        var_dump(deleteAllResults($wpdb));
-echo '<hr/>';
+//echo '<hr/>';
 
 
 

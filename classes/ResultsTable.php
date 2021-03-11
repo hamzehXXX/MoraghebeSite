@@ -5,6 +5,7 @@ class ResultsTable
 {
 private $salekID;
 private $nameArray;
+private $amalidArr;
     /**
      * ResultsTable constructor.
      */
@@ -57,10 +58,12 @@ private $nameArray;
         echo '<li class="ddd  " style="display: table-cell; " >';  // start of the second column
         echo '<div class="nameheader" >نام عمل</div>';
         $this->nameArray = array();
+        $this->amalidArr = array();
         while (have_rows('amal')) {
             the_row();
 //            $name = get_sub_field('amal_name');
             $amalTerm = get_sub_field('amal_term');
+            $this->amalidArr[] = $amalTerm->term_id;
             $name = $amalTerm->name;
             $content = get_sub_field('amal_desc');
             $this->nameArray[] = $name;
@@ -86,9 +89,11 @@ private $nameArray;
 
     private function resultsColumn($taskCount, $arbID, $arbrepeat, $days){
 //            testHelper($days);
+
         // depict day columns in row
         $dbDate=0;
         $dayCounter = 0;
+        $amalidArray = $this->amalidArr;
         foreach ($days as $day){
 //            echo $day->ID;
             echo '<li class="row" style="display: table-cell;">';
@@ -107,10 +112,13 @@ private $nameArray;
             // results of each day column
             $sumDayPoints = 0;  // Initialize the sum of the day's result points
             $amalCounter = 0;
-            foreach ($resultVals as $resVal){
-                $sumDayPoints += $resVal->result_point;
-                $point = $resVal->result_point;
-                $matn = $resVal->result_matni;
+
+            foreach ($amalidArray as $amalid){
+//            foreach ($resultVals as $resVal){
+                $point = isset($resultVals[$amalid]['result_point'])?$resultVals[$amalid]['result_point']:0;
+                $sumDayPoints += $point;
+
+                $matn = isset($resultVals[$amalid]['result_matni'])?$resultVals[$amalid]['result_matni']:0;
                 $myval = $this->getResultString($point);
                 $amalName = $this->nameArray[$amalCounter];
                 $displayRes = $matn == NULL?$myval[0]:$matn;

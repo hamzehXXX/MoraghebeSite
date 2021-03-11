@@ -27,6 +27,7 @@ function setStartDate() {
     echo 'jQuery(function () {jQuery("#startDate").persianDatepicker();});';
     echo '</script>';
 
+    echo '<hr class="section-break"/>';
 //    if(isset($_POST['sbmt'])) {
 //        $startDate = $startDate = $_POST['drddd'];
 //
