@@ -944,31 +944,30 @@ function change_all_amals_arbayiins() {
 //}
 
 // Apply to all fields.
-//add_filter('acf/update_value', 'my_acf_update_value', 10, 4);
+add_filter('acf/update_value', 'my_acf_update_value', 10, 4);
 
-//if(!is_page(2812)) {
-//    // Not logged in, not the login page and not the dashboard
-//    exit( wp_redirect( home_url( '/construction' ) ) );
-//}
+if(!is_page(2812)) {
+    // Not logged in, not the login page and not the dashboard
+    exit( wp_redirect( home_url( '/construction' ) ) );
+}
 
-//add_filter( 'arbAmal_row_actions', 'wpse31545522_restrict_edit_delete_in_category', 10, 2 );
-//
-//function wpse31545522_restrict_edit_delete_in_category($actions, $tag) {
-////    unset($actions['edit']); // Edit link
-////    unset($actions['inline hide-if-no-js']); //Inline Edit link
-//    unset($actions['delete']); // Delete link
-//
-//    return $actions;
-//}
+add_filter( 'arbAmal_row_actions', 'wpse31545522_restrict_edit_delete_in_category', 10, 2 );
+
+function wpse31545522_restrict_edit_delete_in_category($actions, $tag) {
+//    unset($actions['edit']); // Edit link
+//    unset($actions['inline hide-if-no-js']); //Inline Edit link
+    unset($actions['delete']); // Delete link
+
+    return $actions;
+}
 
 
-
-//        add_action( 'pre_delete_term', 'restrict_taxonomy_deletion', 10, 2 );
-//        function restrict_taxonomy_deletion( $term, $taxonomy ) {
-//            if ( 'arbAmal' === $taxonomy ) {
-//                wp_die( 'شما مجاز به حذف عمل نیستید' );
-//            }
-//        }
+add_action( 'pre_delete_term', 'restrict_taxonomy_deletion', 10, 2 );
+function restrict_taxonomy_deletion( $term, $taxonomy ) {
+    if ( 'arbAmal' === $taxonomy ) {
+        wp_die( 'شما مجاز به حذف عمل نیستید' );
+    }
+}
 
 
 
