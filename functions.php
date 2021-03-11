@@ -327,8 +327,8 @@ function my_custom_columns($column) {
 add_action("manage_salek_posts_custom_column", "my_custom_columns");
 add_filter("manage_salek_posts_columns", "my_page_columns");
 
-//add_filter("manage_amal_posts_columns", "my_amal_columns");
-//add_action("manage_amal_posts_custom_column", "my_amal_custom_columns");
+add_filter("manage_amal_posts_columns", "my_amal_columns");
+add_action("manage_amal_posts_custom_column", "my_amal_custom_columns");
 function my_amal_columns($columns) {
     $columns['arbId'] = 'اربعین';
     return $columns;
@@ -372,7 +372,7 @@ function amal_custom_columns_list($columns) {
 
     return $columns;
 }
-//add_filter( 'manage_amal_posts_columns', 'amal_custom_columns_list' );
+add_filter( 'manage_amal_posts_columns', 'amal_custom_columns_list' );
 
 
 
@@ -746,7 +746,7 @@ function wpse64933_add_posttype_note()
     echo '<p>این صفحه مخصوص استفاده در کد های وب سایت می باشد. درصورت تغییر فیلد های این بخش نمایش نتایج اعمال با مشکل مواجه خواهد شد، لذا تغییر فیلد های این بخش به هیچ عنوان توصیه نمی شود. بهترین استفاده ای که در این بخش برای شما توصیه می شود، حذف کردن نتایج شاگردان در صورت لزوم می باشد. منتها دقّت کافی داشته باشید که نتایج را از آخرین تاریخ ثبت شده حذف کنید. مثلا سالکی 10 روز را ثبت کرده است، و شما می خواهید روز پنجم را حذف کنید. برای این کار لازم است روز دهم، نهم، هشتم، هفتم، ششم، و پنجم را حذف بفرمایید.</p>';
 }
 
-//add_action('all_admin_notices', 'wpse64933_add_posttype_note');
+add_action('all_admin_notices', 'wpse64933_add_posttype_note');
 
 // extend expiretime of login session
 add_filter('auth_cookie_expiration', 'my_expiration_filter', 99, 3);
@@ -932,19 +932,19 @@ function change_all_amals_arbayiins() {
 //add_action( 'init', 'change_all_amals_arbayiins' );
 
 
-//function my_acf_update_value( $value, $post_id, $field, $original ) {
-//    if( is_string($value) ) {
-//
-//        $value = $field;
+function my_acf_update_value( $value, $post_id, $field, $original ) {
+    if( is_string($value) ) {
+
+        $value = $field;
+    }
+//    if ($value != $original) {
+//        $value = $value . ' - ' . $original;
 //    }
-////    if ($value != $original) {
-////        $value = $value . ' - ' . $original;
-////    }
-//    return $value;
-//}
+    return $value;
+}
 
 // Apply to all fields.
-add_filter('acf/update_value', 'my_acf_update_value', 10, 4);
+//add_filter('acf/update_value', 'my_acf_update_value', 10, 4);
 
 //if(!is_page(2812)) {
 //    // Not logged in, not the login page and not the dashboard
@@ -961,13 +961,33 @@ function wpse31545522_restrict_edit_delete_in_category($actions, $tag) {
     return $actions;
 }
 
+add_action( 'admin_head', function () {
+    $current_screen = get_current_screen();
 
-add_action( 'pre_delete_term', 'restrict_taxonomy_deletion', 10, 2 );
-function restrict_taxonomy_deletion( $term, $taxonomy ) {
-    if ( 'arbAmal' === $taxonomy ) {
-        wp_die( 'شما مجاز به حذف عمل نیستید' );
-    }
-}
+    // Hides the "Move to Trash" link on the post edit page.
+//    if ( 'arbAmal' === $current_screen->taxonomy &&
+//    'arbayiin' === $current_screen->post_type ) :
+//    ?>
+<!--        <style>#delete-link { display: none; }</style>-->
+<!--    --><?php
+//    endif;
+
+    // Hides the "Delete" link on the term edit page.
+    if ( 'term' === $current_screen->base &&
+    'arbAmal' === $current_screen->taxonomy ) :
+    ?>
+        <style>#delete-link { display: none; }</style>
+    <?php
+    endif;
+} );
+
+
+        add_action( 'pre_delete_term', 'restrict_taxonomy_deletion', 10, 2 );
+        function restrict_taxonomy_deletion( $term, $taxonomy ) {
+            if ( 'arbAmal' === $taxonomy ) {
+                wp_die( 'The taxonomy you were trying to delete is protected.' );
+            }
+        }
 
 
 

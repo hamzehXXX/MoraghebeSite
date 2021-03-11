@@ -263,6 +263,8 @@ if ($duration != $amalSize):
 ?>
 
 <hr/>
+<hr/>
+<hr/>
         <span class="delete-results btn btn--blue btn--small block <?php echo $display;?>"
               data-arbid="<?php echo $arbayiinID;?>"
               data-arbrepeat="<?php echo $repeat;?>" style="position: absolute; left: 0px; color: red">حذف نتایج</span>
