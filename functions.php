@@ -951,43 +951,43 @@ function my_acf_update_value( $value, $post_id, $field, $original ) {
 //    exit( wp_redirect( home_url( '/construction' ) ) );
 //}
 
-add_filter( 'arbAmal_row_actions', 'wpse31545522_restrict_edit_delete_in_category', 10, 2 );
+//add_filter( 'arbAmal_row_actions', 'wpse31545522_restrict_edit_delete_in_category', 10, 2 );
+//
+//function wpse31545522_restrict_edit_delete_in_category($actions, $tag) {
+////    unset($actions['edit']); // Edit link
+////    unset($actions['inline hide-if-no-js']); //Inline Edit link
+//    unset($actions['delete']); // Delete link
+//
+//    return $actions;
+//}
 
-function wpse31545522_restrict_edit_delete_in_category($actions, $tag) {
-//    unset($actions['edit']); // Edit link
-//    unset($actions['inline hide-if-no-js']); //Inline Edit link
-    unset($actions['delete']); // Delete link
-
-    return $actions;
-}
-
-add_action( 'admin_head', function () {
-    $current_screen = get_current_screen();
-
-    // Hides the "Move to Trash" link on the post edit page.
-//    if ( 'arbAmal' === $current_screen->taxonomy &&
-//    'arbayiin' === $current_screen->post_type ) :
+//add_action( 'admin_head', function () {
+//    $current_screen = get_current_screen();
+//
+//    // Hides the "Move to Trash" link on the post edit page.
+////    if ( 'arbAmal' === $current_screen->taxonomy &&
+////    'arbayiin' === $current_screen->post_type ) :
+////    ?>
+<!--<!--        <style>#delete-link { display: none; }</style>-->-->
+<!--<!--    -->--><?php
+////    endif;
+//
+//    // Hides the "Delete" link on the term edit page.
+//    if ( 'term' === $current_screen->base &&
+//    'arbAmal' === $current_screen->taxonomy ) :
 //    ?>
 <!--        <style>#delete-link { display: none; }</style>-->
 <!--    --><?php
 //    endif;
-
-    // Hides the "Delete" link on the term edit page.
-    if ( 'term' === $current_screen->base &&
-    'arbAmal' === $current_screen->taxonomy ) :
-    ?>
-        <style>#delete-link { display: none; }</style>
-    <?php
-    endif;
-} );
+//} );
 
 
-        add_action( 'pre_delete_term', 'restrict_taxonomy_deletion', 10, 2 );
-        function restrict_taxonomy_deletion( $term, $taxonomy ) {
-            if ( 'arbAmal' === $taxonomy ) {
-                wp_die( 'شما مجاز به حذف عمل نیستید' );
-            }
-        }
+//        add_action( 'pre_delete_term', 'restrict_taxonomy_deletion', 10, 2 );
+//        function restrict_taxonomy_deletion( $term, $taxonomy ) {
+//            if ( 'arbAmal' === $taxonomy ) {
+//                wp_die( 'شما مجاز به حذف عمل نیستید' );
+//            }
+//        }
 
 ?>
 
