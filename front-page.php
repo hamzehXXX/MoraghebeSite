@@ -11,7 +11,8 @@ get_header();
     <div class="page-banner">
         <div class="page-banner__bg-image"></div>
         <div class="page-banner__content container t-center c-white">
-            <h1 class="headline headline--large">مراقبه سلوکی</h1>
+            <h1 class="headline headline--large"></h1>
+            <br/>
             <h2 class="headline headline--medium">مراقبه سلوکی شاگردان</h2>
             <h3 class="headline headline--small"> آیت الله کمیلی خراسانی</h3>
             <a href="<?php echo get_post_type_archive_link('arbayiin'); ?>" class="btn btn--large btn--blue">اربعینیات من</a>
