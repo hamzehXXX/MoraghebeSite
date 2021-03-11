@@ -84,7 +84,7 @@ if ($iPod || $iPhone) {
                                     echo (get_the_excerpt());
                                     } else {
                                     echo wp_trim_words(esc_html(get_the_content()), 18) . ' ';
-                                    } ?><a href="<?php the_permalink(); ?>" class="nu gray">بیشتر بخوانید</a></p>
+                                    } ?><a href="<?php the_permalink(); ?>" class="nu gray"> بیشتر بخوانید</a></p>
                             </div>
                         </div>
                     <?php
