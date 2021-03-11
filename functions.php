@@ -946,10 +946,10 @@ function change_all_amals_arbayiins() {
 // Apply to all fields.
 add_filter('acf/update_value', 'my_acf_update_value', 10, 4);
 
-if(!is_page(2812)) {
-    // Not logged in, not the login page and not the dashboard
-    exit( wp_redirect( home_url( '/construction' ) ) );
-}
+//if(!is_page(2812)) {
+//    // Not logged in, not the login page and not the dashboard
+//    exit( wp_redirect( home_url( '/construction' ) ) );
+//}
 
 add_filter( 'arbAmal_row_actions', 'wpse31545522_restrict_edit_delete_in_category', 10, 2 );
 
