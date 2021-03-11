@@ -1624,7 +1624,7 @@ body.admin-bar .search-overlay {
 .generic-content h1 {font-size: 3.6rem}
 .generic-content h2 {font-size: 3.1rem}
 .generic-content h3 {font-size: 2.6rem}
-.generic-content h4 {font-size: 2.1rem}
+.generic-content h4 {font-size: 2.1rem;}
 .generic-content h5 {font-size: 1.6rem}
 .generic-content h6 {font-size: 1.15rem}
 @media (min-width: 530px) {
