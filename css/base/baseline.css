@@ -11,7 +11,7 @@
 }
 
 @define-mixin atMobile {
-  @media (max-width: 540px) {
+  @media (max-width: 529px) {
     @mixin-content;
   }
 }

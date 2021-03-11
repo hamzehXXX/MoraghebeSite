@@ -333,9 +333,15 @@ function arbayiin_columns($columns) {
         'cb' => '< input type="checkbox" />',
         'title' => 'نام دستور',
         'duration' => 'مدت',
-        
 
     );
+
+    unset( $columns['date']   );
+
+    $columns['cb']     = '< input type="checkbox" />';
+    $columns['title']     = 'نام دستور';
+    $columns['duration']     = 'مدت';
+
     return $columns;
 }
 

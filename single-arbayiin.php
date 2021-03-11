@@ -53,14 +53,14 @@ while(have_posts()) {
 //********************************       [ PAGE BANNER ]       ********************************* START >>>>>>
     ?>
 
-    <div class="page-banner">
-        <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
+<a class="page-banner__link" href="<?php echo site_url(); ?>"><div class="page-banner">
+        <div class="page-banner__bg-image" ></div>
         <div class="page-banner__content container container--narrow">
             <h1 class="page-banner__title"><?php the_title(); ?></h1>
             <div class="page-banner__intro"><?php echo $amalSize!=$duration?'روز ' . $nthday[$amalSize]:'پایان اربعین';?>
             </div>
         </div>
-    </div>
+    </div></a>
 
 <?php ####################################################################################### END <<<<<<<<<<<<<<<<<<?>
     <!--    //======================================================================-->

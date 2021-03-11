@@ -47,7 +47,14 @@
 
 .school-logo-text a {
   color: #FFF;
+  display: none;
   text-decoration: none;
+  font-family: iranyekanwebregularfanum;
+  opacity: .33;
+@mixin atMobile {
+
+
+}
 }
 
 .school-logo-text--alt-color a {

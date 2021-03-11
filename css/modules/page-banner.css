@@ -1,12 +1,16 @@
 .page-banner {
   font-family: iranyekanwebregularfanum;
   background-color: #666666;
+
   padding: 80px 0 40px 0;
   position: relative;
 
   @mixin atSmall {
     padding: 130px 0 60px 0;
+
   }
+
+
 
   &__content {
     position: relative;
@@ -28,14 +32,22 @@
   }
 
   &__bg-image {
-    opacity: .33;
+    opacity: .93;
       background-size: cover;
+  background-repeat: no-repeat;
+     background-image: url("images/bg-aqa.jpg");
     position: absolute;
+
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+
   }
+
+&__link {
+  text-decoration: none;
+ }
 
   &__intro {
     font-weight: 300;

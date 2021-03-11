@@ -5,15 +5,15 @@
 
 get_header();
 //include('jdf.php'); ?>
-    <div class="page-banner">
-        <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
+<a class="page-banner__link" href="<?php echo site_url(); ?>"><div class="page-banner">
+        <div class="page-banner__bg-image"></div>
         <div class="page-banner__content container container--narrow">
             <h1 class="page-banner__title">اطلاعیه ها</h1>
             <div class="page-banner__intro">
                 <p>آخرین اخبار و اطلاعیه ها</p>
             </div>
         </div>
-    </div>
+    </div></a>
     <div class="container container--narrow page-section">
     <section id="primary" class="site-content">
         <div id="content" role="main">

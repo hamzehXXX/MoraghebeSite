@@ -4,7 +4,10 @@
   font-weight: 100px;
 
   &--large {
+    opacity: 0.33;
     font-size: 3.6rem;
+
+
     @mixin atSmall {
       font-size: 6.25rem;
     }
