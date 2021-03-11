@@ -970,7 +970,7 @@ function change_all_amals_arbayiins() {
 //            }
 //        }
 
-?>
+
 
 
 
