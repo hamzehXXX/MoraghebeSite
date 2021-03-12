@@ -3018,6 +3018,11 @@ table.amal-table tr.zebra {
 .hide-table {
     display: none;
 }
+.delete-lastday {
+    color: red;
+    cursor: pointer;
+
+}
 /*@import "modules/slidebars.css";*/
 .star-rating-ul li{
     display: inline-block;

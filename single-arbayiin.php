@@ -13,21 +13,21 @@ while(have_posts()) {
     $nthday = CONSTANTS::getDays();
     $arbayiinID = get_the_ID();
     // GET AMALS WHERE CURRENT USER ID HAVE POSTED FOR CURRENT ARBAYIIN ================================================================================================
-    $amalResults = new WP_Query(array(
-        'post_type' => 'amal',
-        'posts_per_page' => -1,
-        'order' => 'ASC',
-        'author' => $currentUserId,
-        'meta_key' => 'arbayiin',
-        'meta_query' => array(
-            'key' => 'arbayiin',
-            'compare' => '=',
-            'value' => $arbayiinID
-        )));
+//    $amalResults = new WP_Query(array(
+//        'post_type' => 'amal',
+//        'posts_per_page' => -1,
+//        'order' => 'ASC',
+//        'author' => $currentUserId,
+//        'meta_key' => 'arbayiin',
+//        'meta_query' => array(
+//            'key' => 'arbayiin',
+//            'compare' => '=',
+//            'value' => $arbayiinID
+//        )));
 
 
 
-    $amalSize = $amalResults -> found_posts;
+//    $amalSize = $amalResults -> found_posts;
     $today = jdate('Y-m-d');
 
     $amalDay = $today;

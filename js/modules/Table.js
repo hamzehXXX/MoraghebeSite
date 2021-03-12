@@ -15,6 +15,7 @@ class Table {
         $(".new-task").on("click", ".save-task", this.createTask.bind(this));
         $(".amal-js").on("click", this.showContentPopUp.bind(this));
         $(".resultvalue").on("click", this.showResultsPopUp.bind(this));
+        $(".delete-lastday").on("click", this.dayDeleteDispatcher.bind(this));
         $(".pop-outer").on("click",".close-popup", this.closeContentPopUp.bind(this));
         $(".date-pop-outer").on("click","#btnAddAction", this.editStartDate.bind(this));
         $("#startdate").on("click", this.startDate.bind(this));
@@ -32,6 +33,52 @@ class Table {
            }
         });
         console.log(content);
+    }
+    dayDeleteDispatcher(e) {
+        var dateTitle = $(e.target).data('datetitle');
+        $("body").addClass("body-no-scroll");
+        $(".pop-outer h5").html(`<span>` + `آیا برای حذف نتایج ` + dateTitle + ` مطمئن هستید؟` + `</span>`);
+        $(".pop-inner p").html(``);
+        $(".pop-inner p").html(`<div>` + `همه ی نتایج ` + dateTitle + ` حذف خواهند شد.` + `</div><br/><div class="cancel-delete btn btn--blue">انصراف</div>  <div class="confirm-delete btn btn--orange btn-outline-warning">حذف</div>`);
+        $(".pop-outer").fadeIn("slow");
+        $(".confirm-delete").on("click",  this.deleteLastday.bind(this));
+        // $(".confirm-delete").bind("click", this.deleteLastday(e));
+
+        $(".cancel-delete").on("click",  this.cancelDelete.bind(this));
+    }
+
+    cancelDelete(e) {
+        $("body").removeClass("body-no-scroll");
+        $(".pop-outer").fadeOut("slow");
+    }
+
+    deleteLastday(e) {
+        var dayid = $(".delete-lastday").data('dayid');
+
+        console.log(dayid);
+        var data = {
+            'dayid' : dayid
+        }
+        $.ajax({
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader('X-WP-Nonce', moraghebehData.nonce);
+            },
+            url: moraghebehData.root_url + '/wp-json/moraghebeh/v1/deleteLastDay',
+            type: 'DELETE',
+            data: data,
+            success: (response) => {
+                console.log("Congrats");
+                console.log(response);
+                location.reload();
+
+            },
+            error: (response) => {
+                console.log("Sorry");
+                console.log(response);
+            }
+        });
+
+
     }
     editStartDate(id) {
        var edit_window = $("#frmEdit").dialog({

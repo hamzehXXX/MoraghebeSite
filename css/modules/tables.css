@@ -160,3 +160,9 @@ table.amal-table tr.zebra {
 .hide-table {
     display: none;
 }
+
+.delete-lastday {
+    color: red;
+    cursor: pointer;
+
+}

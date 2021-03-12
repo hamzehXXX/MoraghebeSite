@@ -333,4 +333,21 @@ function queryDayIdFromAmalDay($wpdb) {
              ",
             OBJECT
     );
+
+}
+
+function deleteResultsByDayid($wpdb, $dayid) {
+    return $wpdb->delete(
+        'amal_results',
+        array(
+            'dayid' => $dayid
+        ));
+}
+
+function deleteDayDayid($wpdb, $dayid) {
+    return $wpdb->delete(
+        'result_days',
+        array(
+            'ID' => $dayid
+        ));
 }

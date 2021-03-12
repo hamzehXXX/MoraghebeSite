@@ -7,8 +7,8 @@ if (!is_user_logged_in() AND ( !(in_array('khadem-mard', $currentUserRoles)) OR 
 }
 get_header();
 //include_once('jdf.php');
-//while(have_posts()) {
-//    the_post();
+while(have_posts()) {
+    the_post();
     $name = get_the_title();
     ?>
 <a class="page-banner__link" href="<?php echo site_url(); ?>"><div class="page-banner">
@@ -29,7 +29,7 @@ get_header();
         <div class="generic-content">
 
             <?php  the_content(); ?>
-            <div><span>خادم: </span><a><?php echo get_field('khademid')['display_name']; ?></a></div>
+            <div><span>خادم: </span><a><?php echo isset(get_field('khademid')['display_name'])?get_field('khademid')['display_name']:'تعیین نشده'; ?></a></div>
             <div><span>شهر: </span><a><?php echo get_field('city'); ?></a></div>
 
 
@@ -40,24 +40,26 @@ get_header();
         //          AFTER APPLICATION ARBAYIINS
         //======================================================================
         $salekID = get_field('salekid')['ID']; // for using in ResultsTable to query the current user Results
+        $resultsTable = new ResultsTable($salekID);     // Instantiate ResultsTable class
+        $post = '';
         if (have_rows('arb_after_app')){
             while (have_rows('arb_after_app')){
                 the_row();
+                $resultsOfDay = array();
                 // Get parent value.
-                $post = get_sub_field('dastoor_takhsised');
+                $dastoor = get_sub_field('dastoor_takhsised');
                 $repeat = get_sub_field('repeat');
-                $dastoor_title = $post->post_title;
-                $dastoor_link = $post->guid;
-                $dastoor_ID = $post->ID;
+                $dastoor_title = $dastoor->post_title;
+                $dastoor_link = $dastoor->guid;
+                $dastoor_ID = $dastoor->ID;
 
-                if ($post) {
-
+                if ($dastoor) {
+                    $post = $dastoor;
                     ?>
                     <div class="arbayiin-results-title"><?php echo $dastoor_title;?></div>
 
                     <?php
                 setup_postdata($post); // Set the Main Query to the 'arbayiin'
-                        $resultsTable = new ResultsTable($salekID);     // Instantiate ResultsTable class
 
 //                    $resultsFromDb = queryAllDaysForArb($salekID, $dastoor_ID, $repeat);
 //        testHelper($resultsFromDb);
@@ -71,6 +73,8 @@ get_header();
                     }
 
                         $resultsTable->showResultsTable('', $dastoor_ID, $result);      // Show the results table
+
+                    echo '<hr class="section-break"/>';
                 wp_reset_postdata();                            // Sets the Main Query back to the 'salek'
                     ?>
                     <br/>
@@ -121,58 +125,56 @@ get_header();
         }
 
 
-            $arbayiinByGroups = new WP_Query(array(
-                'post_type' => 'arbayiin',
-                'posts_per_page' => -1,
+//            $arbayiinByGroups = new WP_Query(array(
+//                'post_type' => 'arbayiin',
+//                'posts_per_page' => -1,
+//            ));
 
-
-            ));
-
-           while ($arbayiinByGroups->have_posts()){
-               $arbayiinByGroups->the_post();
-               $arbayiinID = get_the_ID();
-               $permalink = get_the_permalink();
-               $title= get_the_title();
-               $post_objects = get_field('groups');
-
-               if( $post_objects ):
-                   foreach( $post_objects as $post_object): // variable must be called $post (IMPORTANT)
-
-                       $userss = get_field('userss', $post_object->ID);
-                       if( $userss ): ?>
-                       <?php $arbayiinTitlesArray = [] ?>
-                           <?php foreach( $userss as $user ): ?>
-                               <?php if ($user['ID'] == $userID): ?>
-                                   <li><h3><strong><?php echo the_title(); ?></strong></h3></li>
-                                   <li>
-                                       <div class="arbayiin-table">
-                                           <ul class="min-list" id="results">
-                                               <?php
-                                               set_query_var( 'userID', $userID );
-                                               set_query_var( 'arbayiinID', $arbayiinID );
-//                                               echo get_template_part( 'template-parts/content', 'results' );
-                                               ?>
-                                           </ul>
-                                       </div>
-                                   </li>
+//           while ($arbayiinByGroups->have_posts()){
+//               $arbayiinByGroups->the_post();
+//               $arbayiinID = get_the_ID();
+//               $permalink = get_the_permalink();
+//               $title= get_the_title();
+//               $post_objects = get_field('groups');
+//
+//               if( $post_objects ):
+//                   foreach( $post_objects as $post_object): // variable must be called $post (IMPORTANT)
+//
+//                       $userss = get_field('userss', $post_object->ID);
+//                       if( $userss ): ?>
+<!--                       --><?php //$arbayiinTitlesArray = [] ?>
+<!--                           --><?php //foreach( $userss as $user ): ?>
+<!--                               --><?php //if ($user['ID'] == $userID): ?>
+<!--                                   <li><h3><strong>--><?php //echo the_title(); ?><!--</strong></h3></li>-->
+<!--                                   <li>-->
+<!--                                       <div class="arbayiin-table">-->
+<!--                                           <ul class="min-list" id="results">-->
+<!--                                               --><?php
+//                                               set_query_var( 'userID', $userID );
+//                                               set_query_var( 'arbayiinID', $arbayiinID );
+////                                               echo get_template_part( 'template-parts/content', 'results' );
+//                                               ?>
+<!--                                           </ul>-->
+<!--                                       </div>-->
+<!--                                   </li>-->
 <!--                                   --><?php //echo get_template_part( 'template-parts/content', 'resultsform' ); ?>
-                               <?php endif; ?>
-                           <?php endforeach; ?>
-                       <?php endif; ?>
-                   <?php endforeach; ?>
-
-                   <?php
-               foreach ($arbayiinTitlesArray as $title){
-//                   setup_postdata( $arbayiinByGroups->the_post() );
-                   ?>
-
-                   <?php
-               }
-                   ?>
-
-               <?php endif;
-
-           }  wp_reset_postdata();
+<!--                               --><?php //endif; ?>
+<!--                           --><?php //endforeach; ?>
+<!--                       --><?php //endif; ?>
+<!--                   --><?php //endforeach; ?>
+<!---->
+<!--                   --><?php
+//               foreach ($arbayiinTitlesArray as $title){
+////                   setup_postdata( $arbayiinByGroups->the_post() );
+//                   ?>
+<!---->
+<!--                   --><?php
+//               }
+//                   ?>
+<!---->
+<!--               --><?php //endif;
+//
+//           }  wp_reset_postdata();
 
         echo '</ul>';
 
@@ -181,7 +183,7 @@ get_header();
 
     </div>
 
-<?php //} wp_reset_postdata();
+<?php } wp_reset_postdata();
 
 get_footer();
 ?>

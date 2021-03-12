@@ -94,11 +94,12 @@ private $amalidArr;
         $dbDate=0;
         $dayCounter = 0;
         $amalidArray = $this->amalidArr;
-        foreach ($days as $day){
+        foreach ($days as $dayId => $day){
 //            echo $day->ID;
             echo '<li class="row" style="display: table-cell;">';
             echo '<div class="t-header" >';
-            echo 'روز' . CONSTANTS::getDays()[$dayCounter];
+            $dateTitle = 'روز' . CONSTANTS::getDays()[$dayCounter];
+            echo $dateTitle;
             echo '(' . jdate('l, Y/m/d', $day['date']) . ')';
             echo '</div>';
 
@@ -138,9 +139,19 @@ private $amalidArr;
             echo ' <div class="resultvalue" style="background-color: #ECECEC; direction: ltr">';
             echo jdate('Y/m/d H:i', $day['submitdate']);
             echo '</div>';
-            echo '</li>';
+
             $dayCounter++;
+//          echo $this->salekID . ' vs ' . get_current_user_id();
+            if (sizeof($days) == $dayCounter && get_current_user_id() == $this->salekID){
+                ?>
+                <div class="resultvalue "><i class="fa fa-trash delete-lastday" data-dayid="<?php echo $dayId;?>"
+                 data-datetitle="<?php echo $dateTitle;?>" aria-hidden="true"></i></div>
+                <?php
+            }
+            echo '</li>';
+
         }
+
 
     }
 

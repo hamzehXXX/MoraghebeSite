@@ -30,6 +30,11 @@ function amalRoute() {
         'callback' => 'deleteResults'
     ));
 
+    register_rest_route('moraghebeh/v1', 'deleteLastDay', array(
+        'methods' => WP_REST_SERVER::DELETABLE,
+        'callback' => 'deleteLastDay'
+    ));
+
     function manageStartDate($data) {
 //        include(get_stylesheet_directory() . '/jdf.php');
         $optionName = sanitize_text_field($data['optionName']);
@@ -330,6 +335,16 @@ function amalRoute() {
 
         }
         return $array;
+    }
+
+
+    function deleteLastDay($data) {
+        $dayId = $data['dayid'];
+        global $wpdb;
+        $deletedResults = deleteResultsByDayid($wpdb, $dayId);
+        $deletedDay = deleteDayDayid($wpdb, $dayId);
+
+        return $deletedDay;
     }
 
 }
