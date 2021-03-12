@@ -340,13 +340,13 @@ $resultsTable->showResultsTable($display, $arbayiinID, $result);
         if ($duration != $amalSize):
             ?>
 
-            <hr class="section-break"/>
-          <h4 style="font-family: iranyekanwebregularfanum">حذف کلیه نتایج اربعین</h4>
-          <h5 style="font-family: iranyekanwebregularfanum;">با حذف نتایج، کلیه نتایجی که برای این اربعین ثبت کرده اید حذف خواهند شد و دیگر قابل بازگشت  نخواهد بود. لطفا دقت لازم را مبذول بفرمایید.</h5>
-
-            <span class="delete-results btn btn--blue btn--small block <?php echo $display;?>"
-                  data-arbid="<?php echo $arbayiinID;?>"
-                  data-arbrepeat="<?php echo $repeat;?>" style="position: absolute; left: 0px;background-color: red; color: yellow">حذف نتایج</span>
+<!--            <hr class="section-break"/>-->
+<!--          <h4 style="font-family: iranyekanwebregularfanum">حذف کلیه نتایج اربعین</h4>-->
+<!--          <h5 style="font-family: iranyekanwebregularfanum;">با حذف نتایج، کلیه نتایجی که برای این اربعین ثبت کرده اید حذف خواهند شد و دیگر قابل بازگشت  نخواهد بود. لطفا دقت لازم را مبذول بفرمایید.</h5>-->
+<!---->
+<!--            <span class="delete-results btn btn--blue btn--small block --><?php //echo $display;?><!--"-->
+<!--                  data-arbid="--><?php //echo $arbayiinID;?><!--"-->
+<!--                  data-arbrepeat="--><?php //echo $repeat;?><!--" style="position: absolute; left: 0px;background-color: red; color: yellow">حذف نتایج</span>-->
 
         <?php
         endif;
