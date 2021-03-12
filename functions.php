@@ -1016,14 +1016,68 @@ add_action( 'admin_head', function () {
 } );
 
 
-        add_action( 'pre_delete_term', 'restrict_taxonomy_deletion', 10, 2 );
-        function restrict_taxonomy_deletion( $term, $taxonomy ) {
-            if ( 'arbAmal' === $taxonomy ) {
-                wp_die( 'The taxonomy you were trying to delete is protected.' );
-            }
-        }
+add_action( 'pre_delete_term', 'restrict_taxonomy_deletion', 10, 2 );
+function restrict_taxonomy_deletion( $term, $taxonomy ) {
+    if ( 'arbAmal' === $taxonomy ) {
+        wp_die( 'The taxonomy you were trying to delete is protected.' );
+    }
+}
+
+//add_action('save_post', 'assign_parent_terms');
+
+function assign_parent_terms($post_id) {
+global $post;
 
 
+if(isset($post) && $post->post_type != 'salek') return $post_id;
+
+// get all assigned terms
+$terms = wp_get_post_terms($post_id, 'category' );
+$row = array(
+        'dastoor_takhsised' => get_posts(607),
+        'repreat' => 1
+    );
+add_row('arb_after_app', $row, $post_id);
+//foreach($terms as $term){
+//
+//    while($term->parent != 0 && !has_term( $term->parent, 'product_cat', $post )){
+//
+//        // move upward until we get to 0 level terms
+//        wp_set_object_terms($post_id, array($term->parent), 'product_cat', true);
+//        $term = get_term($term->parent, 'product_cat');
+//    }
+//  }
+}
 
 
+//add_action( 'quick_edit_custom_box', 'display_custom_quickedit_book', 10, 2 );
+
+function display_custom_quickedit_book( $column_name, $post_type ) {
+    static $printNonce = TRUE;
+    if ( $printNonce ) {
+        $printNonce = FALSE;
+        wp_nonce_field( plugin_basename( __FILE__ ), 'book_edit_nonce' );
+    }
+
+    ?>
+    <fieldset class="inline-edit-col-right inline-edit-book">
+      <div class="inline-edit-col column-<?php echo $column_name; ?>">
+        <label class="inline-edit-group">
+        <?php
+         switch ( $column_name ) {
+         case 'khadem':
+             echo wp_dropdown_categories(array(
+                     'taxonomy' => 'arbAmal'
+             ));
+             break;
+         case 'salek':
+             ?><span class="title">سالک</span><input name="inprint" type="checkbox" /><?php
+             break;
+         }
+        ?>
+        </label>
+      </div>
+    </fieldset>
+    <?php
+}
 

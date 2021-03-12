@@ -66,7 +66,8 @@ get_header();
                     foreach ($resultsOfDay as $element) {
                         $result[$element->dayid]['date'] = $element->date;
                         $result[$element->dayid]['submitdate'] = $element->submitdate;
-                        $result[$element->dayid]['results'][] = $element;
+                        $result[$element->dayid]['results'][$element->amalid]['result_point'] = $element->result_point;
+                        $result[$element->dayid]['results'][$element->amalid]['result_matni'] = $element->result_matni;
                     }
 
                         $resultsTable->showResultsTable('', $dastoor_ID, $result);      // Show the results table

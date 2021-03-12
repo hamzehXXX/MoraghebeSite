@@ -211,8 +211,7 @@ if (!is_user_logged_in() AND (!(in_array('khadem-mard', $currentUserRoles)) OR !
     </div>
 
 <?php
-function get_users_in_UI($khademin, $user, $khademIDArray)
-{
+function get_users_in_UI($khademin, $user, $khademIDArray) {
     //var_dump($arbayiinsQuery);
 
     //$myArbayiins = new WP_Query( $arbayiinsQuery);
