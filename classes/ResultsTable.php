@@ -142,7 +142,8 @@ private $amalidArr;
 
             $dayCounter++;
 //          echo $this->salekID . ' vs ' . get_current_user_id();
-            if (sizeof($days) == $dayCounter && get_current_user_id() == $this->salekID){
+//&& get_current_user_id() == $this->salekID
+            if (sizeof($days) == $dayCounter ){
                 ?>
                 <div class="resultvalue "><i class="fa fa-trash delete-lastday" data-dayid="<?php echo $dayId;?>"
                  data-datetitle="<?php echo $dateTitle;?>" aria-hidden="true"></i></div>

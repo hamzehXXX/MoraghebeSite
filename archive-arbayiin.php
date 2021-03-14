@@ -114,7 +114,7 @@
 //                print_r($compeleteMeta);
 //                    echo '</pre>';
                     $salekidField = get_field('salekid');
-                    $salekID = isset($salekidField) ? $salekidField['ID'] : '0';
+                    $salekID = isset($salekidField->ID) ? $salekidField->ID : '0';
                         $rowNum = 1;
                         $finishedArbsArr = array();
                     $finishedArbsCounter = 0;

@@ -36,13 +36,17 @@ class Table {
     }
     dayDeleteDispatcher(e) {
         var dateTitle = $(e.target).data('datetitle');
+        var dayid = $(e.target).data('dayid');
+        console.log(dayid);
         $("body").addClass("body-no-scroll");
         $(".pop-outer h5").html(`<span>` + `آیا برای حذف نتایج ` + dateTitle + ` مطمئن هستید؟` + `</span>`);
         $(".pop-inner p").html(``);
         $(".pop-inner p").html(`<div>` + `همه ی نتایج ` + dateTitle + ` حذف خواهند شد.` + `</div><br/><div class="cancel-delete btn btn--blue">انصراف</div>  <div class="confirm-delete btn btn--orange btn-outline-warning">حذف</div>`);
         $(".pop-outer").fadeIn("slow");
-        $(".confirm-delete").on("click",  this.deleteLastday.bind(this));
-        // $(".confirm-delete").bind("click", this.deleteLastday(e));
+        $(".confirm-delete").on("click", {
+            dayid : dayid
+        }, this.deleteLastday.bind(this));
+        // $(".confirm-delete").bind("click", $(e.target).data('dayid'), this.deleteLastday);
 
         $(".cancel-delete").on("click",  this.cancelDelete.bind(this));
     }
@@ -53,9 +57,10 @@ class Table {
     }
 
     deleteLastday(e) {
-        var dayid = $(".delete-lastday").data('dayid');
+        // var dayid = $(".delete-lastday").data('dayid');
+        var dayid = e.data.dayid;
 
-        console.log(dayid);
+        console.log(e.data.dayid);
         var data = {
             'dayid' : dayid
         }
@@ -127,7 +132,7 @@ class Table {
         var thisAmal = $(e.target).closest(".amal-js");
 
         var content = thisAmal.data("content");
-        // $("body").addClass("body-no-scroll");
+        $("body").addClass("body-no-scroll");
         var name = thisAmal.data("name");
         // alert(content);
         console.log(thisAmal);

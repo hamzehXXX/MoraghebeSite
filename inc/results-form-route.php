@@ -16,6 +16,7 @@ function resultsFormRoute() {
             $vaziyat = sanitize_text_field($data['vaziyat']);
             $khab = ($data['khab']);
             $arbayiinID = ($data['arbayiinid']);
+            $repeat = ($data['repeat']);
 
 
 
@@ -27,7 +28,8 @@ function resultsFormRoute() {
                     'halat' => $halat,
                     'vaziyat' => $vaziyat,
                     'khab' => $khab,
-                    'arbayiinid' => $arbayiinID
+                    'arbayiinid' => $arbayiinID,
+                    'repeat' => $repeat
                 )
             ));
 

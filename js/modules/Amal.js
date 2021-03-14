@@ -185,7 +185,7 @@ class Amal {
         $(".pop-inner p").html(``);
         $(".pop-inner p").html(`<div>همه ی نتایج این اربعین حذف خواهند شد</div><br/><div class="cancel-delete btn btn--blue">انصراف</div>  <div class="confirm-delete btn btn--orange btn-outline-warning">حذف</div>`);
         $(".pop-outer").fadeIn("slow");
-        $(".confirm-delete").on("click",  this.deleteResults.bind(this));
+        $(".confirm-delete").on("click",   this.deleteResults.bind(this));
         $(".cancel-delete").on("click",  this.cancelDelete.bind(this));
     }
 

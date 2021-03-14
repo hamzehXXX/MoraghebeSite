@@ -2,7 +2,14 @@
 get_header();
 $ourCurrentUser = wp_get_current_user();
 $currentUserRoles = $ourCurrentUser -> roles;
-if (!is_user_logged_in() AND (!(in_array('khadem-mard', $currentUserRoles)) OR !(in_array('khadem-zan', $currentUserRoles)) OR !(in_array('admin', $currentUserRoles)))) {
+$currentUserId = get_current_user_id();
+if (!is_user_logged_in() AND
+    (!(in_array('khadem-mard', $currentUserRoles)) OR
+        !(in_array('khadem-zan', $currentUserRoles)) OR
+        !(in_array('admin-mard', $currentUserRoles)) OR
+        !(in_array('admin-zan', $currentUserRoles))
+    )
+) {
     wp_redirect(esc_url(site_url('/')));
     exit;
 }
@@ -20,9 +27,11 @@ if (!is_user_logged_in() AND (!(in_array('khadem-mard', $currentUserRoles)) OR !
     </div></a>
     <div class="container container--narrow page-section">
 
+        <i class="fa fa-hourglass size-large" style="color:#5A5A5A;"><span class="title red">  این بخش در دست ارتقا می باشد، بعد از آماده شدن اطلاع رسانی می شود.</span></i>
+    </div>
         <?php
-
-
+        get_footer();
+die;
 
 //        global $wpdb;
 //        $mid = $wpdb->get_results( $wpdb->prepare("SELECT post_id FROM $wpdb->postmeta WHERE meta_key LIKE %s AND meta_value = '1101'",
@@ -49,9 +58,78 @@ if (!is_user_logged_in() AND (!(in_array('khadem-mard', $currentUserRoles)) OR !
         ));
 
         // khadems whose saleks will display
-        $availableKhademsID[] = get_current_user_id();
+        $availableKhademsID[] = $currentUserId;
 
         mainFunction($availableKhademsID);
+
+
+        ///////////////////// Logic for Display Salek and Khadems \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+######## Display All Khadem-mards for admin-mard
+        if (in_array('admin-mard', $currentUserRoles)) {
+            $khademUsers = queryKhademsByRole(['khadem-mard'], ['khadem-zan', 'salek-zan']);
+
+            if (!empty($khademUsers)){
+                foreach ($khademUsers as $khadem) {                         // loop through khadm-mards
+                    $khademID = $khadem->ID;
+                    $saleksInMahfel = get_mahfel_saleks($khademID);       // get saleks of each khadem-mard
+
+                    echo 'خادم مرد: ' .$khadem->display_name . '<br/>';
+                    echo 'سالکان محفل: ' . '<br/>';
+                    testHelper($saleksInMahfel);
+//                    testHelper($saleksInMahfel);
+
+                    $khademArbs = get_khadem_arbs($khademID);
+                    $saleksInArbs = get_arbayiin_saleks($khademArbs);
+
+                    foreach ($saleksInArbs as $arbName => $saleksInArb) {
+                        $salekRolesArr = array();
+                        echo 'اربعین من: ' . $arbName;
+                        foreach ($saleksInArb as $salek) {
+                            $salekUserObj = get_field('salekid', $salek->ID);
+
+//                            echo $arbName . '<br/>';
+                            if (in_array('salek-mard', $salekUserObj->roles)){
+//                                testHelper($salekUserObj);
+                                $salekRolesArr[$arbName][$salekUserObj->data->display_name][] = $salekUserObj->roles;
+                            }
+
+
+                        }
+                        testHelper($salekRolesArr);
+
+                    }
+//                    testHelper($saleksInArbs);
+                }
+            }
+
+//            testHelper($khademUsers);
+
+        } else if (in_array('khadem-mard', $currentUserRoles)){     // if highest level of role is khadem-mard
+            $saleksInMahfel = get_mahfel_saleks($currentUserId);           // get saleks current khadem-mard
+//            testHelper($saleksInMahfel);
+        }
+
+
+######## Display All khadem-zans for admin-zan
+        if (in_array('admin-zan', $currentUserRoles)){
+
+            $khademUsers = queryKhademsByRole(['khadem-zan'], ['khadem-mard', 'salek-mard']);
+
+//            testHelper($khademUsers);
+        }
+        else if (in_array('khadem-zan', $currentUserRoles)){     // Display All saleks for khadem-zan
+            $saleksInMahfel = get_mahfel_saleks($currentUserId);        // get saleks for current khadem-zan
+//            testHelper($saleksInMahfel);
+        }
+
+
+
+
+
+        ///////////////////// Functions Being Used \\\\\\\\\\\\\\\\\\\\\\\\\
 
 
 
@@ -68,6 +146,15 @@ if (!is_user_logged_in() AND (!(in_array('khadem-mard', $currentUserRoles)) OR !
         }
 
 
+        function queryKhademsByRole($roleIn, $roleNotIn) {
+            return get_users(array(
+                'role__in' => $roleIn,
+                'role__not_in' => $roleNotIn,
+                'orderby' => 'first_name',
+                'order' => 'ASC',
+                'fields' =>  array('ID', 'display_name')
+            ));
+        }
 
         /**Saleks which their khademId is $khademId
          * @param $khademId
@@ -199,7 +286,7 @@ if (!is_user_logged_in() AND (!(in_array('khadem-mard', $currentUserRoles)) OR !
             $myKhadem = get_post($user -> ID);
 
 
-            if (get_current_user_id() == $user -> ID OR in_array('administrator', $currentUserRoles)) {
+            if ($currentUserId == $user -> ID OR in_array('administrator', $currentUserRoles)) {
                 get_users_in_UI($khademin, $user, $khademIDArray);
             }
             array_push($khademIDArray, $user -> ID);
@@ -264,13 +351,13 @@ function get_users_in_UI($khademin, $user, $khademIDArray) {
     $commonSaleks = array();
     while (have_posts()) {  // loop through all saleks
         the_post();
-        $salekidField = get_field('salekid');
+//        $salekidField = get_field('salekid');
         //print_r($salekidField);
         $khademidField = get_field('khademid');
 //        $salekID = isset($salekidField) ? $salekidField['ID'] : '0';
 //        $salekName = isset($salekidField) ? $salekidField['user_firstname'] : 'shugulu';
 //        $salekFamily = isset($salekidField) ? $salekidField['user_lastname'] : 'shugulu';
-        $khademID = $khademidField ? $khademidField['ID'] : '0';
+        $khademID = $khademidField ? $khademidField->ID : '0';
 
         if (have_rows('arb_after_app')):
             while (have_rows('arb_after_app')) : the_row();  // loop through arbayiins of salek

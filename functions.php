@@ -77,6 +77,8 @@ add_action('after_setup_theme', 'moraghebeh_features');
 add_filter( 'manage_edit-salek_sortable_columns', 'smashing_salek_sortable_columns');
 function smashing_salek_sortable_columns( $columns ) {
   $columns['khadem'] = 'khademid';
+  $columns['salek'] = 'salekid';
+  $columns['city'] = 'city';
   return $columns;
 }
 
@@ -276,37 +278,73 @@ function my_page_columns($columns) {
     $columns = array(
         'cb' => '< input type="checkbox" />',
         'title' => 'نام سالک',
-        'salek' => 'سالک',
+        'salek' => 'نام کاربری',
         'khadem' => 'خادم',
         'arb_after_app' => 'اربعینیات جاری',
-        'city' => 'شهر'
     );
+    global $post;
+    $counter = 0;
+//    while (have_rows('arb_after_app', $post->ID)){
+//        the_row();
+//        $column = 'arbafterapp'. $counter;
+//        $columns[$column] = get_sub_field('dastoor_takhsised')->post_title;
+//        $counter++;
+//    }
+//
+//    for ($i = 0; $i <70; $i++){
+//        $column = 'arbafterappsss'. $i;
+//        $columns[$column] = 'اربعین بید مرحوم بیدآبادی پنجم اربعین بید مرحوم بیدآبادی پنجم';
+//    }
+//
+//    $columns['myarn1'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn3'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn4'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn5'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn6'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn7'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn8'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn9'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn11'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn12'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn13'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn14'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn15'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn16'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn17'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn18'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn19'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+//    $columns['myarn20'] = 'اربعین بید مرحوم بیدآبادی پنجم';
+
     return $columns;
 }
 function my_custom_columns($column) {
     global $post;
     if($column == 'khadem') {
-		$firstName = get_field('khademid', $post->ID)['user_firstname'];
-		$lastName = get_field('khademid', $post->ID)['user_lastname'];
-		
+        $khademUserObj = !is_string(get_field('khademid', $post->ID))?get_field('khademid', $post->ID):get_userdata(get_field('khademid', $post->ID));
+//        testHelper($khademUserObj);
+
+		$firstName = $khademUserObj->data->display_name;
+//		$lastName = $khademUserObj->data->display_name;
+
 		?> 
-		<a href="<?php echo get_admin_url($post->ID) . 'edit.php?post_type=salek&khademid=' .  get_field('khademid', $post->ID)['ID']; ?>">
+		<a href="<?php echo get_admin_url($post->ID)
+		        . 'edit.php?s&post_status=all&post_type=salek&m=0&khadem='
+		        .  $khademUserObj->ID; ?>">
 		<?php
-        echo $firstName . ' ' . $lastName;
+        echo $firstName;
 		echo '</a>';
     } else {
         echo '';
     }
+    if ($column == 'myarn19') {
+        echo 'hello';
+    }
     if($column == 'city') {
         echo get_field('city', $post->ID);
-    } else {
-        echo '';
     }
 
     if($column == 'salek') {
-        echo get_field('salekid', $post->ID)['ID'];
-    } else {
-        echo '';
+        echo isset(get_field('salekid', $post->ID)->ID)?get_field('salekid', $post->ID)->data->user_login: 'تعریف نشده';
     }
 	
 	if($column == 'arb_after_app') {
@@ -314,13 +352,21 @@ function my_custom_columns($column) {
 		print_r(get_field($column, $post->ID));
 		echo '</pre>'; */
 		$dastoorRows = get_field($column, $post->ID);
+//		testHelper($dastoorRows);
 	if(!($dastoorRows)) {
 		echo '<h3 style="color:#ff0000">فاقد اربعین</h3>';
 		return;
 	}
 		foreach($dastoorRows as $row) {
-			echo $row['dastoor_takhsised']->post_title;
-			echo '<br/>';
+
+		    $adminUrl = get_admin_url($post->ID);
+		    $dastoorId = isset($row['dastoor_takhsised']->ID)?$row['dastoor_takhsised']->ID:'';
+//		    testHelper($dastoorId);
+		    $href = $adminUrl . 'edit.php?s&post_status=all&post_type=salek&m=0&dastoorid=' . $dastoorId;
+		    echo "<a href=" . $href . ">";
+//		    testHelper($row);
+			echo isset($row['dastoor_takhsised']->post_title)?$row['dastoor_takhsised']->post_title . '<br/>' :'';
+			echo '</a>';
 		}
 	}
 }
@@ -329,18 +375,20 @@ add_filter("manage_salek_posts_columns", "my_page_columns");
 
 
 function arbayiin_columns($columns) {
-    $columns = array(
-        'cb' => '< input type="checkbox" />',
-        'title' => 'نام دستور',
-        'duration' => 'مدت',
-
-    );
+//    $columns = array(
+//        'cb' => '< input type="checkbox" />',
+//        'title' => 'نام دستور',
+//        'duration' => 'مدت',
+//        'khadem' => 'خادم'
+//
+//    );
 
     unset( $columns['date']   );
 
     $columns['cb']     = '< input type="checkbox" />';
     $columns['title']     = 'نام دستور';
     $columns['duration']     = 'مدت';
+    $columns['khadem']     = 'خادم';
 
     return $columns;
 }
@@ -352,8 +400,14 @@ function arbayiin_custom_columns($column) {
     global $post;
     if($column == 'duration') {
         echo get_field('arbayiin-duration', $post->ID);
-    } else {
-        echo '';
+    }
+
+    elseif ($column == 'khadem') {
+        $khademArr = get_field('khadem', $post->ID)?get_field('khadem', $post->ID):array();
+        foreach ($khademArr as $khademId) {
+            $user_meta=get_userdata($khademId);
+            echo $user_meta->data->display_name . '<br/>';
+        }
     }
 }
 add_action("manage_arbayiin_posts_custom_column", "arbayiin_custom_columns");
@@ -780,7 +834,7 @@ function wpse64933_add_posttype_note()
     echo '<p>این صفحه مخصوص استفاده در کد های وب سایت می باشد. درصورت تغییر فیلد های این بخش نمایش نتایج اعمال با مشکل مواجه خواهد شد، لذا تغییر فیلد های این بخش به هیچ عنوان توصیه نمی شود. بهترین استفاده ای که در این بخش برای شما توصیه می شود، حذف کردن نتایج شاگردان در صورت لزوم می باشد. منتها دقّت کافی داشته باشید که نتایج را از آخرین تاریخ ثبت شده حذف کنید. مثلا سالکی 10 روز را ثبت کرده است، و شما می خواهید روز پنجم را حذف کنید. برای این کار لازم است روز دهم، نهم، هشتم، هفتم، ششم، و پنجم را حذف بفرمایید.</p>';
 }
 
-add_action('all_admin_notices', 'wpse64933_add_posttype_note');
+//add_action('all_admin_notices', 'wpse64933_add_posttype_note');
 
 // extend expiretime of login session
 add_filter('auth_cookie_expiration', 'my_expiration_filter', 99, 3);
@@ -789,10 +843,10 @@ function my_expiration_filter($seconds, $user_id, $remember){
     //if "remember me" is checked;
     if ( $remember ) {
         //WP defaults to 2 weeks;
-        $expiration = 14*24*60*60; //UPDATE HERE;
+        $expiration = 30*24*60*60; //UPDATE HERE;
     } else {
         //WP defaults to 48 hrs/2 days;
-        $expiration = 2*24*60*60; //UPDATE HERE;
+        $expiration = 14*24*60*60; //UPDATE HERE;
     }
 
     //http://en.wikipedia.org/wiki/Year_2038_problem
@@ -841,7 +895,7 @@ function set_post_default_category( $post_id, $post, $update ) {
             $dastoor_takhsised_obj = get_sub_field('dastoor_takhsised');
             $dastoor_ID = $dastoor_takhsised_obj->ID;
             $salekidField = get_field('salekid');
-            $salekID = isset($salekidField) ? $salekidField['ID'] : '0';
+            $salekID = isset($salekidField->ID) ? $salekidField->ID : '0';
             $repeatNum = in_array($dastoor_ID, $arbIdArray)?$dastoor_ID . '-' .array_count_values($arbIdArray)[$dastoor_ID]:$dastoor_ID;
             $metaByValue = get_meta_by_value($post_id, 'arb_after_app_%_dastoor_takhsised', $dastoor_ID);
 
@@ -924,7 +978,7 @@ function change_all_amals_arbayiins() {
                             $dastoor_takhsised_obj = get_sub_field('dastoor_takhsised');
                             $dastoor_ID = $dastoor_takhsised_obj->ID;
                             $salekidField = get_field('salekid');
-                            $salekID = isset($salekidField) ? $salekidField['ID'] : '0';
+                            $salekID = isset($salekidField->ID) ? $salekidField->ID : '0';
                             $arbIdForResults = get_sub_field('repeat');
 
 
@@ -1082,3 +1136,25 @@ function display_custom_quickedit_book( $column_name, $post_type ) {
     <?php
 }
 
+//add_action( 'admin_head', 'kaz_stop_sidescroll' );
+
+function kaz_stop_sidescroll(){
+  ?>
+    <style type="text/css">
+        #adminmenuwrap  {
+        position: sticky!important;
+        /*top:-2px!important;*/
+        right: 0px;
+        }
+        #adminmenuback {
+        position: sticky!important;
+        /*top:-2px!important;*/
+        right: 0px;
+        }
+        table.fixed {
+            table-layout: auto;!important;
+            position: absolute;!important;
+        }
+    </style>
+  <?php
+}

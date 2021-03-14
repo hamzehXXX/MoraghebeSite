@@ -12,11 +12,14 @@ class ResultsForm {
 
     // Methods
     createForm(e) {
+        var repeat =$(".results-form__submit").data('repeat');
+        console.log(repeat);
         var ourNewForm = {
             'halat': $("#halat").val(),
             'vaziyat': $("#vaziyat").val(),
             'khab': $("#khab").val(),
-            'arbayiinid': $(".results-form__submit").data('arbayiinid')
+            'arbayiinid': $(".results-form__submit").data('arbayiinid'),
+            'repeat': repeat
 
         }
         $.ajax({
@@ -28,8 +31,10 @@ class ResultsForm {
             data: ourNewForm,
             success: (response) => {
                 $(".results-form").css('display', 'none');
+
                 console.log("Congrats");
                 console.log(response);
+                location.reload();
             },
             error: (response) => {
                 console.log("Sorry");

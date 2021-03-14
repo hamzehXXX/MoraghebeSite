@@ -344,7 +344,7 @@ function amalRoute() {
         $deletedResults = deleteResultsByDayid($wpdb, $dayId);
         $deletedDay = deleteDayDayid($wpdb, $dayId);
 
-        return $deletedDay;
+        return $deletedDay . '-' . $deletedResults;
     }
 
 }

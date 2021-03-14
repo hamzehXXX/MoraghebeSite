@@ -29,7 +29,7 @@ while(have_posts()) {
         <div class="generic-content">
 
             <?php  the_content(); ?>
-            <div><span>خادم: </span><a><?php echo isset(get_field('khademid')['display_name'])?get_field('khademid')['display_name']:'تعیین نشده'; ?></a></div>
+            <div><span>خادم: </span><a><?php echo isset(get_field('khademid')->data->display_name)?get_field('khademid')->data->display_name:'تعیین نشده'; ?></a></div>
             <div><span>شهر: </span><a><?php echo get_field('city'); ?></a></div>
 
 
@@ -39,8 +39,8 @@ while(have_posts()) {
         //======================================================================
         //          AFTER APPLICATION ARBAYIINS
         //======================================================================
-        $salekID = get_field('salekid')['ID']; // for using in ResultsTable to query the current user Results
-        $resultsTable = new ResultsTable($salekID);     // Instantiate ResultsTable class
+        $salekID = get_field('salekid')->ID; // for using in ResultsTable to query the current user Results
+
         $post = '';
         if (have_rows('arb_after_app')){
             while (have_rows('arb_after_app')){
@@ -61,6 +61,7 @@ while(have_posts()) {
                     <?php
                 setup_postdata($post); // Set the Main Query to the 'arbayiin'
 
+//                    echo $dastoor_ID . ' vs ' . get_the_ID();
 //                    $resultsFromDb = queryAllDaysForArb($salekID, $dastoor_ID, $repeat);
 //        testHelper($resultsFromDb);
                     $resultsOfDay = queryAllResultIDs($wpdb, $salekID, $dastoor_ID, $repeat);
@@ -70,10 +71,11 @@ while(have_posts()) {
                         $result[$element->dayid]['submitdate'] = $element->submitdate;
                         $result[$element->dayid]['results'][$element->amalid]['result_point'] = $element->result_point;
                         $result[$element->dayid]['results'][$element->amalid]['result_matni'] = $element->result_matni;
+//                        echo $element->dayid . '<br/>';
                     }
-
+                        $resultsTable = new ResultsTable($salekID);     // Instantiate ResultsTable class
                         $resultsTable->showResultsTable('', $dastoor_ID, $result);      // Show the results table
-
+//                        testHelper($resultsTable->showResultsTable('', $dastoor_ID, $result));
                     echo '<hr class="section-break"/>';
                 wp_reset_postdata();                            // Sets the Main Query back to the 'salek'
                     ?>
@@ -86,8 +88,10 @@ while(have_posts()) {
         //======================================================================
         //          BEFORE APPLICATION ARBAYIINS
         //======================================================================
-        $posts = get_field('arbayiin');
-        $userID = get_field('salekid')['ID']; // Get the current user ID
+//        the_title();
+        $posts = empty(get_field('arbayiin'))?'':get_field('arbayiin');
+//        testHelper(get_field('arbayiin'));
+//        $userID = isset(get_field('salekid')['ID'])?get_field('salekid')['ID']:0; // Get the current user ID
         if ($posts) {
             echo '<hr class="section-break">';
 
@@ -119,8 +123,8 @@ while(have_posts()) {
 //                echo get_template_part( 'template-parts/content', 'resultsform' );
                 ?>
                 <?php
-
-            }    wp_reset_postdata();
+                wp_reset_postdata();
+            }
 
         }
 
@@ -183,7 +187,8 @@ while(have_posts()) {
 
     </div>
 
-<?php } wp_reset_postdata();
+<?php }
+wp_reset_postdata();
 
 get_footer();
 ?>

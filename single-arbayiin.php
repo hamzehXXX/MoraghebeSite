@@ -206,9 +206,18 @@ while(have_posts()) {
                 'author' => $currentUserId,
                  'meta_key' => 'arbayiinid',
                  'meta_query' => array(
-                    'key' => 'arbayiinid',
-                'compare' => '=',
-                'value' =>  $arbayiinID
+                         'relation' => 'AND',
+                     array(
+                         'key' => 'arbayiinid',
+                         'compare' => '=',
+                         'value' =>  $arbayiinID
+                     ),
+                     array(
+
+                         'key' => 'repeat',
+                         'compare' => '=',
+                         'value' =>  $repeat
+                     )
             )
             ));
  ?>
@@ -231,7 +240,7 @@ while(have_posts()) {
 
             <textarea class="new-note-body field-long field-textarea results-form__textarea" id="khab" placeholder=""></textarea>
             </div>
-            <span class="results-form__submit" data-arbayiinid="<?php echo $arbayiinID; ?>">ثبت نتایج</span>
+            <span class="results-form__submit" data-arbayiinid="<?php echo $arbayiinID; ?>" data-repeat="<?php echo $repeat;?>" >ثبت نتایج</span>
         </div>
         <?php endif; ?>
 
