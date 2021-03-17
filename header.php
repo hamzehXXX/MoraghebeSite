@@ -1,6 +1,6 @@
 <?php
 if (!is_user_logged_in()) {
-    wp_redirect(esc_url(site_url('/wp-login.php')));
+    wp_redirect(esc_url(site_url('/vorud')));
     exit;
 }
 ?>

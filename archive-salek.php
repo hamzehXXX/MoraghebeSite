@@ -28,10 +28,10 @@ if (!is_user_logged_in() AND
     <div class="container container--narrow page-section">
 
         <i class="fa fa-hourglass size-large" style="color:#5A5A5A;"><span class="title red">  این بخش در دست ارتقا می باشد، بعد از آماده شدن اطلاع رسانی می شود.</span></i>
-    </div>
+<!--    </div>-->
         <?php
-        get_footer();
-die;
+//        get_footer();
+//die;
 
 //        global $wpdb;
 //        $mid = $wpdb->get_results( $wpdb->prepare("SELECT post_id FROM $wpdb->postmeta WHERE meta_key LIKE %s AND meta_value = '1101'",
@@ -65,67 +65,67 @@ die;
 
         ///////////////////// Logic for Display Salek and Khadems \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
-
-######## Display All Khadem-mards for admin-mard
-        if (in_array('admin-mard', $currentUserRoles)) {
-            $khademUsers = queryKhademsByRole(['khadem-mard'], ['khadem-zan', 'salek-zan']);
-
-            if (!empty($khademUsers)){
-                foreach ($khademUsers as $khadem) {                         // loop through khadm-mards
-                    $khademID = $khadem->ID;
-                    $saleksInMahfel = get_mahfel_saleks($khademID);       // get saleks of each khadem-mard
-
-                    echo 'خادم مرد: ' .$khadem->display_name . '<br/>';
-                    echo 'سالکان محفل: ' . '<br/>';
-                    testHelper($saleksInMahfel);
+//
+//
+//######## Display All Khadem-mards for admin-mard
+//        if (in_array('admin-mard', $currentUserRoles)) {
+//            $khademUsers = queryKhademsByRole(['khadem-mard'], ['khadem-zan', 'salek-zan']);
+//
+//            if (!empty($khademUsers)){
+//                foreach ($khademUsers as $khadem) {                         // loop through khadm-mards
+//                    $khademID = $khadem->ID;
+//                    $saleksInMahfel = get_mahfel_saleks($khademID);       // get saleks of each khadem-mard
+//
+//                    echo 'خادم مرد: ' .$khadem->display_name . '<br/>';
+//                    echo 'سالکان محفل: ' . '<br/>';
 //                    testHelper($saleksInMahfel);
-
-                    $khademArbs = get_khadem_arbs($khademID);
-                    $saleksInArbs = get_arbayiin_saleks($khademArbs);
-
-                    foreach ($saleksInArbs as $arbName => $saleksInArb) {
-                        $salekRolesArr = array();
-                        echo 'اربعین من: ' . $arbName;
-                        foreach ($saleksInArb as $salek) {
-                            $salekUserObj = get_field('salekid', $salek->ID);
-
-//                            echo $arbName . '<br/>';
-                            if (in_array('salek-mard', $salekUserObj->roles)){
-//                                testHelper($salekUserObj);
-                                $salekRolesArr[$arbName][$salekUserObj->data->display_name][] = $salekUserObj->roles;
-                            }
-
-
-                        }
-                        testHelper($salekRolesArr);
-
-                    }
-//                    testHelper($saleksInArbs);
-                }
-            }
-
-//            testHelper($khademUsers);
-
-        } else if (in_array('khadem-mard', $currentUserRoles)){     // if highest level of role is khadem-mard
-            $saleksInMahfel = get_mahfel_saleks($currentUserId);           // get saleks current khadem-mard
-//            testHelper($saleksInMahfel);
-        }
-
-
-######## Display All khadem-zans for admin-zan
-        if (in_array('admin-zan', $currentUserRoles)){
-
-            $khademUsers = queryKhademsByRole(['khadem-zan'], ['khadem-mard', 'salek-mard']);
-
-//            testHelper($khademUsers);
-        }
-        else if (in_array('khadem-zan', $currentUserRoles)){     // Display All saleks for khadem-zan
-            $saleksInMahfel = get_mahfel_saleks($currentUserId);        // get saleks for current khadem-zan
-//            testHelper($saleksInMahfel);
-        }
-
-
+////                    testHelper($saleksInMahfel);
+//
+//                    $khademArbs = get_khadem_arbs($khademID);
+//                    $saleksInArbs = get_arbayiin_saleks($khademArbs);
+//
+//                    foreach ($saleksInArbs as $arbName => $saleksInArb) {
+//                        $salekRolesArr = array();
+//                        echo 'اربعین من: ' . $arbName;
+//                        foreach ($saleksInArb as $salek) {
+//                            $salekUserObj = get_field('salekid', $salek->ID);
+//
+////                            echo $arbName . '<br/>';
+//                            if (in_array('salek-mard', $salekUserObj->roles)){
+////                                testHelper($salekUserObj);
+//                                $salekRolesArr[$arbName][$salekUserObj->data->display_name][] = $salekUserObj->roles;
+//                            }
+//
+//
+//                        }
+//                        testHelper($salekRolesArr);
+//
+//                    }
+////                    testHelper($saleksInArbs);
+//                }
+//            }
+//
+////            testHelper($khademUsers);
+//
+//        } else if (in_array('khadem-mard', $currentUserRoles)){     // if highest level of role is khadem-mard
+//            $saleksInMahfel = get_mahfel_saleks($currentUserId);           // get saleks current khadem-mard
+////            testHelper($saleksInMahfel);
+//        }
+//
+//
+//######## Display All khadem-zans for admin-zan
+//        if (in_array('admin-zan', $currentUserRoles)){
+//
+//            $khademUsers = queryKhademsByRole(['khadem-zan'], ['khadem-mard', 'salek-mard']);
+//
+////            testHelper($khademUsers);
+//        }
+//        else if (in_array('khadem-zan', $currentUserRoles)){     // Display All saleks for khadem-zan
+//            $saleksInMahfel = get_mahfel_saleks($currentUserId);        // get saleks for current khadem-zan
+////            testHelper($saleksInMahfel);
+//        }
+//
+//
 
 
 

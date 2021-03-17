@@ -132,16 +132,16 @@ class Amal {
                     break;
             }
 
-            console.log('resultString: ' + str);
+            // console.log('resultString: ' + str);
 
         });
-        console.log('arbid: ' + arbId);
-        console.log('author: ' + author);
-        console.log('day: ' + day);
-        console.log('amals: ' + amalidArr);
-        console.log('rowszh counts: ' + rowNumber);
-        console.log('repeats: ' + repeat);
-        console.log(myList);
+        // console.log('arbid: ' + arbId);
+        // console.log('author: ' + author);
+        // console.log('day: ' + day);
+        // console.log('amals: ' + amalidArr);
+        // console.log('rowszh counts: ' + rowNumber);
+        // console.log('repeats: ' + repeat);
+        // console.log(myList);
 
         var amaleruz = {
             'results': str,
@@ -163,6 +163,8 @@ class Amal {
             data: amaleruz,
             success: (response) => {
                 console.log("Congrats");
+                alert("اعمال روز "+day + " با موفقیت ثبت شد.");
+                window.scrollTo(0,0);
                 // console.log('response: ' +response);
                 // var dayCounter = parseInt($(".ruz").data('daycount'), 10);
                 // dayCounter++;
