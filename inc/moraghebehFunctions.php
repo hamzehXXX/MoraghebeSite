@@ -176,7 +176,7 @@ echo '<hr/>';
         <tfoot>
         <tr>
             <th scope="row" colspan="2" >
-                <input class="" type="submit" id="submit-amal" name="<?php echo 'submit-amal'; ?>" value="<?php echo $submitButtonText;?>" <?php echo $disableSubmitBtn;?> >
+                <button class="button-large" id="submit-amal" name="<?php echo 'submit-amal'; ?>" value="<?php echo $submitButtonText;?>" <?php echo $disableSubmitBtn;?> ><?php echo $submitButtonText;?></button>
             </th>
         </tr>
         </tfoot>
