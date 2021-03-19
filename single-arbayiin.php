@@ -319,9 +319,9 @@ $resultsTable->showResultsTable($display, $arbayiinID, $result);
                         $hide = '';
                 }
 
-//                if (has_term('عمومی', 'category', get_the_ID())){
-//                    $hide='';
-//                }
+                if (has_term('عمومی', 'category', get_the_ID())){
+                    $hide='';
+                }
 //                echo the_date();
 //                echo strtotime(get_the_date());
 //                echo jdate('F', strtotime(get_the_date()));
