@@ -26,6 +26,18 @@ $wp_admin_bar->remove_menu( 'wp-logo' );
 }
 add_action( 'wp_before_admin_bar_render', 'example_admin_bar_remove_logo', 0 );
 
+// remove toolbar items
+// https://digwp.com/2016/06/remove-toolbar-items/
+function shapeSpace_remove_toolbar_node($wp_admin_bar) {
+
+    // replace 'updraft_admin_node' with your node id
+    $wp_admin_bar->remove_node('new-content');
+    $wp_admin_bar->remove_node('wp-logo');
+    $wp_admin_bar->remove_node('comments');
+
+}
+add_action('admin_bar_menu', 'shapeSpace_remove_toolbar_node', 999);
+
 
 function remove_dashboard_meta() {
 if (get_current_user_id() != 1) {
