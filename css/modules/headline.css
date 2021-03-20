@@ -50,10 +50,14 @@
     font-size: 1.3875rem;
     margin-bottom: .25rem;
   }
+   
 
   &--post-title a {
     color: $mainBlue;
     text-decoration: none;
+
+
+
   }
 
   &--post-title a:hover {

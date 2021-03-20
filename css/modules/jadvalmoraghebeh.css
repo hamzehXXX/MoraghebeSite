@@ -678,6 +678,10 @@ table td .firstcol {
     &__finished {
          border: 1px solid #5a55c3;
      }
+
+@mixin atMobile {
+    font-size: 1rem;
+}
 }
 .arbayiin-title a:nth-of-type(even){
     background: #d8226b;

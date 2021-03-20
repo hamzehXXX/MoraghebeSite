@@ -1604,6 +1604,9 @@ body.admin-bar .search-overlay {
 .headline--post-title a {
     color: #0D3B66;
     text-decoration: none;
+
+
+
   }
 .headline--post-title a:hover {
     text-decoration: underline;
@@ -2487,6 +2490,11 @@ table td .firstcol {
 .arbayiin-title__finished {
          border: 1px solid #5a55c3;
      }
+@media (max-width: 529px) {
+.arbayiin-title{
+    font-size: 1rem
+}
+  }
 .arbayiin-title a:nth-of-type(even){
     background: #d8226b;
     color: #fffFFF;
