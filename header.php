@@ -52,7 +52,10 @@ if (!is_user_logged_in()) {
                        $ourCurrentUser = wp_get_current_user();
 //                       var_dump($ourCurrentUser);
                         if (($ourCurrentUser->roles[0] == 'administrator') OR ($ourCurrentUser->roles[0] == 'admin')OR ($ourCurrentUser->roles[0] == 'khadem-mard')OR ($ourCurrentUser->roles[0] == 'khadem-zan') OR in_array('khadem-mard', $ourCurrentUser->roles) OR in_array('khadem-zan', $ourCurrentUser->roles)){ ?>
-                            <li <?php if (get_post_type() == 'salek')echo 'class="current-menu-item"'; ?>><a href="<?php echo get_post_type_archive_link('salek'); ?>">شاگردان</a></li>
+<!--                            <li --><?php ////if (get_post_type() == 'salek')echo 'class="current-menu-item"'; ?>
+<!--                            >-->
+<!--                                <a href="--><?php//// echo get_post_type_archive_link('salek'); ?><!--">شاگردان</a>-->
+<!--                            </li>-->
 
                         <?php }                    ?>
 
