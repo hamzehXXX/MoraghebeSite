@@ -21,6 +21,14 @@ if (get_current_user_id() != 1) {
 global $wp_admin_bar;
 $wp_admin_bar->remove_menu( 'wp-logo' );
     $wp_admin_bar->remove_menu( 'updates' );
+
+    // Add a link called 'My Link'...
+    $wp_admin_bar->add_node(array(
+        'id'    => 'myArbs',
+        'title' => 'اربعینیات من',
+        'href'  => site_url('/arbayiin')
+    ));
+
 }
 
 }
