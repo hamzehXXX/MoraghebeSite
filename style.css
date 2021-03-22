@@ -1605,8 +1605,6 @@ body.admin-bar .search-overlay {
     color: #0D3B66;
     text-decoration: none;
 
-
-
   }
 .headline--post-title a:hover {
     text-decoration: underline;
@@ -1627,14 +1625,14 @@ body.admin-bar .search-overlay {
 .generic-content h1 {font-size: 3.6rem}
 .generic-content h2 {font-size: 3.1rem}
 .generic-content h3 {font-size: 2.6rem}
-.generic-content h4 {font-size: 1.5rem;}
+.generic-content h4 {font-size: 2.1rem;}
 .generic-content h5 {font-size: 1.6rem}
 .generic-content h6 {font-size: 1.15rem}
 @media (min-width: 530px) {
     .generic-content h1 {font-size: 6.25rem}
     .generic-content h2 {font-size: 5rem}
     .generic-content h3 {font-size: 3.125rem}
-    .generic-content h4 {font-size: 2.2rem}
+    .generic-content h4 {font-size: 2.4rem}
     .generic-content h5 {font-size: 1.9rem}
     .generic-content h6 {font-size: 1.15rem}
   }
@@ -2503,7 +2501,7 @@ table td .firstcol {
     border: 1px solid #7f887d;
     width: 80%;
     border-radius: 5px;
-    font-size: 1.1rem;
+    font-size: 1.3em;
     padding: 10px;
 }
 .arbayiin-title_sabegh a:nth-of-type(even){

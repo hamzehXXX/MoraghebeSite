@@ -27,7 +27,7 @@ if (!is_user_logged_in() AND
     </div></a>
     <div class="container container--narrow page-section">
 
-        <i class="fa fa-hourglass size-large" style="color:#5A5A5A;"><span class="title red">  این بخش در دست ارتقا می باشد، بعد از آماده شدن اطلاع رسانی می شود.</span></i>
+<!--        <i class="fa fa-hourglass size-large" style="color:#5A5A5A;"><span class="title red">  این بخش در دست ارتقا می باشد، بعد از آماده شدن اطلاع رسانی می شود.</span></i>-->
 <!--    </div>-->
         <?php
 //        testHelper(get_khadem_arbs_ids(1));
@@ -79,78 +79,78 @@ if (!is_user_logged_in() AND
 //
 //
 //######## Display All Khadem-mards for admin-mard
-        if (in_array('admin-mard', $currentUserRoles)) {
-            $khademUsers = queryKhademsByRole(['khadem-mard'], ['khadem-zan', 'salek-zan']);
-
-            if (!empty($khademUsers)){
-                foreach ($khademUsers as $khadem) {                         // loop through khadm-mards
-                    $khademID = $khadem->ID;
-                    $saleksInMahfel = get_mahfel_saleks($khademID);       // get saleks of each khadem-mard
-
-                    echo "<h1 style='color: red'>$khadem->display_name</h1>";
-
-                    $saleksAndArbsArr = get_saleks_and_arbs_from_salekin($saleksInMahfel);
+//        if (in_array('admin-mard', $currentUserRoles)) {
+//            $khademUsers = queryKhademsByRole(['khadem-mard'], ['khadem-zan', 'salek-zan']);
+//
+//            if (!empty($khademUsers)){
+//                foreach ($khademUsers as $khadem) {                         // loop through khadm-mards
+//                    $khademID = $khadem->ID;
+//                    $saleksInMahfel = get_mahfel_saleks($khademID);       // get saleks of each khadem-mard
+//
+//                    echo "<h1 style='color: red'>$khadem->display_name</h1>";
+//
+//                    $saleksAndArbsArr = get_saleks_and_arbs_from_salekin($saleksInMahfel);
+////                    testHelper($saleksAndArbsArr);
+////                    testHelper($saleksInMahfel);
+//
+//                    $khademArbs = get_khadem_arbs($khademID);
+//                    $saleksInArbs = get_arbayiin_saleks($khademArbs);
+//
+//                    echo  'اربعین من: ';
+//                    foreach ($saleksInArbs as $arbName => $saleksInArb) {
+//                        $salekRolesArr = array();
+//                        echo ' - ' . $arbName;
+//
+//                        foreach ($saleksInArb as $salek) {
+//                            $salekUserObj = get_field('salekid', $salek->ID);
+//
+////                            echo $arbName . '<br/>';
+//                            if (in_array('salek-mard', $salekUserObj->roles)){
+////                                testHelper($salekUserObj);
+//                                $salekRolesArr[$arbName][$salekUserObj->data->display_name][] = $salekUserObj->roles;
+//                                $saleksAndArbsArr[$salek->post_title][] = $arbName;
+//
+//                            }
+//
+//                        }
+////                        testHelper($saleksInArbs);
+//                    }
 //                    testHelper($saleksAndArbsArr);
-//                    testHelper($saleksInMahfel);
-
-                    $khademArbs = get_khadem_arbs($khademID);
-                    $saleksInArbs = get_arbayiin_saleks($khademArbs);
-
-                    echo  'اربعین من: ';
-                    foreach ($saleksInArbs as $arbName => $saleksInArb) {
-                        $salekRolesArr = array();
-                        echo ' - ' . $arbName;
-
-                        foreach ($saleksInArb as $salek) {
-                            $salekUserObj = get_field('salekid', $salek->ID);
-
-//                            echo $arbName . '<br/>';
-                            if (in_array('salek-mard', $salekUserObj->roles)){
-//                                testHelper($salekUserObj);
-                                $salekRolesArr[$arbName][$salekUserObj->data->display_name][] = $salekUserObj->roles;
-                                $saleksAndArbsArr[$salek->post_title][] = $arbName;
-
-                            }
-
-                        }
-//                        testHelper($saleksInArbs);
-                    }
-                    testHelper($saleksAndArbsArr);
-                    echo '<div class="flex-container sizing">';
-                    foreach ($saleksAndArbsArr as $saleksName => $arbsArray) {
-
-                        echo '<div class="flex-item-left sizing">';
-                        echo "<h3>$saleksName</h3>";
-                        foreach ($arbsArray as $arbName) {
-                            echo  "<div>$arbName</div>";
-                        }
-                        echo '</div>';
-                    }
-                    echo '</div>';
-                }
-            }
-
-//            testHelper($khademUsers);
-
-        } else if (in_array('khadem-mard', $currentUserRoles)){     // if highest level of role is khadem-mard
-            $saleksInMahfel = get_mahfel_saleks($currentUserId);           // get saleks current khadem-mard
-//            testHelper($saleksInMahfel);
-        }
-
-
-######## Display All khadem-zans for admin-zan
-        if (in_array('admin-zan', $currentUserRoles)){
-
-            $khademUsers = queryKhademsByRole(['khadem-zan'], ['khadem-mard', 'salek-mard']);
-
-//            testHelper($khademUsers);
-        }
-        else if (in_array('khadem-zan', $currentUserRoles)){     // Display All saleks for khadem-zan
-            $saleksInMahfel = get_mahfel_saleks($currentUserId);        // get saleks for current khadem-zan
-//            testHelper($saleksInMahfel);
-        }
+//                    echo '<div class="flex-container sizing">';
+//                    foreach ($saleksAndArbsArr as $saleksName => $arbsArray) {
+//
+//                        echo '<div class="flex-item-left sizing">';
+//                        echo "<h3>$saleksName</h3>";
+//                        foreach ($arbsArray as $arbName) {
+//                            echo  "<div>$arbName</div>";
+//                        }
+//                        echo '</div>';
+//                    }
+//                    echo '</div>';
+//                }
+//            }
+//
+////            testHelper($khademUsers);
+//
+//        } else if (in_array('khadem-mard', $currentUserRoles)){     // if highest level of role is khadem-mard
+//            $saleksInMahfel = get_mahfel_saleks($currentUserId);           // get saleks current khadem-mard
+////            testHelper($saleksInMahfel);
+//        }
 //
 //
+//######## Display All khadem-zans for admin-zan
+//        if (in_array('admin-zan', $currentUserRoles)){
+//
+//            $khademUsers = queryKhademsByRole(['khadem-zan'], ['khadem-mard', 'salek-mard']);
+//
+////            testHelper($khademUsers);
+//        }
+//        else if (in_array('khadem-zan', $currentUserRoles)){     // Display All saleks for khadem-zan
+//            $saleksInMahfel = get_mahfel_saleks($currentUserId);        // get saleks for current khadem-zan
+////            testHelper($saleksInMahfel);
+//        }
+////
+////
 
 
 

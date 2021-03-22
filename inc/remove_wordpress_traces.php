@@ -29,6 +29,12 @@ $wp_admin_bar->remove_menu( 'wp-logo' );
         'href'  => site_url('/arbayiin')
     ));
 
+    $wp_admin_bar->add_node(array(
+        'id'    => 'salekin',
+        'title' => 'شاگردان',
+        'href'  => admin_url('/edit.php?post_type=salek')
+    ));
+
 }
 
 }
@@ -43,6 +49,7 @@ function shapeSpace_remove_toolbar_node($wp_admin_bar) {
     $wp_admin_bar->remove_node('wp-logo');
     $wp_admin_bar->remove_node('comments');
     $wp_admin_bar->remove_node('archive');
+
 
 }
 add_action('admin_bar_menu', 'shapeSpace_remove_toolbar_node', 999);
