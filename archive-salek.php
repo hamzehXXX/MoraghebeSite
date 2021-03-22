@@ -455,7 +455,7 @@ function get_users_in_UI($khademin, $user, $khademIDArray) {
         foreach ($saleksOfMahfel as $salekMahfelID) {
             ?>
                     <a href="<?php echo get_permalink($salekMahfelID); ?>">
-                        <li class=" "> <?php echo get_the_title($salekMahfelID) . ' (محفل) '; ?>
+                        <li class=" "> <?php echo get_the_title($salekMahfelID); ?>
                             <?php if (in_array($salekMahfelID, $khademIDArray)) echo ' (عضو خادمین) '; ?>
                         </li>
                     </a>
@@ -468,7 +468,7 @@ function get_users_in_UI($khademin, $user, $khademIDArray) {
             <a href="<?php echo get_permalink($key); ?>">
                 <li class=" ">
                     <?php
-                    echo !in_array($key, $commonSaleks)?get_the_title($key):get_the_title($key) . ' ( محفل )';
+                    echo !in_array($key, $commonSaleks)?get_the_title($key):get_the_title($key);
                     foreach ($saleksOfArb as $salekArb){
                         echo ' ( ' . $salekArb . ' )';
                     }
