@@ -77,6 +77,7 @@ if ($days[$amalSize] > jdate('Y/m/d')) {
 
 }
 echo '<hr/>';
+$dayNumber = new NumberToWord();
     ?>
     <table class="amal-table" data-arbid="<?php echo $arbId;?>"
                               data-author="<?php echo $userID;?>"
@@ -87,7 +88,8 @@ echo '<hr/>';
         <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col" class="current-date"><?php echo 'روز ' . CONSTANTS::getDays()[$amalSize] . $displayDate; ?></th>
+<!--            <th scope="col" class="current-date">--><?php //echo 'روز ' . CONSTANTS::getDays()[$amalSize] . $displayDate; ?><!--</th>-->
+            <th scope="col" class="current-date"><?php echo 'روز ' . ($amalSize<41?CONSTANTS::getDays()[$amalSize]:$dayNumber->numberToWords($amalSize + 1)) . ' ' . $displayDate; ?></th>
         </tr>
         </thead>
         <tbody>
@@ -164,7 +166,6 @@ echo '<hr/>';
                 }
                 do_action( 'insideSlector', $rowNumber, $disableBox, $amalID);
 
-
                 ?>
 
             </td>
@@ -183,49 +184,6 @@ echo '<hr/>';
 <!--        </form>-->
     </table>
 
-    <?php
-    $resultsArray = '';
-
-
-    if(isset($_POST['submit-amal'])) {
-//        echo 'submited!!!';
-//        for ($i=1; $i<$rowNumber; $i++) {
-//            $result = $_POST['result-'.$i] == ''?'0':$_POST['result-'.$i];
-//            $resultsArray .= $result . '!@#';
-//            echo $_POST['result-'.$i] . ' ___';
-
-//            $dbAdded = $wpdb->insert(
-//                'wp_amalresults',
-//                array(
-//                    'userid' => get_current_user_id(),
-//                    'arbid' => $arbId,
-//                    'amalid' => $amalIDArray[$i-1],
-//                    'arbrepeat' => 0,
-//                    'resultval' => $result,
-//                    'date' => jdate('Y-m-d H:i:s')
-//                )
-//            );
-//        }
-
-        $arbDate = 'روز ' . CONSTANTS::getDays()[$amalSize] . $displayDate;
-
-//    wp_insert_post(array(
-//            'post_type' => 'amal',
-//            'post_status' => 'publish',
-//            'post_title' => $user->user_login . ' - ' . $user->display_name . ' - ' . $arbDate . get_the_title($arbId),
-//            'post_author' => $userID,
-//            'meta_input' => array(
-//                'arbayiin' => $amalId,
-//                'day' => $arbDate,
-//                'results' => $resultsArray
-//            )
-//        ));
-
-//        $_POST['submit-amal'] = null;
-//        echo "<meta http-equiv='refresh' content='0'>";
-
-    }
-    ?>
     <input type="hidden" class="jsResults" data-amalsize="<?php echo $amalSize; ?>">
     <script>
         jQuery('table').each(function() {

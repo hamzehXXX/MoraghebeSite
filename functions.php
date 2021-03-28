@@ -24,6 +24,7 @@ require get_theme_file_path('/GooglesheetTest.php');
 require get_theme_file_path('/classes/ResultsTable.php');
 require get_theme_file_path('/classes/ArchiveArbayiin.php');
 require get_theme_file_path('/classes/CONSTANTS.php');
+require get_theme_file_path('/classes/NumberToWord.php');
 
 
 

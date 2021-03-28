@@ -15,10 +15,8 @@
 
             <?php
             //_____________________ START TEST____________
-            $start = microtime(true);
-//            convertAllResults();
-//            echo microtime(true) - $start;
 
+            $ruzNumber = new NumberToWord();
 
             //_____________________ END TEST  ____________
             ?>
@@ -167,7 +165,7 @@
 //                                                var_dump($dastoor_ID);
 //                                                var_dump($arbrepeat);
 //                                                echo $submitedDayCount;
-                                            echo 'روز ' . CONSTANTS ::getDays()[$submitedDayCount] . ' | ' . jdate('l, Y/m/d', $submitedDaydate + (86400 * $submitedDayCount));
+                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . jdate('l, Y/m/d', $submitedDaydate + (86400 * $submitedDayCount));
                                         }
                                         ?>
                                     </div>

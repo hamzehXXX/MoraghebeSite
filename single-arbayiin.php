@@ -1,31 +1,15 @@
 <?php get_header();
-//include_once('jdf.php');
-//include('classes/CONSTANTS.php');
-//echo phpinfo(); die;
 while(have_posts()) {
     the_post();
     global $wpdb;
  $start = microtime(true);
  $currentUserId = get_current_user_id();
-//var_dump(function_exists('wp_filter_content_tags'));
     $duration = get_field('arbayiin-duration');
     $ruz = "روز";
     $nthday = CONSTANTS::getDays();
     $arbayiinID = get_the_ID();
-    // GET AMALS WHERE CURRENT USER ID HAVE POSTED FOR CURRENT ARBAYIIN ================================================================================================
-//    $amalResults = new WP_Query(array(
-//        'post_type' => 'amal',
-//        'posts_per_page' => -1,
-//        'order' => 'ASC',
-//        'author' => $currentUserId,
-//        'meta_key' => 'arbayiin',
-//        'meta_query' => array(
-//            'key' => 'arbayiin',
-//            'compare' => '=',
-//            'value' => $arbayiinID
-//        )));
 
-
+$ruzNumber = new NumberToWord();
 
 //    $amalSize = $amalResults -> found_posts;
     $today = jdate('Y-m-d');
@@ -40,7 +24,6 @@ while(have_posts()) {
 //    $resultsFromDb = queryAllDaysForArb($currentUserId, $arbayiinID, $repeat);
 //        testHelper($resultsFromDb);
     $resultsOfDay = queryAllResultIDs($wpdb, $currentUserId, $arbayiinID, $repeat);
-//    testHelper($resultsOfDay);
     $result = array();
     foreach ($resultsOfDay as $element) {
         $result[$element->dayid]['date'] = $element->date;
@@ -48,7 +31,6 @@ while(have_posts()) {
         $result[$element->dayid]['results'][$element->amalid]['result_point'] = $element->result_point;
         $result[$element->dayid]['results'][$element->amalid]['result_matni'] = $element->result_matni;
     }
-//    testHelper($result);
 
     $amalSize = sizeof($result);
 //********************************       [ PAGE BANNER ]       ********************************* START >>>>>>
@@ -58,7 +40,7 @@ while(have_posts()) {
         <div class="page-banner__bg-image" ></div>
         <div class="page-banner__content container container--narrow">
             <h1 class="page-banner__title"><?php the_title(); ?></h1>
-            <div class="page-banner__intro"><?php echo $amalSize!=$duration?'روز ' . $nthday[$amalSize]:'پایان اربعین';?>
+            <div class="page-banner__intro"><?php echo $amalSize!=$duration?'روز ' . ($amalSize<40?$nthday[$amalSize]:$ruzNumber->numberToWords($amalSize+1)):'پایان اربعین';?>
             </div>
         </div>
     </div></a>
@@ -67,54 +49,8 @@ while(have_posts()) {
     <!--    //======================================================================-->
     <!--    // CONTAINER - PAGE SECTION -->
     <!--    //======================================================================-->
-    <?php
-//    $month = CONSTANTS::$month_array;
-//    $daysArray = CONSTANTS::getDays();
-//    $year = CONSTANTS::year();
-//    $queryString = createInsertDayQuery();
-    ?>
 
     <div class="container container--narrow page-section">
-<!--        <div style="overflow-x: auto">-->
-            <?php
-//            ini_set('memory_limit', '-1');
-//            var_dump($wpdb->query($queryString));
-            ?>
-<!--        </div>-->
-        <?php
-
-//        testHelper($queryString[0]);
-//        testHelper($queryString[1]);
-//        die;
-
-//        $dayVals = " (1, 607, 1, 1614613800, 1615072915), (1, 607, 1, 1614713800, 1615073415)";
-
-//        testHelper($queryString); die;
-//        echo $queryString;
-
-
-//        testHelper(queryDayIdFromAmalDay($wpdb));
-//        var_dump(deleteDaysByArbIdFromDB($wpdb, 0));
-//        var_dump(deleteAllDays($wpdb));
-//        var_dump(deleteAllResults($wpdb));
-//echo '<hr/>';
-
-
-
-//        testHelper(($result));
-//        echo '<hr/>';
-        $myjdate = jdate('H/i/s/m/d/y');
-//        testHelper($myjdate);
-//        testHelper(explode('/', $myjdate));
-
-        $timestamp = jmktime(jdate('H'), jdate('i'), jdate('s'), jdate('m'), jdate('d'), jdate('Y'));
-        $timestamp += 315360000*2;
-//        echo $timestamp;
-//        echo jdate('l, d-m-Y H:i:s', $timestamp);
-        ?>
-<!--        //------------------------------------------------------->
-<!--        // Meta-Box-->
-<!--        //------------------------------------------------------->
 
         <div class="metabox metabox--position-up metabox--with-home-link">
             <p><a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('arbayiin'); ?>"><i class="fa fa-home" aria-hidden="true"></i> اربعینیات </a> <span>مدت اربعین:</span><span class="metabox__main"><?php  echo $duration; ?></span></p>
@@ -129,8 +65,6 @@ while(have_posts()) {
         <?php
         $display = '';
         $optionName = $currentUserId . '-' . $arbayiinID . '-period';
-//        var_dump(delete_option($optionName));
-//        var_dump(get_option($optionName));
 
 //        $distinctDates = $wpdb->get_results(
 //            $wpdb->prepare("SELECT COUNT(*) FROM result_days WHERE userid = %d AND arbid = %d", 1, $arbayiinID),
@@ -322,9 +256,7 @@ $resultsTable->showResultsTable($display, $arbayiinID, $result);
                 if (has_term('عمومی', 'category', get_the_ID())){
                     $hide='';
                 }
-//                echo the_date();
-//                echo strtotime(get_the_date());
-//                echo jdate('F', strtotime(get_the_date()));
+
                 ?>
                 <div class="event-summary <?php echo $hide;?>">
                     <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink(); ?>">
@@ -346,25 +278,10 @@ $resultsTable->showResultsTable($display, $arbayiinID, $result);
         }
 
 
-        if ($duration != $amalSize):
-            ?>
-
-<!--            <hr class="section-break"/>-->
-<!--          <h4 style="font-family: iranyekanwebregularfanum">حذف کلیه نتایج اربعین</h4>-->
-<!--          <h5 style="font-family: iranyekanwebregularfanum;">با حذف نتایج، کلیه نتایجی که برای این اربعین ثبت کرده اید حذف خواهند شد و دیگر قابل بازگشت  نخواهد بود. لطفا دقت لازم را مبذول بفرمایید.</h5>-->
-<!---->
-<!--            <span class="delete-results btn btn--blue btn--small block --><?php //echo $display;?><!--"-->
-<!--                  data-arbid="--><?php //echo $arbayiinID;?><!--"-->
-<!--                  data-arbrepeat="--><?php //echo $repeat;?><!--" style="position: absolute; left: 0px;background-color: red; color: yellow">حذف نتایج</span>-->
-
-        <?php
-        endif;
-
         ?>
     </div>
 
 <?php } wp_reset_postdata();
-//echo microtime(true) - $start;
 get_footer();
 ?>
 

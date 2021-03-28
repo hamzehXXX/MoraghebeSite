@@ -19,6 +19,10 @@ public static $month_array = array(
 
 
 public static function getDays(){
+
+    $dozenArr = array("یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده",
+        "هفده", "هجده", "نوزده");
+
     return [
         "اول", "دوم", "سوم", "چهارم", "پنجم", "ششم", "هفتم", "هشتم", "نهم", "دهم",
         "یازدهم", "دوازدهم", "سیزدهم", "چهاردهم", "پانزدهم", "شانزدهم",
@@ -27,6 +31,30 @@ public static function getDays(){
         "سی و دوم", "سی و سوم", "سی و چهارم", "سی و پنجم", "سی و ششم", "سی و هفتم", "سی و هشتم",
         "سی و نهم", "چهلم", "چهل و یکم", "چهل و دوم", "چهل و سوم", " چهل و چهارم", "چهل و پنجم", "چهل و ششم"
     ];
+}
+
+public static function getDay($d){
+    if ($d <= 40) {
+        return self::getDays()[$d];
+    } else  {
+        $dayArr = array("یکم", "دوم", "سوم", "چهارم", "پنجم", "ششم", "هفتم", "هشتم", "نهم");
+        $tensArr = array("ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود");
+        $sadganArr = array("صد", "دویست", "سیصد", "چهارصد", "پانصد","ششصد", "هفتصد", "هشتصد", "نهصد");
+
+        if ($d+1 < 100) {
+            $dahgan = $tensArr[$d/10 - 1];
+            $yekan = $dayArr[$d % 10 -1];
+            $isYekanZero = (($d+1)%10 == 0);
+            return $isYekanZero? ($dahgan): ($dahgan . " و" . $yekan);
+        } elseif ($d < 1000) {
+            $sadgan = $d / 100;
+            $dahganVaYekan = ($d% 100);
+            $dahgan = $dahganVaYekan/ 10;
+            $yekan = $dahganVaYekan% 10;
+            $sadganVaDahgan =  $sadganArr[$sadgan - 1] . " و " . $tensArr[$dahgan - 1];
+            return $yekan == 0? $sadganVaDahgan: $sadganVaDahgan . " و " . $dayArr[$yekan - 1];
+        }
+    }
 }
 
     /**
