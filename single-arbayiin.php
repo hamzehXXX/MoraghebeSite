@@ -40,7 +40,7 @@ $ruzNumber = new NumberToWord();
         <div class="page-banner__bg-image" ></div>
         <div class="page-banner__content container container--narrow">
             <h1 class="page-banner__title"><?php the_title(); ?></h1>
-            <div class="page-banner__intro"><?php echo $amalSize!=$duration?'روز ' . ($amalSize<40?$nthday[$amalSize]:$ruzNumber->numberToWords($amalSize+1)):'پایان اربعین';?>
+            <div class="page-banner__intro"><?php echo $amalSize!=$duration?'روز ' . ($amalSize<41?$nthday[$amalSize]:$ruzNumber->numberToWords($amalSize+1)):'پایان اربعین';?>
             </div>
         </div>
     </div></a>

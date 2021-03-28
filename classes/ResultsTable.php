@@ -99,7 +99,7 @@ private $amalidArr;
             echo '<li class="row" style="display: table-cell;">';
             echo '<div class="t-header" >';
             $ruzNumber = new NumberToWord();
-            $ruzNum = $dayCounter<42? CONSTANTS::getDays()[$dayCounter]:$ruzNumber->numberToWords($dayCounter);
+            $ruzNum = $dayCounter<42? CONSTANTS::getDays()[$dayCounter]:$ruzNumber->numberToWords($dayCounter+1);
             $dateTitle = 'روز' . $ruzNum;
             echo $dateTitle;
             echo '(' . jdate('l, Y/m/d', $day['date']) . ')';
