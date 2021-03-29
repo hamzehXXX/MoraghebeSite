@@ -31,8 +31,8 @@ require get_theme_file_path('/classes/NumberToWord.php');
 function moraghebeh_files() {
 //    wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
     wp_enqueue_style('font-awsomesss', get_theme_file_uri('/css/font-awesome/css/font-awesome.min.css'), NULL, '1.2');
-    $styleVersion = '2.8';
-    $jQueryVersion = '2.5';
+    $styleVersion = '2.9';
+    $jQueryVersion = '2.6';
     wp_enqueue_style('moraghebeh_main_styles', get_stylesheet_uri(), NULL, $styleVersion);
 
 
