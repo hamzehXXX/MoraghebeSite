@@ -733,7 +733,9 @@ table td .firstcol {
     background-color: #fff;
     width: 50%;
     height: 60%;
-    padding: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+
     margin: 15% auto;
     alignment: center;
     vertical-align: center;
@@ -748,6 +750,9 @@ table td .firstcol {
     z-index: 100;
     background: #c32929;
     color: white;
+    position: sticky;
+    margin-top: 4px;
+    top: 0;
 }
 
 .date-pop-outer {
@@ -793,4 +798,12 @@ table td .firstcol {
 .dim-selector{
     opacity: 0.3;
 
+}
+.pop-inner__head{
+    z-index: 100;
+    background-color: white;
+    color: white;
+    position: sticky;
+
+    top: 0;
 }
