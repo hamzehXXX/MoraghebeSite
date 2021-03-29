@@ -6,10 +6,23 @@ class Amal {
     }
 
     events() {
+
         $("#submit-amal").on("click",  this.sabtAmal.bind(this));
         $(".delete-results").on("click",  this.deleteDispatcher.bind(this));
-
         $("button#submit-date").on("click",  this.sabtDate.bind(this));
+        $(".display-arbcontent").on("click", this.displayContent.bind(this));
+        $("#startDate").on("click", this.startDateClick.bind(this));
+
+    }
+
+    startDateClick() {
+        window.scrollTo(0,200);
+    }
+    displayContent() {
+        // alert("heey");
+        $("div#arb-content").toggleClass("hide");
+        $("div#display-arbcontent").toggleClass("hide");
+        $("div#arb-excerpt").toggleClass("hide");
 
     }
 
@@ -27,6 +40,7 @@ class Amal {
             $(".arbayiin-table, .generic-content").removeClass("hide-table");
             // $(".start-date__alert").text(startDate);
             $(".current-date").text('روز اوّل' + ' (' + startDate + ')');
+
         }
 
         var startDateInfo = {
@@ -43,8 +57,10 @@ class Amal {
             data: startDateInfo,
             success: (response) => {
                 console.log(response);
-                location.reload();
+                window.scrollTo(0,470);
 
+                location.reload();
+                // $(".start-date__alert").text(startDate);
                 // alert(response);
             },
             error: (response) => {
@@ -52,8 +68,8 @@ class Amal {
                 // alert("nope");
             }
         });
-
-        $(".start-date__alert").text(startDate);
+        $(".current-date").addClass("current-date_yellow");
+        // $(".start-date__alert").text(startDate);
     }
 
     datepicker() {

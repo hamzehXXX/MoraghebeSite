@@ -3029,6 +3029,9 @@ table.amal-table tr.zebra {
     cursor: pointer;
 
 }
+.current-date_yellow{
+    background-color: yellow;
+}
 /*@import "modules/slidebars.css";*/
 .star-rating-ul li{
     display: inline-block;

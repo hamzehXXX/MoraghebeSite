@@ -166,3 +166,7 @@ table.amal-table tr.zebra {
     cursor: pointer;
 
 }
+
+.current-date_yellow{
+    background-color: yellow;
+}
