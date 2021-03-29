@@ -78,7 +78,7 @@ private $amalidArr;
 //            echo '<pre>';
 //            print_r(get_sub_field_object('amal_name')['ID']);
 //            echo '</pre>';
-            echo $name;
+            echo wp_trim_words($name,4);
             echo '</div>';
         }
         echo ' <div class="resultname" style="background-color:#7ad2ee; color: #FFFFFF"  >جمع امتیازات روز</div>';
