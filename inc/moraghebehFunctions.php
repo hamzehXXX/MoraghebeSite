@@ -7,33 +7,34 @@ function setStartDate() {
     $startDate = get_option($optionName);
     // display startDate select datepicker if not set yet
 //    echo '<form method="post">';
-    echo '<label for="startDate" >قبل از ثبت اعمال ابتدا لازم است <strong style="color: darkgreen">تاریخ شروع</strong> اربعین را مشخص نمایید: </label>';
+    echo '<label for="startDate" >قبل از ثبت اعمال, ابتدا لازم است  <strong style="color: darkgreen">تاریخ شروع</strong> اربعین را مشخص نمایید: </label>';
     ?>
     <br/>
     <br/>
-    <i class="fa fa-circle" style="color: green"> آموزش تعیین تاریخ شروع اربعین:</i>
-    <br/>
-    <br/>
-    <ol style="font-family: iranyekanwebregularfanum;">
-        <li>روی <span style="border: darkgreen 2px solid; background-color: #7ab5d322">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> کلیک کنید.</li>
-        <li>تاریخ شروع را از روی تقویم انتخاب کرده تا در کادر خالی نمایان شود</li>
-        <li>سپس روی <span style="background-color: green; color: white; border: #5A5A5A 1px solid; padding: 0px 3px 3px; height: 4px">انتخاب</span> کلیک کنید.</li>
-    </ol>
-    <hr class="section-break"/>
     <div style="border: #F4D35E 4px double; padding: 10px">
-    <div>تعیین تاریخ شروع: </div>
+    <div>تاریخ شروع اربعین: (حتما بعد از انتخاب روی ثبت تاریخ شروع کلیک بفرمایید.) </div>
     <br/>
         <i class="fa fa-calendar" style=" color:darkgreen; font-size: 1.6rem;"></i>
         <input class="start-date" style="border: green 2px solid; background-color: #7ab5d322" type="text" id="startDate" name="drddd" autocomplete="off" value="<?php echo $startDate?$startDate:'';?>"
                data-userid = "<?php echo get_current_user_id(); ?>"  onkeydown="return false"
                data-arbid = "<?php the_ID(); ?>" readonly>
 
+
     <?php
     echo '<script>';
     echo 'jQuery(function () {jQuery("#startDate").persianDatepicker();});';
     echo '</script>';
-    echo '<button name="sbmt" id="submit-date" style="background-color: green; color: white" >انتخاب</button>';
+    echo '<button name="sbmt" id="submit-date" style="background-color: green; color: white" >ثبت تاریخ شروع</button>';
     echo '</div>';
+    ?>
+    <i class="fa fa-circle" style="color: green; cursor: pointer" id="amuzeh"> آموزش تعیین تاریخ شروع اربعین:</i>
+    <br/>
+    <ol class="hide" style="font-family: iranyekanwebregularfanum;" id="amuzesh-body">
+        <li>روی <span style="border: darkgreen 2px solid; background-color: #7ab5d322">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> کلیک کنید.</li>
+        <li>تاریخ شروع را از روی تقویم انتخاب کرده تا در کادر خالی نمایان شود</li>
+        <li>سپس روی <span style="background-color: green; color: white; border: #5A5A5A 1px solid; padding: 0px 3px 3px; height: 4px">ثبت تاریخ شروع </span> کلیک کنید.</li>
+    </ol>
+    <?php
 //    echo '</form>';
 //    echo '<div class="start-date__alert"></div>';
 

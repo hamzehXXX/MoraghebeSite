@@ -90,7 +90,7 @@ $ruzNumber = new NumberToWord();
             <div style="margin-right: 15px" id="arb-excerpt"><?php the_excerpt(); ?></div>
             <div class="display-arbcontent show-more" style="margin-right: 15px; cursor: pointer; color: blue;" id="display-arbcontent">بیشتر...</div>
         <div class="hide" style="margin-right: 15px" id="arb-content"><?php the_content(); ?></div>
-        <div class="display-arbcontent show-less hide" style="margin-right: 15px; cursor: pointer; color: blue;" id="display-arbcontent">مشاهده کمتر</div>
+        <div class="display-arbcontent show-less hide" style="margin-right: 15px; cursor: pointer; color: blue;" id="display-arbcontent">بستن توضیحات</div>
 
 <!--            /* If amalsize is less than arbayiin duration show the inputs for arbayiins */-->
     <?php if( $amalSize < $duration ): ?>

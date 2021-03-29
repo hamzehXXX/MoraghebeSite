@@ -12,6 +12,7 @@ class Amal {
         $("button#submit-date").on("click",  this.sabtDate.bind(this));
         $(".display-arbcontent").on("click", this.displayContent.bind(this));
         $("#startDate").on("click", this.startDateClick.bind(this));
+        $("i#amuzeh").on("click", this.displayAmuzesh.bind(this));
 
     }
 
@@ -23,6 +24,10 @@ class Amal {
         $("div#arb-content").toggleClass("hide");
         $("div#display-arbcontent").toggleClass("hide");
         $("div#arb-excerpt").toggleClass("hide");
+    }
+
+    displayAmuzesh() {
+        $("ol#amuzesh-body").toggleClass("hide");
 
     }
 
