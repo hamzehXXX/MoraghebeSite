@@ -158,8 +158,7 @@ function redirectSubsToFrontEnd() {
     $ourCurrentUser = wp_get_current_user();
 	$ourCurrentUserRoles = $ourCurrentUser->roles;
 	if(!in_array('admin', $ourCurrentUserRoles) AND !in_array('administrator', $ourCurrentUserRoles)
-	AND !in_array('khadem-mard', $ourCurrentUserRoles) AND !in_array('admin-mard', $ourCurrentUserRoles)
-	 AND !in_array('admin-zan', $ourCurrentUserRoles)) {
+	AND !in_array('editor', $ourCurrentUserRoles)) {
         wp_redirect(site_url('/'));
         exit;
     }
@@ -170,13 +169,14 @@ add_action('wp_loaded', 'noSubsAdminBar');
 function noSubsAdminBar() {
     $ourCurrentUser = wp_get_current_user();
 $ourCurrentUserRoles = $ourCurrentUser->roles;
-    if (count($ourCurrentUser->roles) == 1 AND (($ourCurrentUser->roles[0] != 'admin') AND ($ourCurrentUser->roles[0] != 'administrator'))) {
+    if(!in_array('admin', $ourCurrentUserRoles) AND !in_array('administrator', $ourCurrentUserRoles)
+	AND !in_array('editor', $ourCurrentUserRoles)) {
         show_admin_bar(false);
     }
 
-    if (in_array('khadem-mard', $ourCurrentUserRoles)){
-        show_admin_bar(true);
-    }
+//    if (in_array('khadem-mard', $ourCurrentUserRoles)){
+//        show_admin_bar(true);
+//    }
 }
 
 
