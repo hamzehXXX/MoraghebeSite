@@ -165,7 +165,7 @@
 //                                                var_dump($dastoor_ID);
 //                                                var_dump($arbrepeat);
 //                                                echo $submitedDayCount;
-                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . jdate('l, Y/m/d', $submitedDaydate + (86400 * $submitedDayCount));
+                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount)) . ' | ' . jdate('l, Y/m/d', $submitedDaydate + (86400 * $submitedDayCount));
                                         }
                                         ?>
                                     </div>
