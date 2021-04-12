@@ -69,7 +69,7 @@ function wpdocs_selectively_enqueue_admin_script( $hook ) {
 //    if ( 'edit.php' != $hook ) {
 //        return;
 //    }
-    wp_register_script( 'my_customsss_script', get_stylesheet_directory_uri() .'/js/bulkaction.js', NULL, '1.3' );
+    wp_register_script( 'my_customsss_script', get_stylesheet_directory_uri() .'/js/bulkaction.js', NULL, '1.4' );
     wp_enqueue_script( 'my_customsss_script');
 }
 add_action( 'admin_init', 'wpdocs_selectively_enqueue_admin_script' );
