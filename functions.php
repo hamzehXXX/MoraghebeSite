@@ -32,9 +32,8 @@ function moraghebeh_files() {
 //    wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
     wp_enqueue_style('font-awsomesss', get_theme_file_uri('/css/font-awesome/css/font-awesome.min.css'), NULL, '1.2');
     $styleVersion = '3.0';
-    $jQueryVersion = '2.7';
+    $jQueryVersion = '2.9';
     wp_enqueue_style('moraghebeh_main_styles', get_stylesheet_uri(), NULL, $styleVersion);
-
 
 //    wp_enqueue_style('custom-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
     //microtime() gozashtim beja version number ke harbar load kone
@@ -43,7 +42,6 @@ function moraghebeh_files() {
     wp_enqueue_script('main_moraghebeh-js', get_theme_file_uri('/js/scripts-bundled.js'), NULL, $jQueryVersion, true);
     wp_enqueue_script('prism-js', get_theme_file_uri('/js/prism.js'), NULL, '1.0', true);
 //    wp_enqueue_script('main_moraghebeh-jsfd', get_theme_file_uri('/js/jquery-1.10.1.min.js'), NULL, microtime(), true);
-
 
 //    wp_enqueue_script('sb-js', get_theme_file_uri('/js/slidebars.js'), array('jquery'), microtime(), true);
 
@@ -60,6 +58,21 @@ function moraghebeh_files() {
 
 
 add_action('wp_enqueue_scripts', 'moraghebeh_files');
+
+
+/**
+ * Enqueue a script in the WordPress admin on edit.php.
+ *
+ * @param int $hook Hook suffix for the current admin page.
+ */
+function wpdocs_selectively_enqueue_admin_script( $hook ) {
+//    if ( 'edit.php' != $hook ) {
+//        return;
+//    }
+    wp_register_script( 'my_customsss_script', get_stylesheet_directory_uri() .'/js/bulkaction.js', NULL, '1.3' );
+    wp_enqueue_script( 'my_customsss_script');
+}
+add_action( 'admin_init', 'wpdocs_selectively_enqueue_admin_script' );
 
 
 function moraghebeh_features() {
