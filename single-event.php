@@ -6,14 +6,14 @@ while(have_posts()) {
         <div class="page-banner__content container container--narrow">
             <h1 class="page-banner__title"><?php the_title(); ?></h1>
             <div class="page-banner__intro">
-                <p>don't forget to replace me later</p>
+                <p></p>
             </div>
         </div>
     </div></a>
 
     <div class="container container--narrow page-section">
         <div class="metabox metabox--position-up metabox--with-home-link">
-            <p><a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('event'); ?>"><i class="fa fa-home" aria-hidden="true"></i> رویدادها </a> <span class="metabox__main"><?php the_title(); ?></span></p>
+            <p><a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('event'); ?>"><i class="fa fa-home" aria-hidden="true"></i> رویدادها </a></p>
         </div>
 
         <div class="generic-content"><?php  the_content(); ?></div>
