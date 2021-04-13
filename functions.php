@@ -380,16 +380,38 @@ function my_custom_columns($column) {
 		echo '<h3 style="color:#ff0000">فاقد اربعین</h3>';
 		return;
 	}
+	$userId = isset(get_field('salekid', $post->ID)->ID)?get_field('salekid', $post->ID)->ID:0;
+
 		foreach($dastoorRows as $row) {
 
 		    $adminUrl = get_admin_url($post->ID);
 		    $dastoorId = isset($row['dastoor_takhsised']->ID)?$row['dastoor_takhsised']->ID:'';
+		    $duration = empty($dastoorId)?0:get_field('arbayiin-duration', $dastoorId);
+
+		    $dastoorRepeat = isset($row['repeat'])&&$row['repeat']>1?' (' . 'تکرار ' . $row['repeat'] . ')':'';
+		    $dayInfo = getDayInfoInByUserId($userId, $dastoorId, $row['repeat']);
+//            $justTest = '(' . $userId . '--' . $dastoorId . ')';
+//            testHelper($justTest);
+//		    testHelper($dayInfo);
+//		    testHelper($row['repeat']);
 //		    testHelper($dastoorId);
+$dayCount = $dayInfo[0]->count;
+if ($dayCount > 1) {
+//                echo ($dayInfo[0]->submitdate) != 0?jdate('Y-m-d', $dayInfo[0]->submitdate):'';
+            }
 		    $href = $adminUrl . 'edit.php?s&post_status=all&post_type=salek&m=0&dastoorid=' . $dastoorId;
-		    echo "<a href=" . $href . ">";
-//		    testHelper($row);
-			echo isset($row['dastoor_takhsised']->post_title)?$row['dastoor_takhsised']->post_title . '<br/>' :'';
+
+            $arbColor = '';
+            if (isset($_GET['dastoorid']) && $_GET['dastoorid'] == $dastoorId ) {
+                $arbColor = "color:orange; font-size: 2em;";
+            }
+
+            if ($dayCount < $duration){
+                echo '<a href=' . $href . ' style=' . $arbColor . '>';
+			echo isset($row['dastoor_takhsised']->post_title)?$row['dastoor_takhsised']->post_title . $dastoorRepeat . ' - ' . $dayCount . '/' .$duration . '<br/>' :'';
 			echo '</a>';
+            }
+
 		}
 	}
 }

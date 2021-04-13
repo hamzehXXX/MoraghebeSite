@@ -43,6 +43,22 @@ function archiveArbDaysQuery($userid) {
     );
 }
 
+function getDayInfoInByUserId($userid, $arbid, $arbrepeat) {
+    global $wpdb;
+    return $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT 
+                    date, submitdate, COUNT(*) AS count
+                    FROM 
+                    result_days 
+                    WHERE 
+                        userid = %d AND arbid = %d AND arbrepeat = %d
+                    ",
+            $userid, $arbid, $arbrepeat),
+        OBJECT
+    );
+}
+
 /** Gets All Day Ids for a single arb for a user
  * @param $wpdb
  * @param $userid
