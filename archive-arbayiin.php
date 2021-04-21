@@ -165,10 +165,10 @@
 //                                                var_dump($dastoor_ID);
 //                                                var_dump($arbrepeat);
 //                                                echo $submitedDayCount;
-                                            $optionName = get_current_user_id() . '-' . get_the_ID() . '-period';
-                                            $days = get_option($optionName);
-                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . $days[$submitedDayCount];
-//                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . jdate('l, Y/m/d', $submitedDaydate + (86400 * $submitedDayCount));
+//                                            $optionName = get_current_user_id() . '-' . get_the_ID() . '-period';
+//                                            $days = get_option($optionName);
+//                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . $days[$submitedDayCount];
+                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . jdate('l, Y/m/d', $submitedDaydate + (86400 * $submitedDayCount));
                                         }
                                         ?>
                                     </div>
