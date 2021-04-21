@@ -65,7 +65,7 @@ function getDayInfoInByUserId($userid, $arbid, $arbrepeat) {
     return $wpdb->get_results(
         $wpdb->prepare(
             "SELECT 
-                    date, submitdate, COUNT(*) AS count
+                    max(date) as maxdate, submitdate, COUNT(*) AS count
                     FROM 
                     result_days 
                     WHERE 

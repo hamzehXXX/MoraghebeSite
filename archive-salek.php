@@ -173,7 +173,7 @@ if (!is_user_logged_in() AND
             $repeat = $maxRepeat > 1 ? '(' . 'تکرار ' . $maxRepeat . ')' : '';
             $duration = get_field('arbayiin-duration', $arbid);
             $dayInfo = getDayInfoInByUserId($salekUserObj -> ID, $arbid, $maxRepeat)[0];
-            $date = $dayInfo -> date;
+            $date = $dayInfo -> maxdate;
             $submitdate = $dayInfo -> submitdate;
             $dayCount = $dayInfo -> count;
 
@@ -199,7 +199,7 @@ if (!is_user_logged_in() AND
                         $finalRepeat = $arbRepeat > 1?'(' . 'تکرار ' . $arbRepeat . ')':'';
                         $userid = get_field('salekid', $salekid);
                         $dayInfo = getDayInfoInByUserId($userid->ID, $arbayiin[0], $arbRepeat)[0];
-                        $date = $dayInfo->date;
+                        $date = $dayInfo->maxdate;
                         $duration = get_field('arbayiin-duration', $arbayiin[0]);
                         $submitdate = $dayInfo->submitdate;
                         $dayCount = $dayInfo->count;
