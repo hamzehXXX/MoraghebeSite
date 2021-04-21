@@ -43,6 +43,23 @@ function archiveArbDaysQuery($userid) {
     );
 }
 
+function getLastDateSubmited($userid, $arbid, $repeat) {
+    global $wpdb;
+    return $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT 
+                    max(date) as maxdate
+                    FROM 
+                    result_days 
+                    WHERE 
+                        userid = %d AND arbid = %d AND arbrepeat = %d
+                        
+                    ",
+            $userid, $arbid, $repeat),
+        OBJECT
+    );
+}
+
 function getDayInfoInByUserId($userid, $arbid, $arbrepeat) {
     global $wpdb;
     return $wpdb->get_results(

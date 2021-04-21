@@ -62,7 +62,6 @@
             );
 
             $dayObjects = archiveArbDaysQuery(get_current_user_id());
-//            testHelper($dayObjects);
             foreach ($dayObjects as $count) {
                 $arbid = $count->arbid;
                 $repeatNum =$count->arbrepeat;
@@ -151,6 +150,7 @@
 //                            echo '<br/>' . $newLink;
                             $submitedDayCount = isset($dayCountArb[$dastoor_ID.'-'.$arbrepeat]['count'])?$dayCountArb[$dastoor_ID.'-'.$arbrepeat]['count']:0;
                             $submitedDaydate = isset($dayCountArb[$dastoor_ID.'-'.$arbrepeat]['date'])?$dayCountArb[$dastoor_ID.'-'.$arbrepeat]['date']:0;
+
                             if ($submitedDayCount < $arbDuration) {
                                 ?>
                                 <li class="arbayiin-title arbayiin-title__current" data-id="<?php echo $dastoor_ID; ?>">
@@ -161,14 +161,15 @@
                                         if (!($submitedDayCount)) {
                                             echo 'هنوز اربعین را آغاز نکرده اید';
                                         } else {
-//                                                var_dump($dayCountArb);
-//                                                var_dump($dastoor_ID);
-//                                                var_dump($arbrepeat);
-//                                                echo $submitedDayCount;
-//                                            $optionName = get_current_user_id() . '-' . get_the_ID() . '-period';
-//                                            $days = get_option($optionName);
+                                            $optionName = get_current_user_id() . '-' . $dastoor_ID . '-period';
+                                            $days = get_option($optionName);
+//                                            testHelper($days);
+                                            $lastDate = getLastDateSubmited(get_current_user_id(), $dastoor_ID, $arbrepeat);
+//                                            testHelper(jdate('Y/m/d', ($lastDate[0]->maxdate) + 86400));
 //                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . $days[$submitedDayCount];
-                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . jdate('l, Y/m/d', $submitedDaydate + (86400 * $submitedDayCount));
+//                                            testHelper(jdate('Y/m/d', $submitedDaydate));
+                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . jdate('l, Y/m/d', $lastDate[0]->maxdate + 86400);
+//                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . jdate('l, Y/m/d', $submitedDaydate + (86400 * $submitedDayCount));
                                         }
                                         ?>
                                     </div>
