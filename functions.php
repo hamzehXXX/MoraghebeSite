@@ -31,8 +31,8 @@ require get_theme_file_path('/classes/NumberToWord.php');
 function moraghebeh_files() {
 //    wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
     wp_enqueue_style('font-awsomesss', get_theme_file_uri('/css/font-awesome/css/font-awesome.min.css'), NULL, '1.2');
-    $styleVersion = '3.4';
-    $jQueryVersion = '3.2';
+    $styleVersion = '3.5';
+    $jQueryVersion = '3.3';
     wp_enqueue_style('moraghebeh_main_styles', get_stylesheet_uri(), NULL, $styleVersion);
 
 //    wp_enqueue_style('custom-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
