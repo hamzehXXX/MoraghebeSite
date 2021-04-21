@@ -50,7 +50,7 @@ if (!is_user_logged_in() AND
 //
 //
 //######## Display All Khadem-mards for admin-mard
-        if ($currentUserId == 93 or $currentUserId == 245) {
+        if ($currentUserId == 93 or $currentUserId == 245 or $currentUserId == 1) {
             ?>
             <div class="shagerdan-container">
 
