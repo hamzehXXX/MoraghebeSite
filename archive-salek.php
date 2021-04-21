@@ -353,7 +353,7 @@ if (!is_user_logged_in() AND
 
 //        die;
 
-
+        if ($currentUserId != 93 or $currentUserId != 245 or $currentUserId != 1) {
             $khademIDArray = [];
             $args = array(
                 'role__in' => ['khadem-mard', 'khadem-zan', 'admin', 'administrator'],
@@ -412,7 +412,7 @@ if (!is_user_logged_in() AND
                 array_push($khademIDArray, $user -> ID);
             }
             echo '</ul>';
-
+}
         ?>
 
     </div>
