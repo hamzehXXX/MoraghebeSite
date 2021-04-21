@@ -31,8 +31,8 @@ require get_theme_file_path('/classes/NumberToWord.php');
 function moraghebeh_files() {
 //    wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
     wp_enqueue_style('font-awsomesss', get_theme_file_uri('/css/font-awesome/css/font-awesome.min.css'), NULL, '1.2');
-    $styleVersion = '3.0';
-    $jQueryVersion = '3.0';
+    $styleVersion = '3.4';
+    $jQueryVersion = '3.2';
     wp_enqueue_style('moraghebeh_main_styles', get_stylesheet_uri(), NULL, $styleVersion);
 
 //    wp_enqueue_style('custom-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
@@ -344,9 +344,13 @@ function my_custom_columns($column) {
         $khademUserObj = !is_string(get_field('khademid', $post->ID))?get_field('khademid', $post->ID):get_userdata(get_field('khademid', $post->ID));
 //        testHelper($khademUserObj);
 
-		$firstName = $khademUserObj->data->display_name;
-//		$lastName = $khademUserObj->data->display_name;
 
+//		testHelper($khademUserObj);
+//		$lastName = $khademUserObj->data->display_name;
+        foreach ($khademUserObj as $khadem) {
+            $firstName = $khadem->data->display_name;
+
+            echo ' ( ';
 		?> 
 		<a href="<?php echo get_admin_url($post->ID)
 		        . 'edit.php?s&post_status=all&post_type=salek&m=0&khadem='
@@ -354,6 +358,8 @@ function my_custom_columns($column) {
 		<?php
         echo $firstName;
 		echo '</a>';
+		echo ' ) ';
+		}
     } else {
         echo '';
     }

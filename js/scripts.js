@@ -12,6 +12,7 @@ import Rate from "./modules/Rate";
 import Profile from "./modules/Profile";
 import Amal from "./modules/Amal";
 import ResultsForm from "./modules/ResultsForm";
+import ShagerdanTable from "./modules/ShagerdanTable";
 
 // Instantiate a new object using our modules/classes
 var mobileMenu = new MobileMenu();
@@ -23,3 +24,4 @@ var rate = new Rate();
 var profile = new Profile();
 var amal = new Amal();
 var resulstsForm = new ResultsForm();
+var shagerdanTable = new ShagerdanTable();

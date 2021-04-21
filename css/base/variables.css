@@ -3,3 +3,11 @@ $mainYellow: #F4D35E;
 $mainBlue: #0D3B66;
 $lightOrange: #EE964B;
 $darkOrange: #F95738;
+
+$base-spacing-unit: 24px;
+$half-spacing-unit: $base-spacing-unit / 2;
+
+$color-alpha: #1772FF;
+$color-form-highlight: #EEEEEE;
+$breakpoint: 750px;
+$heading-color: #43BAC0;
