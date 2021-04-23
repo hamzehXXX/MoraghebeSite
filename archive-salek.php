@@ -397,9 +397,6 @@ if (!is_user_logged_in() AND
                             )
                         )
                     );
-//                echo '<pre>';
-//                print_r(get_posts($args));
-//                echo '</pre>';
                 }
 
 
