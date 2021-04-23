@@ -1,38 +1,38 @@
 @font-face {
     font-family: iransansweb;
-    src: url(../../fonts/IRANSansWeb.ttf);
+    src: url(fonts/IRANSansWeb.ttf);
 }
 @font-face {
     font-family: iransanswebbold;
-    src: url(../../fonts/IRANSansWeb_Bold.ttf);
+    src: url(fonts/IRANSansWeb_Bold.ttf);
 }
 @font-face {
     font-family: iransansweblight;
-    src: url(../../fonts/IRANSansWeb_Light.ttf);
+    src: url(fonts/IRANSansWeb_Light.ttf);
 }
 @font-face {
     font-family: iransanswebmedium;
-    src: url(../../fonts/IRANSansWeb_Medium.ttf);
+    src: url(fonts/IRANSansWeb_Medium.ttf);
 }
 
 @font-face {
     font-family: iransanswebultralight;
-    src: url(../../fonts/IRANSansWeb_UltraLight.ttf);
+    src: url(fonts/IRANSansWeb_UltraLight.ttf);
 }
 @font-face {
     font-family: web_yekan;
-    src: url(../../fonts/web_Yekan.woff);
+    src: url(fonts/web_Yekan.woff);
 }
 
 @font-face {
     font-family: iranyekanwebbold;
-    src: url(../../fonts/iranyekanwebbold.ttf);
+    src: url(fonts/iranyekanwebbold.ttf);
 }@font-face {
     font-family: iranyekanwebboldfanum;
-    src: url(../../fonts/iranyekanwebboldfanum.ttf);
+    src: url(fonts/iranyekanwebboldfanum.ttf);
 }@font-face {
     font-family: iranyekanwebregularfanum;
-    src: url(../../fonts/iranyekanwebregularfanum.ttf);
+    src: url(fonts/iranyekanwebregularfanum.ttf);
 }
 .edit-profile {
     font-size: .9rem;
