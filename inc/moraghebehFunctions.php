@@ -6,7 +6,6 @@ function setStartDate() {
     $optionName = get_current_user_id() . '-' . get_the_ID();
     $startDate = get_option($optionName);
     // display startDate select datepicker if not set yet
-//    echo '<form method="post">';
     echo '<label for="startDate" >قبل از ثبت اعمال, ابتدا لازم است  <strong style="color: darkgreen">تاریخ شروع</strong> اربعین را مشخص نمایید: </label>';
     ?>
     <br/>
@@ -35,19 +34,8 @@ function setStartDate() {
         <li>سپس روی <span style="background-color: green; color: white; border: #5A5A5A 1px solid; padding: 0px 3px 3px; height: 4px">ثبت تاریخ شروع </span> کلیک کنید.</li>
     </ol>
     <?php
-//    echo '</form>';
-//    echo '<div class="start-date__alert"></div>';
-
 
     echo '<hr class="section-break"/>';
-//    if(isset($_POST['sbmt'])) {
-//        $startDate = $startDate = $_POST['drddd'];
-//
-//        return $startDate;
-//    } else {
-//        $startDate = 'لطفا حتما تاریخ شروع را مشخص بفرمایید';
-//    }
-//    echo $startDate;
 
     return $startDate;
 

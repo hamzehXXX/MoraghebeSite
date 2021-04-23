@@ -52,12 +52,23 @@ while(have_posts()) {
                 $dastoor_title = $dastoor->post_title;
                 $dastoor_link = $dastoor->guid;
                 $dastoor_ID = $dastoor->ID;
-
-                if ($dastoor) {
+                $duration = intval(get_field('arbayiin-duration', $dastoor_ID));
+                 if ($dastoor) {
                     $post = $dastoor;
                     $repeattext = $repeat==1?'':'(' . 'تکرار ' . $repeat . ')';
+                    $dayInfo = getDayInfoInByUserId($salekID, $dastoor_ID, $repeat);
+                    $titleColor = 'green';
+                    $resCount = intval($dayInfo[0]->count);
+                    $lastSubmitedDay = $resCount?jdate("l, Y/m/d", $dayInfo[0]->maxdate):'شروع نشده';
+//                    testHelper($dayInfo[0]->count . ' vs ' . '(' . $duration  . ')');
+
                     ?>
-                    <div class="arbayiin-results-title display-table" id="display-table" data-arbid="<?php echo $dastoor_ID.'and'.$repeat;?>"><?php echo $dastoor_title . $repeattext;?></div>
+                    <div class="arbayiin-results-title display-table" style="color: <?php echo $titleColor?>" id="display-table" data-arbid="<?php echo $dastoor_ID.'and'.$repeat;?>">
+                        <?php
+                        echo $dastoor_title . $repeattext;
+                        echo '<div style="width: 30%; font-size: 0.8rem; color: #989a9e; ">' . $dayInfo[0]->count . '/' . $duration . ' - ' . $lastSubmitedDay . '</div>';
+                        ?>
+                    </div>
 
                     <?php
                 setup_postdata($post); // Set the Main Query to the 'arbayiin'
@@ -88,14 +99,12 @@ while(have_posts()) {
                     echo get_template_part( 'template-parts/content', 'resultsform', $ressultsArgs);
                     echo '<div class="display-table" id="display-table" data-arbid="' . $dastoor_ID . 'and'.$repeat .'">' . 'بستن جدول'. '</div>';
                     echo '</div>';
-                    echo '<hr class="section-break"/>';
+                    echo '<hr class=""/>';
 
-                wp_reset_postdata();                            // Sets the Main Query back to the 'salek'
-                    ?>
-
-                    <?php
+                wp_reset_postdata();    // Sets the Main Query back to the 'salek'
 
                 }
+
             }
         }
 
