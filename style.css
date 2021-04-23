@@ -1709,7 +1709,7 @@ body.admin-bar .search-overlay {
   }
 .event-summary__month {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 300;
     text-transform: uppercase;
   }
