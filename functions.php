@@ -363,9 +363,9 @@ function my_custom_columns($column) {
     } else {
         echo '';
     }
-    if ($column == 'myarn19') {
-        echo 'hello';
-    }
+//    if ($column == 'myarn19') {
+//        echo 'hello';
+//    }
 
 
     if($column == 'city') {

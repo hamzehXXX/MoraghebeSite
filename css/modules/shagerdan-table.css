@@ -58,7 +58,7 @@
     width:100%;
     z-index: 9;
     /*padding: 10px 0px 10px  0px;*/
-    background: #3207ff;
+    background: #2e674d;
     /*padding:($half-spacing-unit * 1.5) 0;*/
 @mixin atMobile {
     /*width: 500px;*/

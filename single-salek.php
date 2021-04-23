@@ -55,8 +55,9 @@ while(have_posts()) {
 
                 if ($dastoor) {
                     $post = $dastoor;
+                    $repeattext = $repeat==1?'':'(' . 'تکرار ' . $repeat . ')';
                     ?>
-                    <div class="arbayiin-results-title"><?php echo $dastoor_title;?></div>
+                    <div class="arbayiin-results-title display-table" id="display-table" data-arbid="<?php echo $dastoor_ID.'and'.$repeat;?>"><?php echo $dastoor_title . $repeattext;?></div>
 
                     <?php
                 setup_postdata($post); // Set the Main Query to the 'arbayiin'
@@ -73,14 +74,27 @@ while(have_posts()) {
                         $result[$element->dayid]['results'][$element->amalid]['result_matni'] = $element->result_matni;
 //                        echo $element->dayid . '<br/>';
                     }
+
+                    echo '<div class="hide display-table__content" id="' . $dastoor_ID . 'and' . $repeat . '">';
                         $resultsTable = new ResultsTable($salekID);     // Instantiate ResultsTable class
                         $resultsTable->showResultsTable('', $dastoor_ID, $result);      // Show the results table
 //                        testHelper($resultsTable->showResultsTable('', $dastoor_ID, $result));
+                    $ressultsArgs = array(
+                              'name' => $name,
+                              'userid' => $salekID,
+                              'arbid' => $dastoor_ID,
+                              'repeat' => $repeat
+                    );
+                    echo get_template_part( 'template-parts/content', 'resultsform', $ressultsArgs);
+                    echo '<div class="display-table" id="display-table" data-arbid="' . $dastoor_ID . 'and'.$repeat .'">' . 'بستن جدول'. '</div>';
+                    echo '</div>';
                     echo '<hr class="section-break"/>';
+
                 wp_reset_postdata();                            // Sets the Main Query back to the 'salek'
                     ?>
-                    <br/>
+
                     <?php
+
                 }
             }
         }

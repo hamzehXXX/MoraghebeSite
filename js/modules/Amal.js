@@ -11,6 +11,7 @@ class Amal {
         $(".delete-results").on("click",  this.deleteDispatcher.bind(this));
         $("button#submit-date").on("click",  this.sabtDate.bind(this));
         $(".display-arbcontent").on("click", this.displayContent.bind(this));
+        $(".display-table").on("click", this.displayTable.bind(this));
         $("#startDate").on("click", this.startDateClick.bind(this));
         $("i#amuzeh").on("click", this.displayAmuzesh.bind(this));
 
@@ -19,6 +20,17 @@ class Amal {
     startDateClick() {
         window.scrollTo(0,200);
     }
+
+    displayTable(e) {
+        // $("div#display-table").toggleClass("hide");
+        $("div#display-table__content").toggleClass("hide");
+        $("div#display-table__hide").toggleClass("hide");
+        var arbid = $(e.target).data('arbid');
+        console.log(arbid);
+        console.log($("div#" + arbid).attr('id'));
+        $('div#' + arbid).toggleClass("hide");
+    }
+
     displayContent() {
         // alert("heey");
         $("div#arb-content").toggleClass("hide");
@@ -45,7 +57,6 @@ class Amal {
             $(".arbayiin-table, .generic-content").removeClass("hide-table");
             // $(".start-date__alert").text(startDate);
             $(".current-date").text('روز اوّل' + ' (' + startDate + ')');
-
         }
 
         var startDateInfo = {

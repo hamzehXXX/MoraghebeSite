@@ -456,7 +456,7 @@ th {
 /* SASS and Global'ish Stuff */
 body {
   color: #333;
-  font-family: 'Roboto', sans-serif;
+  font-family: iranyekanwebregularfanum, 'Roboto', sans-serif;
   overflow-x: hidden;
   position: relative;
 }
@@ -1609,6 +1609,10 @@ body.admin-bar .search-overlay {
 .headline--post-title a:hover {
     text-decoration: underline;
   }
+.generic-content {
+  font-family: iranyekanwebregularfanum;
+
+}
 .generic-content p, .generic-content li {
     /*font-size: 1.15rem;*/
   }
@@ -1854,39 +1858,39 @@ margin: 20px 0;
   }
 @font-face {
     font-family: iransansweb;
-    src: url(fonts/IRANSansWeb.ttf);
+    src: url(../../fonts/IRANSansWeb.ttf);
 }
 @font-face {
     font-family: iransanswebbold;
-    src: url(fonts/IRANSansWeb_Bold.ttf);
+    src: url(../../fonts/IRANSansWeb_Bold.ttf);
 }
 @font-face {
     font-family: iransansweblight;
-    src: url(fonts/IRANSansWeb_Light.ttf);
+    src: url(../../fonts/IRANSansWeb_Light.ttf);
 }
 @font-face {
     font-family: iransanswebmedium;
-    src: url(fonts/IRANSansWeb_Medium.ttf);
+    src: url(../../fonts/IRANSansWeb_Medium.ttf);
 }
 @font-face {
     font-family: iransanswebultralight;
-    src: url(fonts/IRANSansWeb_UltraLight.ttf);
+    src: url(../../fonts/IRANSansWeb_UltraLight.ttf);
 }
 @font-face {
     font-family: web_yekan;
-    src: url(fonts/web_Yekan.woff);
+    src: url(../../fonts/web_Yekan.woff);
 }
 @font-face {
     font-family: iranyekanwebbold;
-    src: url(fonts/iranyekanwebbold.ttf);
+    src: url(../../fonts/iranyekanwebbold.ttf);
 }
 @font-face {
     font-family: iranyekanwebboldfanum;
-    src: url(fonts/iranyekanwebboldfanum.ttf);
+    src: url(../../fonts/iranyekanwebboldfanum.ttf);
 }
 @font-face {
     font-family: iranyekanwebregularfanum;
-    src: url(fonts/iranyekanwebregularfanum.ttf);
+    src: url(../../fonts/iranyekanwebregularfanum.ttf);
 }
 .edit-profile {
     font-size: .9rem;
@@ -2518,7 +2522,7 @@ table td .firstcol {
     margin-right: 10px;
 }
 .results-form__ui{
-    background: #BEBEBE;
+    font-family: iranyekanwebregularfanum;
 }
 .amal-js{
     cursor: pointer;
@@ -2911,6 +2915,10 @@ table.amal-table {
 .amal-table tbody {
     border-collapse:separate;
     border-spacing:3px;
+}
+.display-table {
+    color: #d8226b;
+    cursor: pointer;
 }
 table.amal-table thead th:nth-child(1) {
     width: 4%;
@@ -4088,7 +4096,7 @@ pre[class*="language-"] {
     width:100%;
     z-index: 9;
     /*padding: 10px 0px 10px  0px;*/
-    background: #3207ff;
+    background: #2e674d;
 }
 /*padding:($half-spacing-unit * 1.5) 0;*/
 @media (max-width: 529px) {
@@ -4184,47 +4192,4 @@ pre[class*="language-"] {
 /*@media all and (min-width: 1500px) {  .shagerdan-table-data, .shagerdan-header__item   { font-size:3.2em;  } }*/
 /*@media all and (min-width: 1600px) {  .shagerdan-table-data, .shagerdan-header__item   { font-size:3.4em;  } }*/
 /*@media all and (min-width: 1700px) {  .shagerdan-table-data, .shagerdan-header__item   { font-size:3.6em;  } }*/
-.flex-container
-{
-    display: flex;
-
-    flex-flow:row;
-    height:100%;
-    position:relative;
-    width:100%;
-    overflow-x: scroll;
-
-
-    /*flex-wrap:wrap;*/
-}
-.box
-{
-    padding: 20px;
-    color:white;
-    font-size:22px;
-    background-color: crimson;
-    border:1px solid white;
-    flex:1;
-    -webkit-flex:1;
-    text-align:center;
-    min-width:200px;
-
-
-
-}
-.splash
-
-{
-    background-color: #d8226b;
-    width:100%;
-    background-size:cover;
-    background-position:50% 50%;
-    background-repeat: no-repeat;
-    transition: all 0.6s ease;
-    flex:none;
-}
-.flex1:hover
-{
-    flex:4;
-    -webkit-flex:4;
-}
+/*@import "modules/responsive-flextable.css";*/

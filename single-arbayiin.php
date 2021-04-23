@@ -31,7 +31,7 @@ $ruzNumber = new NumberToWord();
         $result[$element->dayid]['results'][$element->amalid]['result_point'] = $element->result_point;
         $result[$element->dayid]['results'][$element->amalid]['result_matni'] = $element->result_matni;
     }
-
+//testHelper($result);
     $amalSize = sizeof($result);
 //********************************       [ PAGE BANNER ]       ********************************* START >>>>>>
     ?>
@@ -89,7 +89,7 @@ $ruzNumber = new NumberToWord();
             <div style="margin-right: 15px">توضیحات اربعین: </div>
             <div style="margin-right: 15px" id="arb-excerpt"><?php the_excerpt(); ?></div>
             <div class="display-arbcontent show-more" style="margin-right: 15px; cursor: pointer; color: blue;" id="display-arbcontent">بیشتر...</div>
-        <div class="hide" style="margin-right: 15px" id="arb-content"><?php the_content(); ?></div>
+        <div class="hide" style="margin-right: 15px; font-family: iranyekanwebregularfanum;" id="arb-content"><?php the_content(); ?></div>
         <div class="display-arbcontent show-less hide" style="margin-right: 15px; cursor: pointer; color: blue;" id="display-arbcontent">بستن توضیحات</div>
 
 <!--            /* If amalsize is less than arbayiin duration show the inputs for arbayiins */-->

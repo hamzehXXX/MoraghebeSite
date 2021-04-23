@@ -12,7 +12,10 @@ table.amal-table {
     border-spacing:3px;
 }
 
-
+.display-table {
+    color: #d8226b;
+    cursor: pointer;
+}
 
 table.amal-table thead th:nth-child(1) {
     width: 4%;
