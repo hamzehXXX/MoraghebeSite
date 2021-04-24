@@ -28,6 +28,7 @@ $lastResultForm = $resultsForm[sizeof($resultsForm) - 1];
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     if (get_current_user_id() == 1) {
+        testHelper($userID);
         testHelper($resultsForm);
     }
     //********************************       [ RESULTS FORM ]       *********************************   >>>>>>
