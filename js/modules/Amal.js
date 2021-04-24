@@ -14,6 +14,15 @@ class Amal {
         $(".display-table").on("click", this.displayTable.bind(this));
         $("#startDate").on("click", this.startDateClick.bind(this));
         $("i#amuzeh").on("click", this.displayAmuzesh.bind(this));
+        $("div#showFinished").on("click", this.showFinishedArbs.bind(this));
+
+    }
+
+    showFinishedArbs() {
+        // alert("hey");
+        $("div#salekinTable").toggleClass("haaseb-invisible");
+        $("div#showFinished").toggleClass("haaseb-invisible");
+        // $("div#showCurrentARbs").toggleClass("haaseb-invisible");
 
     }
 

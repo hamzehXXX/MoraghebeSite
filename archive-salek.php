@@ -26,6 +26,15 @@ if (!is_user_logged_in() AND
         </div>
     </div></a>
     <div class="container container--narrow page-section">
+        <div class="metabox metabox--position-up metabox--with-home-link">
+            <p>
+                 <div class="finishedArbToggle metabox__blog-home-link" id="showFinished" style="background-color: #dba88a;" >نمایش اربعینیات پایان یافته</div>
+<!--                <span class="metabox__main">اتمام یافته</span>-->
+            <div class="haaseb-invisible finishedArbToggle metabox__blog-home-link" style="background-color: #8EBF96" id="showFinished">نمایش اربعینیات جاری</div>
+        </div>
+
+        <div id="showFinished" style="color: #8EBF96">اربعینیات جاری: </div>
+        <div class="haaseb-invisible" id="showFinished" style="color:#dba88a;">اربعینیات پایان یافته: </div>
         <?php
 
 
@@ -52,6 +61,7 @@ if (!is_user_logged_in() AND
 //######## Display All Khadem-mards for admin-mard
         if ($currentUserId == 93 or $currentUserId == 245 or $currentUserId == 1) {
             ?>
+
             <div class="shagerdan-container">
 
                 <div class="shagerdan-table">
@@ -119,6 +129,7 @@ if (!is_user_logged_in() AND
                     </div>
                 </div>
             </div>
+
             <?php
         }
 
@@ -176,16 +187,26 @@ if (!is_user_logged_in() AND
             $date = $dayInfo -> maxdate;
             $submitdate = $dayInfo -> submitdate;
             $dayCount = $dayInfo -> count;
-
-            ?>
-            <div class="shagerdan-table-row">
-                <div class="shagerdan-table-data"><a style="text-decoration: none;" href="<?php echo get_permalink($khademSalekinPostObj->ID); ?>"><?php echo $khademName; ?></a></div>
-                <div class="shagerdan-table-data"><?php echo get_the_title($arbid) . $repeat; ?></div>
-                <div class="shagerdan-table-data"><a style="text-decoration: none;" href="<?php echo get_permalink($salek->ID); ?>"><?php echo $salekUserObj -> data -> display_name; ?></a></div>
-                <div class="shagerdan-table-data"><?php echo(($dayCount ? jdate('Y/m/d', $date) : '<span style="color: #ff0000">شروع نشده</span>') . ' | ' . $dayCount . '/' . $duration); ?></div>
-            </div>
-            <?php
-
+            $finishedColor = '';
+            $hide = '';
+            if ($dayCount >= $duration) {
+//                $finishedColor = "#F0F7EE";
+                $hide = "haaseb-invisible";
+                $display = "none;";
+            }
+                ?>
+                <div class="shagerdan-table-row <?php echo $hide;?>" style="background-color: <?php echo $finishedColor;?>" id="salekinTable">
+                    <div class="shagerdan-table-data"><a style="text-decoration: none;"
+                                                         href="<?php echo get_permalink($khademSalekinPostObj -> ID); ?>"><?php echo $khademName; ?></a>
+                    </div>
+                    <div class="shagerdan-table-data"><?php echo get_the_title($arbid) . $repeat; ?></div>
+                    <div class="shagerdan-table-data"><a style="text-decoration: none;"
+                                                         href="<?php echo get_permalink($salek -> ID); ?>"><?php echo $salekUserObj -> data -> display_name; ?></a>
+                    </div>
+                    <div class="shagerdan-table-data"><?php echo(($dayCount ? jdate('Y/m/d', $date) : '<span style="color: #ff0000">شروع نشده</span>') . ' | ' . $dayCount . '/' . $duration); ?></div>
+                </div>
+                <?php
+//            }
         }
 
         function displayResultsForSaleksInMahfel($khademID, $khademName, $khademSalekinPostObj) {
@@ -203,14 +224,28 @@ if (!is_user_logged_in() AND
                         $duration = get_field('arbayiin-duration', $arbayiin[0]);
                         $submitdate = $dayInfo->submitdate;
                         $dayCount = $dayInfo->count;
-                        ?>
-                        <div class="shagerdan-table-row">
-                            <div class="shagerdan-table-data"><a style="text-decoration: none;" href="<?php echo get_permalink($khademSalekinPostObj->ID); ?>"><?php echo $khademName; ?></a></div>
-                            <div class="shagerdan-table-data"><?php echo get_the_title($arbayiin[0]) . $finalRepeat; ?></div>
-                            <div class="shagerdan-table-data"><a style="text-decoration: none;" href="<?php echo get_permalink($salekid); ?>"><?php echo get_the_title($salekid); ?></a></div>
-                            <div class="shagerdan-table-data"><?php echo (($dayCount?jdate('Y/m/d', $date):'<span style="color: #ff0000">شروع نشده</span>') . ' | ' . $dayCount . '/'.$duration); ?></div>
-                        </div>
-                        <?php
+                        $finishedColor = '';
+                        $hide = '';
+                        if ($dayCount >= $duration) {
+//                            $finishedColor = "#F0F7EE";
+                            $hide = "haaseb-invisible";
+                            $display = "none;";
+                            $idFinished = "";
+                        }
+
+                            ?>
+                            <div class="shagerdan-table-row <?php echo $hide;?>" style="background-color: <?php echo $finishedColor;?>"  id="salekinTable">
+                                <div class="shagerdan-table-data"><a style="text-decoration: none;"
+                                                                     href="<?php echo get_permalink($khademSalekinPostObj -> ID); ?>"><?php echo $khademName; ?></a>
+                                </div>
+                                <div class="shagerdan-table-data"><?php echo get_the_title($arbayiin[0]) . $finalRepeat; ?></div>
+                                <div class="shagerdan-table-data"><a style="text-decoration: none;"
+                                                                     href="<?php echo get_permalink($salekid); ?>"><?php echo get_the_title($salekid); ?></a>
+                                </div>
+                                <div class="shagerdan-table-data"><?php echo(($dayCount ? jdate('Y/m/d', $date) : '<span style="color: #ff0000">شروع نشده</span>') . ' | ' . $dayCount . '/' . $duration); ?></div>
+                            </div>
+                            <?php
+//                        }
                     }
                 }
 

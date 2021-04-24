@@ -14,7 +14,10 @@
 /*h1,h2,h3,h4,h5,h6 {*/
 /*    margin:0;*/
 /*}*/
-
+.finishedArbToggle {
+    cursor: pointer;
+    color: #5A4F87;
+}
 .shagerdan-container {
     display: -webkit-box;
     display: -moz-box;
@@ -34,6 +37,10 @@
     /*min-height:100vh;*/
     overflow-x: scroll;
 
+}
+
+.haaseb-invisible{
+    display: none!important;
 }
 
 .shagerdan-table {
@@ -136,6 +143,8 @@
  }
 
 }
+
+
 
 /*@media all and (min-width: 50px)   {  .shagerdan-table-data, .shagerdan-header__item   { font-size:0.1em;  } }*/
 /*@media all and (min-width: 100px)  {  .shagerdan-table-data, .shagerdan-header__item   { font-size:0.2em;  } }*/

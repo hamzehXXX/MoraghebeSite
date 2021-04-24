@@ -4057,6 +4057,10 @@ pre[class*="language-"] {
 /*h1,h2,h3,h4,h5,h6 {*/
 /*    margin:0;*/
 /*}*/
+.finishedArbToggle {
+    cursor: pointer;
+    color: #5A4F87;
+}
 .shagerdan-container {
     display: -webkit-flex;
     font-family: iranyekanwebregularfanum;
@@ -4073,6 +4077,9 @@ pre[class*="language-"] {
     /*min-height:100vh;*/
     overflow-x: scroll;
 
+}
+.haaseb-invisible{
+    display: none!important;
 }
 .shagerdan-table {
     /*min-width: 100%;*/

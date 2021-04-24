@@ -23,7 +23,7 @@ while(have_posts()) {
 
     <div class="container container--narrow page-section">
         <div class="metabox metabox--position-up metabox--with-home-link">
-            <p><a class="metabox__blog-home-link" href="<?php echo site_url('/salek'); ?>"><i class="fa fa-home" aria-hidden="true"></i> شاگردان </a> <span class="metabox__main"><?php  the_title(); ?></span>
+            <p><a class="metabox__blog-home-link" href="<?php echo site_url('/salek'); ?>"><i class="fa fa-home" aria-hidden="true"></i> شاگردان </a> <span class="metabox__main"><?php  the_title(); ?></span></p>
         </div>
 
         <div class="generic-content">
@@ -109,6 +109,20 @@ while(have_posts()) {
             }
         }
 
+//        if ($ourCurrentUser->ID == 1)
+        $resultsForm = get_posts(array(
+            'post_type' => 'resultform',
+            'posts_per_page' => -1,
+            'author' => $salekID,
+        )
+        );
+//        echo '<h2>' . 'همه ی فرم ها' . '</h2>';
+//        foreach ($resultsForm as $form) {
+//            echo $form->post_title . ' ' . get_userdata($form->post_author)->display_name . ' ' . $form->post_date['Y'];
+//            echo '<hr/>';
+//
+//        }
+//        testHelper($resultsForm);
         //======================================================================
         //          BEFORE APPLICATION ARBAYIINS
         //======================================================================

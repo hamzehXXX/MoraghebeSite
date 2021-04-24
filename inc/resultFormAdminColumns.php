@@ -24,3 +24,10 @@ function ressultform_custom_columns($column) {
 
 
 }
+
+add_filter( 'manage_edit-ressultform_sortable_columns', 'ressultform_sortable_columns');
+function ressultform_sortable_columns( $columns ) {
+    $columns['salek'] = 'سالک';
+    $columns['repeat'] = 'تکرار';
+    return $columns;
+}
