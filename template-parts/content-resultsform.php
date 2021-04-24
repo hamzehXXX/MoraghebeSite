@@ -27,30 +27,23 @@ if (empty($resultsForm)){
 $lastResultForm = $resultsForm[sizeof($resultsForm) - 1];
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    foreach ($resultsForm as $currentResForm) {
-        //********************************       [ RESULTS FORM ]       *********************************   >>>>>>
-        $resultFormID = $currentResForm -> ID;
+    
+    //********************************       [ RESULTS FORM ]       *********************************   >>>>>>
+    $resultFormID = $lastResultForm->ID;
         ?>
         <div class="results-form__ui">
-            <div class="display-arbcontent show-more" style="margin-right: 15px; cursor: pointer; color: blue;"
-                 id="display-arbcontent">فرم نتایج <span><?php the_title(); ?></span></div>
+            <div class="display-arbcontent show-more" style="margin-right: 15px; cursor: pointer; color: blue;" id="display-arbcontent">فرم نتایج <span><?php the_title(); ?></span></div>
 
             <div class="hide" style="margin-right: 15px" id="arb-content">
-                <h5 style="color: #c32929">حالات <?php echo $name; ?> در طی این اربعین</h5>
-                <p><?php the_field('halat', $resultFormID) ?></p>
-                <h5 style="color: #c32929">وضعیت <?php echo $name; ?> در طی این اربعین از حیث «خوف و رجا» و «قبض و
-                    بسط»</h5>
-                <p><?php the_field('vaziyat', $resultFormID) ?></p>
-                <h5 style="color: #c32929">خواب ها و رویاهای صادقه </h5>
-                <p><?php the_field('khab', $resultFormID) ?></p>
+                <h5 style="color: #c32929">حالات <?php echo $name; ?> در طی این اربعین</h5><p><?php the_field('halat', $resultFormID) ?></p>
+                <h5 style="color: #c32929">وضعیت <?php echo $name; ?> در طی این اربعین از حیث «خوف و رجا» و «قبض و بسط»</h5><p><?php the_field('vaziyat', $resultFormID) ?></p>
+                <h5 style="color: #c32929">خواب ها و رویاهای صادقه </h5><p><?php the_field('khab', $resultFormID) ?></p>
             </div>
             <br/>
-            <div class="display-arbcontent show-less hide" style="margin-right: 15px; cursor: pointer; color: blue;"
-                 id="display-arbcontent">بستن فرم
-            </div>
+            <div class="display-arbcontent show-less hide" style="margin-right: 15px; cursor: pointer; color: blue;" id="display-arbcontent">بستن فرم</div>
         </div>
         <?php
-    }
+
     ##################################################################################################################
 }
 ?>
