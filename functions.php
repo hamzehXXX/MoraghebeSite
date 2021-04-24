@@ -25,6 +25,7 @@ require get_theme_file_path('/classes/ResultsTable.php');
 require get_theme_file_path('/classes/ArchiveArbayiin.php');
 require get_theme_file_path('/classes/CONSTANTS.php');
 require get_theme_file_path('/classes/NumberToWord.php');
+require get_theme_file_path('/inc/resultFormAdminColumns.php');
 
 
 
@@ -87,6 +88,7 @@ function moraghebeh_features() {
 }
 
 add_action('after_setup_theme', 'moraghebeh_features');
+
 
 
 add_filter( 'manage_edit-salek_sortable_columns', 'smashing_salek_sortable_columns');
@@ -303,39 +305,6 @@ function my_page_columns($columns) {
         'khadem' => 'خادم',
         'arb_after_app' => 'اربعینیات جاری',
     );
-    global $post;
-    $counter = 0;
-//    while (have_rows('arb_after_app', $post->ID)){
-//        the_row();
-//        $column = 'arbafterapp'. $counter;
-//        $columns[$column] = get_sub_field('dastoor_takhsised')->post_title;
-//        $counter++;
-//    }
-//
-//    for ($i = 0; $i <70; $i++){
-//        $column = 'arbafterappsss'. $i;
-//        $columns[$column] = 'اربعین بید مرحوم بیدآبادی پنجم اربعین بید مرحوم بیدآبادی پنجم';
-//    }
-//
-//    $columns['myarn1'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn3'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn4'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn5'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn6'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn7'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn8'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn9'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn11'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn12'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn13'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn14'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn15'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn16'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn17'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn18'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn19'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-//    $columns['myarn20'] = 'اربعین بید مرحوم بیدآبادی پنجم';
-
     return $columns;
 }
 function my_custom_columns($column) {

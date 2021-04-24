@@ -6,15 +6,24 @@
 $name = $args['name'];
 $userID = $args['userid'];
 $arbayiinID = $args['arbid'];
+$repeat = $args['repeat'];
 $resultsForm = get_posts(array(
     'post_type' => 'resultform',
     'posts_per_page' => -1,
     'author' => $userID,
     'meta_key' => 'arbayiinid',
     'meta_query' => array(
-        'key' => 'arbayiinid',
-        'compare' => '=',
-        'value' =>  $arbayiinID
+        'relation' => 'OR',
+        array(
+            'key' => 'arbayiinid',
+            'compare' => '=',
+            'value' =>  $arbayiinID
+        ),
+        array(
+            'key' => 'repeat',
+            'compare' => '=',
+            'value' => $repeat
+        )
     )
 ));
 //testHelper($resultsForm);
