@@ -96,6 +96,7 @@ while(have_posts()) {
                               'arbid' => $dastoor_ID,
                               'repeat' => $repeat
                     );
+//                    testHelper($ressultsArgs);
                     echo get_template_part( 'template-parts/content', 'resultsform', $ressultsArgs);
                     echo '<div class="display-table" id="display-table" data-arbid="' . $dastoor_ID . 'and'.$repeat .'">' . 'بستن جدول'. '</div>';
                     echo '</div>';

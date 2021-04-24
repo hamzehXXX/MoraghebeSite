@@ -28,6 +28,7 @@ class Amal {
         var arbid = $(e.target).data('arbid');
         console.log(arbid);
         console.log($("div#" + arbid).attr('id'));
+        // console.log("useridddd: " + $(e.target).data('userid'));
         $('div#' + arbid).toggleClass("hide");
     }
 
