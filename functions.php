@@ -1127,57 +1127,16 @@ add_row('arb_after_app', $row, $post_id);
 
 }
 
-
-//add_action( 'quick_edit_custom_box', 'display_custom_quickedit_book', 10, 2 );
-
-function display_custom_quickedit_book( $column_name, $post_type ) {
-    static $printNonce = TRUE;
-    if ( $printNonce ) {
-        $printNonce = FALSE;
-        wp_nonce_field( plugin_basename( __FILE__ ), 'book_edit_nonce' );
+function my_update_posts() {
+    //$myposts = get_posts('showposts=-1');//Retrieve the posts you are targeting
+    $args = array(
+        'post_type' => 'salek',
+        'numberposts' => -1
+    );
+    $myposts = get_posts($args);
+    foreach ($myposts as $mypost){
+//        $mypost->post_title = $mypost->post_title.'';
+        wp_update_post( $mypost );
     }
-
-    ?>
-    <fieldset class="inline-edit-col-right inline-edit-book">
-      <div class="inline-edit-col column-<?php echo $column_name; ?>">
-        <label class="inline-edit-group">
-        <?php
-         switch ( $column_name ) {
-         case 'khadem':
-             echo wp_dropdown_categories(array(
-                     'taxonomy' => 'arbAmal'
-             ));
-             break;
-         case 'salek':
-             ?><span class="title">سالک</span><input name="inprint" type="checkbox" /><?php
-             break;
-         }
-        ?>
-        </label>
-      </div>
-    </fieldset>
-    <?php
 }
-
-//add_action( 'admin_head', 'kaz_stop_sidescroll' );
-
-function kaz_stop_sidescroll(){
-  ?>
-    <style type="text/css">
-        #adminmenuwrap  {
-        position: sticky!important;
-        /*top:-2px!important;*/
-        right: 0px;
-        }
-        #adminmenuback {
-        position: sticky!important;
-        /*top:-2px!important;*/
-        right: 0px;
-        }
-        table.fixed {
-            table-layout: auto;!important;
-            position: absolute;!important;
-        }
-    </style>
-  <?php
-}
+add_action( 'wp_loaded', 'my_update_posts' );

@@ -161,7 +161,9 @@
                                         if (!($submitedDayCount)) {
                                             echo 'هنوز اربعین را آغاز نکرده اید';
                                         } else {
+
                                             $lastDate = getLastDateSubmited(get_current_user_id(), $dastoor_ID, $arbrepeat);
+
                                             echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . jdate('l, Y/m/d', $lastDate[0]->maxdate + 86400);
 //                                            echo 'روز ' . ($submitedDayCount<41?CONSTANTS ::getDays()[$submitedDayCount]: $ruzNumber->numberToWords($submitedDayCount+1)) . ' | ' . jdate('l, Y/m/d', $submitedDaydate + (86400 * $submitedDayCount));
                                         }
@@ -232,7 +234,7 @@
             ?>
             </ul>	
 
-			<?php wp_reset_postdata(); 
+			<?php wp_reset_postdata();
 
 
 			?>
