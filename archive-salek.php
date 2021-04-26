@@ -285,8 +285,9 @@ if (!is_user_logged_in() AND
                 'meta_query' => array(
                     array(
                         'key' => 'khademid',
-                        'compare' => 'IN',
-                        'value' => array($khademId)
+                         'value' => '"' . $khademId . '"',
+                        'compare' => 'LIKE',
+
                     )
                 )
             ));
