@@ -33,8 +33,8 @@ if (!is_user_logged_in() AND
             <div class="haaseb-invisible finishedArbToggle metabox__blog-home-link" style="background-color: #8EBF96" id="showFinished">نمایش اربعینیات جاری</div>
         </div>
 
-        <div id="showFinished" style="color: #8EBF96">اربعینیات جاری: </div>
-        <div class="haaseb-invisible" id="showFinished" style="color:#dba88a;">اربعینیات پایان یافته: </div>
+        <div id="showFinished" style="color: #A94B30; font-size: 1.5rem; text-align: center; background-color: yellow" >اربعینیات جاری</div>
+        <div class="haaseb-invisible" id="showFinished" style="color: yellow; font-size: 1.5rem; text-align: center; background-color: #A94B30">اربعینیات پایان یافته</div>
         <?php
 
 
