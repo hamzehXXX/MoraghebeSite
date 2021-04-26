@@ -1135,7 +1135,7 @@ function my_update_posts() {
     );
     $myposts = get_posts($args);
     foreach ($myposts as $mypost){
-//        $mypost->post_title = $mypost->post_title.'';
+        $mypost->post_title = $mypost->post_title.'';
         wp_update_post( $mypost );
     }
 }
