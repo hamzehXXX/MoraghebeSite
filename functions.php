@@ -317,7 +317,7 @@ function my_custom_columns($column) {
 //		testHelper($khademUserObj);
 //		$lastName = $khademUserObj->data->display_name;
         foreach ($khademUserObj as $khadem) {
-            $firstName = $khadem->data->display_name;
+            $khademName = $khadem->data->display_name;
 
             echo ' ( ';
 		?> 
@@ -325,7 +325,7 @@ function my_custom_columns($column) {
 		        . 'edit.php?s&post_status=all&post_type=salek&m=0&khadem='
 		        .  $khademUserObj->ID; ?>">
 		<?php
-        echo $firstName;
+        echo $khademName;
 		echo '</a>';
 		echo ' ) ';
 		}
@@ -1126,17 +1126,3 @@ add_row('arb_after_app', $row, $post_id);
 //  }
 
 }
-
-function my_update_posts() {
-    //$myposts = get_posts('showposts=-1');//Retrieve the posts you are targeting
-    $args = array(
-        'post_type' => 'salek',
-        'numberposts' => -1
-    );
-    $myposts = get_posts($args);
-    foreach ($myposts as $mypost){
-        $mypost->post_title = $mypost->post_title.'';
-        wp_update_post( $mypost );
-    }
-}
-//add_action( 'wp_loaded', 'my_update_posts' );
