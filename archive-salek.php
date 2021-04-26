@@ -14,15 +14,15 @@ if (!is_user_logged_in() AND
     exit;
 }
 
- $args = array(
-        'post_type' => 'salek',
-        'numberposts' => -1
-    );
-    $myposts = get_posts($args);
-    foreach ($myposts as $mypost){
-        $mypost->post_title = $mypost->post_title.'';
-        wp_update_post($mypost->ID);
-    }
+// $args = array(
+//        'post_type' => 'salek',
+//        'numberposts' => -1
+//    );
+//    $myposts = get_posts($args);
+//    foreach ($myposts as $mypost){
+//        $mypost->post_title = $mypost->post_title.'';
+//        wp_update_post($mypost->ID);
+//    }
 ?>
 <a class="page-banner__link" href="<?php echo site_url(); ?>"><div class="page-banner">
         <div class="page-banner__bg-image"></div>
@@ -292,12 +292,26 @@ if (!is_user_logged_in() AND
                 'post_type' => 'salek',
                 'posts_per_page' => -1,
                 'meta_query' => array(
+                        'relation' => 'OR',
                     array(
                         'key' => 'khademid',
                          'value' => '"' . $khademId . '"',
                         'compare' => 'LIKE',
 
+                    ),
+                    array(
+                        'key' => 'khademid',
+                         'value' => array($khademId),
+                        'compare' => 'IN',
+
+                    ),
+                    array(
+                        'key' => 'khademid',
+                         'value' => get_userdata($khademId),
+                        'compare' => '=',
+
                     )
+
                 )
             ));
 
