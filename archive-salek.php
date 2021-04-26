@@ -26,15 +26,14 @@ if (!is_user_logged_in() AND
         </div>
     </div></a>
     <div class="container container--narrow page-section">
-        <div class="metabox metabox--position-up metabox--with-home-link">
-            <p>
-                 <div class="finishedArbToggle metabox__blog-home-link" id="showFinished" style="background-color: #dba88a;" >نمایش اربعینیات پایان یافته</div>
-<!--                <span class="metabox__main">اتمام یافته</span>-->
-            <div class="haaseb-invisible finishedArbToggle metabox__blog-home-link" style="background-color: #8EBF96" id="showFinished">نمایش اربعینیات جاری</div>
-        </div>
+<!--        <div class="metabox metabox--position-up metabox--with-home-link">-->
+<!--            <p>-->
+<!--                 <div class="finishedArbToggle metabox__blog-home-link" id="showFinished" style="background-color: #dba88a;" >نمایش اربعینیات پایان یافته</div>-->
+<!--            <div class="haaseb-invisible finishedArbToggle metabox__blog-home-link" style="background-color: #8EBF96" id="showFinished">نمایش اربعینیات جاری</div>-->
+<!--        </div>-->
 
-        <div id="showFinished" style="color: #A94B30; font-size: 1.5rem; text-align: center; background-color: yellow" >اربعینیات جاری</div>
-        <div class="haaseb-invisible" id="showFinished" style="color: yellow; font-size: 1.5rem; text-align: center; background-color: #A94B30">اربعینیات پایان یافته</div>
+        <div id="showFinished" style="cursor: pointer; color: #fff; font-size: 1.2rem; text-align: center; background-color: #2e674d; font-family: iranyekanwebregularfanum;" >اربعینیات جاری</div>
+        <div class="haaseb-invisible" id="showFinished" style="cursor: pointer; color: yellow; font-size: 1.2rem; text-align: center; background-color: #A94B30; font-family: iranyekanwebregularfanum;">اربعینیات پایان یافته</div>
         <?php
 
 
