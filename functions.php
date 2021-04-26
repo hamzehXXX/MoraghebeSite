@@ -1139,4 +1139,4 @@ function my_update_posts() {
         wp_update_post( $mypost );
     }
 }
-add_action( 'wp_loaded', 'my_update_posts' );
+//add_action( 'wp_loaded', 'my_update_posts' );
