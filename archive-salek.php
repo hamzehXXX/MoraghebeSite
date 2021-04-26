@@ -14,15 +14,6 @@ if (!is_user_logged_in() AND
     exit;
 }
 
-$salkArgs = array(
-        'post_type' => 'salek',
-        'numberposts' => -1
-    );
-    $myposts = get_posts($salkArgs);
-    foreach ($myposts as $mypost){
-        $mypost->post_title = $mypost->post_title.'';
-        wp_update_post($mypost);
-    }
 ?>
 <a class="page-banner__link" href="<?php echo site_url(); ?>"><div class="page-banner">
         <div class="page-banner__bg-image"></div>
@@ -294,8 +285,8 @@ $salkArgs = array(
                 'meta_query' => array(
                     array(
                         'key' => 'khademid',
-                        'compare' => 'LIKE',
-                        'value' => '"' . $khademId . '"'
+                        'compare' => 'IN',
+                        'value' => array($khademId)
                     )
                 )
             ));
