@@ -32,8 +32,8 @@ if (!is_user_logged_in() AND
 <!--            <div class="haaseb-invisible finishedArbToggle metabox__blog-home-link" style="background-color: #8EBF96" id="showFinished">نمایش اربعینیات جاری</div>-->
 <!--        </div>-->
 
-        <div id="showFinished" style="cursor: pointer; color: #fff; font-size: 1.2rem; text-align: center; background-color: #2e674d; font-family: iranyekanwebregularfanum;" >اربعینیات جاری</div>
-        <div class="haaseb-invisible" id="showFinished" style="cursor: pointer; color: yellow; font-size: 1.2rem; text-align: center; background-color: #A94B30; font-family: iranyekanwebregularfanum;">اربعینیات پایان یافته</div>
+        <div id="showFinished" style="cursor: pointer; color: #fff; font-size: 1.2rem; text-align: center; background-color: #2e674d; font-family: iranyekanwebregularfanum;" ><i style="color: #F8119A" class="fa fa-refresh" aria-hidden="true"></i> اربعینیات جاری </div>
+        <div class="haaseb-invisible" id="showFinished" style="cursor: pointer; color: yellow; font-size: 1.2rem; text-align: center; background-color: #A94B30; font-family: iranyekanwebregularfanum;"><i style="color:#F8119A;" class="fa fa-refresh" aria-hidden="true"></i> اربعینیات پایان یافته</div>
         <?php
 
 
