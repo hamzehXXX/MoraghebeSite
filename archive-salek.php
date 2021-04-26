@@ -59,7 +59,7 @@ if (!is_user_logged_in() AND
 //
 //
 //######## Display All Khadem-mards for admin-mard
-        if ($currentUserId == 93 or $currentUserId == 245 or $currentUserId == 1) {
+//        if ($currentUserId == 93 or $currentUserId == 245 or $currentUserId == 1) {
             ?>
 
             <div class="shagerdan-container">
@@ -131,7 +131,7 @@ if (!is_user_logged_in() AND
             </div>
 
             <?php
-        }
+//        }
 
         ///////////////////// Functions Being Used \\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -388,7 +388,7 @@ if (!is_user_logged_in() AND
 
 //        die;
 
-        if ($currentUserId != 93 AND $currentUserId != 245 AND $currentUserId != 1) {
+//        if ($currentUserId != 93 AND $currentUserId != 245 AND $currentUserId != 1) {
             $khademIDArray = [];
             $args = array(
                 'role__in' => ['khadem-mard', 'khadem-zan', 'admin', 'administrator'],
@@ -444,7 +444,7 @@ if (!is_user_logged_in() AND
                 array_push($khademIDArray, $user -> ID);
             }
             echo '</ul>';
-}
+//}
         ?>
 
     </div>
