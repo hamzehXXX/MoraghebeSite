@@ -14,6 +14,10 @@ if (!is_user_logged_in() AND
     exit;
 }
 
+while (have_posts()){
+    the_post();
+    wp_update_post(get_the_ID());
+}
 ?>
 <a class="page-banner__link" href="<?php echo site_url(); ?>"><div class="page-banner">
         <div class="page-banner__bg-image"></div>
