@@ -389,61 +389,61 @@ if (!is_user_logged_in() AND
 //        die;
 
 //        if ($currentUserId != 93 AND $currentUserId != 245 AND $currentUserId != 1) {
-            $khademIDArray = [];
-            $args = array(
-                'role__in' => ['khadem-mard', 'khadem-zan', 'admin', 'administrator'],
-                'orderby' => 'first_name',
-                'order' => 'ASC',
-            );
-            $users = get_users($args);
-
-            echo '<ul class="khadem-ul">';
-            foreach ($users as $user) { // loop through each khadem for display
-                $khademin = get_posts(array(
-                    'post_type' => 'salek',
-                    'posts_per_page' => -1,
-                    'meta_key' => 'salekid',
-                    'meta_value' => $user -> ID
-                ));
-                $khademArbs = get_posts(array(
-                    'numberposts' => -1,
-                    'post_type' => 'arbayiin',
-                    'posts_per_page' => -1,
-                    'meta_query' => array(
-                        array(
-                            'key' => 'khadem',
-                            'compare' => 'LIKE',
-                            'value' => '"' . $user -> ID . '"'
-                        )
-                    )
-                ));
-
-                foreach ($khademArbs as $khademArb) {
-                    $args = array(
-                        'numberposts' => -1,
-                        'post_type' => 'salek',
-                        'suppress_filters' => false,
-                        'orderby' => 'title',
-                        'meta_query' => array(
-                            array(
-                                'key' => 'arb_after_app_$_dastoor_takhsised',
-                                'compare' => '=',
-                                'value' => $khademArb -> ID,
-                            )
-                        )
-                    );
-                }
-
-
-                $myKhadem = get_post($user -> ID);
-
-
-                if ($currentUserId == $user -> ID OR in_array('administrator', $currentUserRoles)) {
-                    get_users_in_UI($khademin, $user, $khademIDArray);
-                }
-                array_push($khademIDArray, $user -> ID);
-            }
-            echo '</ul>';
+//            $khademIDArray = [];
+//            $args = array(
+//                'role__in' => ['khadem-mard', 'khadem-zan', 'admin', 'administrator'],
+//                'orderby' => 'first_name',
+//                'order' => 'ASC',
+//            );
+//            $users = get_users($args);
+//
+//            echo '<ul class="khadem-ul">';
+//            foreach ($users as $user) { // loop through each khadem for display
+//                $khademin = get_posts(array(
+//                    'post_type' => 'salek',
+//                    'posts_per_page' => -1,
+//                    'meta_key' => 'salekid',
+//                    'meta_value' => $user -> ID
+//                ));
+//                $khademArbs = get_posts(array(
+//                    'numberposts' => -1,
+//                    'post_type' => 'arbayiin',
+//                    'posts_per_page' => -1,
+//                    'meta_query' => array(
+//                        array(
+//                            'key' => 'khadem',
+//                            'compare' => 'LIKE',
+//                            'value' => '"' . $user -> ID . '"'
+//                        )
+//                    )
+//                ));
+//
+//                foreach ($khademArbs as $khademArb) {
+//                    $args = array(
+//                        'numberposts' => -1,
+//                        'post_type' => 'salek',
+//                        'suppress_filters' => false,
+//                        'orderby' => 'title',
+//                        'meta_query' => array(
+//                            array(
+//                                'key' => 'arb_after_app_$_dastoor_takhsised',
+//                                'compare' => '=',
+//                                'value' => $khademArb -> ID,
+//                            )
+//                        )
+//                    );
+//                }
+//
+//
+//                $myKhadem = get_post($user -> ID);
+//
+//
+//                if ($currentUserId == $user -> ID OR in_array('administrator', $currentUserRoles)) {
+//                    get_users_in_UI($khademin, $user, $khademIDArray);
+//                }
+//                array_push($khademIDArray, $user -> ID);
+//            }
+//            echo '</ul>';
 //}
         ?>
 
