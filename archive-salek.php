@@ -213,6 +213,10 @@ if (!is_user_logged_in() AND
             if (!empty($saleksInMahfel)){
 
                 $mahfelSaleks = get_saleks_and_arbs_from_salekin($saleksInMahfel);
+                if (get_current_user_id() == 1) {
+                    testHelper($mahfelSaleks);
+                }
+
                 foreach ($mahfelSaleks as $salekid => $arbayiins){
                     foreach ($arbayiins as $arbayiin) {
                         $arbRepeat = $arbayiin[1];
