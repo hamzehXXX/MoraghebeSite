@@ -4119,11 +4119,12 @@ pre[class*="language-"] {
 .shagerdan-table-row {
     font-family: iranyekanwebregularfanum;
     display:flex;
+    border-bottom: #eaf6ee 1px solid;
     width:100%;
 }
 /*padding:($half-spacing-unit * 1.5) 0;*/
 .shagerdan-table-row:nth-of-type(odd) {
-     background:#EEEEEE;
+     /*background:$color-form-highlight;*/
  }
 @media (max-width: 529px) {
 .shagerdan-table-row {
