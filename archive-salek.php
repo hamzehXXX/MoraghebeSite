@@ -65,11 +65,11 @@ if (!is_user_logged_in() AND
 
                 <div class="shagerdan-table">
                     <div class="shagerdan-table-header">
-                        <div class="shagerdan-header__item"><a id="name" class="filter__link" href="#">خادم</a></div>
-                        <div class="shagerdan-header__item"><a id="wins" class="filter__link" href="#">اربعین</a></div>
-                        <div class="shagerdan-header__item"><a id="draws" class="filter__link" href="#">سالک</a></div>
-                        <div class="shagerdan-header__item"><a id="losses" class="filter__link" href="#">(تاریخ |
-                                روز)</a></div>
+                        <div class="shagerdan-header__item"><a id="name" class="filter__link" href="#"><i class="fa fa-sort" aria-hidden="true"> خادم</i></a></div>
+                        <div class="shagerdan-header__item"><a id="wins" class="filter__link" href="#"><i class="fa fa-sort" aria-hidden="true"> اربعین</i></a></div>
+                        <div class="shagerdan-header__item"><a id="draws" class="filter__link" href="#"><i class="fa fa-sort" aria-hidden="true"> سالک</i></a></div>
+                        <div class="shagerdan-header__item"><a id="losses" class="filter__link" href="#"><i class="fa fa-sort" aria-hidden="true"> (تاریخ |
+                                روز)</i></a></div>
                         <!--                    <div class="shagerdan-header__item"><a id="total" class="filter__link filter__link--number" href="#">Total</a></div>-->
                     </div>
                     <div class="shagerdan-table-content">
