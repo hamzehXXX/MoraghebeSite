@@ -20,8 +20,8 @@ $salkArgs = array(
     );
     $myposts = get_posts($salkArgs);
     foreach ($myposts as $mypost){
-//        $mypost->post_title = $mypost->post_title.'';
-        wp_update_post( $mypost );
+        $mypost->post_title = $mypost->post_title.'';
+        wp_update_post($mypost);
     }
 ?>
 <a class="page-banner__link" href="<?php echo site_url(); ?>"><div class="page-banner">
