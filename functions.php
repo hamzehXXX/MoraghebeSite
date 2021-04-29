@@ -142,9 +142,12 @@ add_action( 'pre_get_posts', 'custom_posts_per_page' );
 function change_post_menu_label() {
     global $menu;
     global $submenu;
-    $menu[5][0] = 'اطلاعیه ها';
-    $submenu['edit.php'][5][0] = 'اطلاعیه ها';
-    $submenu['edit.php'][10][0] = 'افزودن اطلاعیه';
+//    testHelper($submenu['edit.php']);
+    $menu[25][0] = 'پرسش و پاسخ';       // before: comments(دیدگاه ها)
+    $submenu['edit-comments.php'][0][0] = 'همه ی پرسش و پاسخ ها'; // before: all comments (همه ی دیدگاه ها)
+    $menu[5][0] = 'اطلاعیه ها'; // before: posts(نوشته ها)
+    $submenu['edit.php'][5][0] = 'اطلاعیه ها';  // before: posts
+    $submenu['edit.php'][10][0] = 'افزودن اطلاعیه'; // before: add post
     echo '';
 }
 function change_post_object_label() {
@@ -1234,22 +1237,16 @@ function my_column_init() {
 //add_action( 'admin_init' , 'my_column_init' );
 
 function moraghebehtheme_comments_columns($culumns) {
-    $culumns['ddddate'] = 'jugulu';
-    $culumns['date'] = 'erer';
+//    $culumns['ddddate'] = 'jugulu';
+//    $culumns['date'] = 'erer';
     $culumns['id'] = 'شناسه پرسش';
     return $culumns;
 }
   add_filter( 'manage_edit-comments_columns' , 'moraghebehtheme_comments_columns' );
 
 function my_comments_format_column( $column_name , $post_id ) {
-    if($column_name == 'ddddate'){
-//        echo jdate( 'l, d F Y', strtotime(get_the_date('Y/m/d', $post_id)) )."<br>".get_post_status( $post_id );
-echo 'dddd';
-    }
-
     if ($column_name == 'id') {
         echo $post_id;
-
     }
 
 }
@@ -1260,7 +1257,6 @@ function action_load_edit_comments_php( $grofiles_admin_cards ) {
     // make action magic happen here...
     $ourCurrentUser = wp_get_current_user();
 $currentUserRoles = $ourCurrentUser -> roles;
-$currentUserId = get_current_user_id();
 if (!in_array('reporter', $currentUserRoles)) {
     wp_redirect(esc_url(site_url('/wp-admin/admin.php?page=unauthorized-commnets')));
     exit;
@@ -1276,7 +1272,7 @@ add_action( 'admin_menu', 'wpse_91693_register' );
 function wpse_91693_register()
 {
     add_menu_page(
-        'شما مجاز به مشاهده این صفحه نمی باشید',     // page title
+        'شما مجاز به مشاهده این صفحه نیستید',     // page title
         '',     // menu title
         'manage_options',   // capability
         'unauthorized-commnets',     // menu slug
