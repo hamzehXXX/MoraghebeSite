@@ -19,7 +19,7 @@ $ruzNumber = new NumberToWord();
     $days = [];
     $currentDayDate = '';
     $currentDayTimeStamp = '';
-    $repeat = $_GET['arbrepeat'];
+    $repeat = isset($_GET['arbrepeat'])?$_GET['arbrepeat']:1;
     //    $dayIDs = queryAllDayIDs($wpdb, $currentUserId, $arbayiinID, $repeat);
 //    $resultsFromDb = queryAllDaysForArb($currentUserId, $arbayiinID, $repeat);
 //        testHelper($resultsFromDb);
@@ -282,6 +282,9 @@ $resultsTable->showResultsTable($display, $arbayiinID, $result);
         }
 
 
+//        if (comments_open()){
+//            comments_template();
+//        }
         ?>
     </div>
 

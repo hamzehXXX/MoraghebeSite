@@ -103,6 +103,8 @@
 //
 //                    return false;
 //                }
+                comments_template('/comments.php');
+                comment_form();
 				if( have_rows('arb_after_app') ):
                     $arbIdArray = array();
 				$arbRepeatCount = 1;

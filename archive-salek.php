@@ -89,8 +89,9 @@ if (!is_user_logged_in() AND
                                 foreach ($khademUsers as $khadem) {                         // loop through khadm-mards
                                     $khademID = $khadem -> ID;
                                     $khademSalekinPostObj = getSalekByUserId($khademID);
-                                    displayResultsForKhademArbs($khademID, $khadem -> display_name, $khademSalekinPostObj[0]);
-                                    displayResultsForSaleksInMahfel($khademID, $khadem -> display_name, $khademSalekinPostObj[0]);
+                                    $khademObj = empty($khademSalekinPostObj)?0:$khademSalekinPostObj[0];
+                                    displayResultsForKhademArbs($khademID, $khadem -> display_name, $khademObj);
+                                    displayResultsForSaleksInMahfel($khademID, $khadem -> display_name, $khademObj);
                                 }
                             }
 
@@ -307,9 +308,8 @@ if (!is_user_logged_in() AND
                     ),
                     array(
                         'key' => 'khademid',
-                         'value' => get_userdata($khademId),
+                         'value' => $khademId,
                         'compare' => '=',
-
                     )
 
                 )

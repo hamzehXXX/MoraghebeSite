@@ -51,13 +51,26 @@ if (!is_user_logged_in()) {
                        <?php
                        $ourCurrentUser = wp_get_current_user();
 //                       testHelper($ourCurrentUser);
-                        if (in_array('administrator', $ourCurrentUser->roles) OR in_array('admin', $ourCurrentUser->roles) OR in_array('khadem-mard', $ourCurrentUser->roles) OR in_array('khadem-zan', $ourCurrentUser->roles) OR in_array('admin-mard', $ourCurrentUser->roles) OR in_array('admin-zan', $ourCurrentUser->roles)){ ?>
-                            <li <?php if (get_post_type() == 'salek')echo 'class="current-menu-item"'; ?>
-                            >
+                        if (in_array('administrator', $ourCurrentUser->roles) OR
+                            in_array('admin', $ourCurrentUser->roles) OR
+                            in_array('khadem-mard', $ourCurrentUser->roles) OR
+                            in_array('khadem-zan', $ourCurrentUser->roles) OR
+                            in_array('admin-mard', $ourCurrentUser->roles) OR
+                            in_array('admin-zan', $ourCurrentUser->roles)){ ?>
+
+
+                            <li <?php if (get_post_type() == 'salek')echo 'class="current-menu-item"'; ?>>
                                 <a href="<?php  echo get_post_type_archive_link('salek'); ?>">شاگردان</a>
                             </li>
 
-                        <?php }                    ?>
+                        <?php }
+                       if (in_array('reporter', $ourCurrentUser->roles)){ ?>
+                           <li <?php if (get_the_ID() == 2974)echo 'class="current-menu-item"'; ?>>
+                               <a style="color: red" href="<?php  echo site_url("/questions"); ?>">پرسش و پاسخ</a>
+                           </li>
+                       <?php } ?>
+
+
 
                        <!--<li <?php if (get_post_type() == 'arbayiin')echo 'class="current-menu-item"'; ?>><a href="<?php echo site_url('/sabegh'); ?>">اربعینیات سابق</a></li>-->
                        <li <?php if (get_post_type() == 'arbayiin')echo 'class="current-menu-item"'; ?>><a href="<?php echo get_post_type_archive_link('arbayiin'); ?>">اربعینیات</a></li>

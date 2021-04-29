@@ -1126,3 +1126,178 @@ add_row('arb_after_app', $row, $post_id);
 //  }
 
 }
+
+
+function moraghebehtheme_comment($comment, $args, $depth) {
+//    if ( 'div' === $args['style'] ) {
+//        $tag       = 'div';
+//        $add_below = 'comment';
+//    } else {
+//        $tag       = 'li';
+//        $add_below = 'div-comment';
+//    }
+        $tag = 'div';
+        $add_below = 'div-comment';?>
+    <<?php echo $tag; ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>"><?php
+    if ( 'div' != $args['style'] ) { ?>
+        <div id="div-comment-<?php comment_ID() ?>" class="comment-body"><?php
+    } ?>
+        <div class="comment-author vcard" style="margin-top: 2rem;"><?php
+//            if ( $args['avatar_size'] != 0 ) {
+//                echo get_avatar( $comment, $args['avatar_size'] );
+//            }
+//            printf(
+//                    __('#%1$s '),
+//                    $comment->comment_ID
+//                );
+//var_dump($comment->user_id == get_current_user_id());
+            printf( __( '<cite class="fn">%s</cite>' ), ($comment->user_id == get_current_user_id()) ? get_comment_author_link() : '<span style="background-color: #dbffcb; padding: 6px">پاسخ حضرت استاد</span>'); ?>
+        </div><?php
+        if ( $comment->comment_approved == '0' ) { ?>
+            <em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.' ); ?></em><br/><?php
+        } ?>
+        <div class="comment-meta commentmetadata" >
+            <a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ); ?>" style="font-size: 0.8rem; text-decoration:none; color: #ef9912"><?php
+                /* translators: 1: date, 2: time */
+                printf(
+                    __('%1$s at %2$s'),
+                    jdate('l, Y/m/d', strtotime(get_comment_date())),
+                    get_comment_time()
+                ); ?>
+            </a>
+            <?php
+            edit_comment_link( __( '(Edit)' ), ' | ', '' ); ?>
+        </div>
+
+        <div style="padding: 1.618em; border-radius: 3px; background-color: #f8f8f8;"><?php comment_text(); ?></div>
+
+        <div class="reply"><?php
+                comment_reply_link(
+                    array_merge(
+                        $args,
+                        array(
+                                'type' => 'pingback',
+                               'after' => '<br/>',
+                            'add_below' => $add_below,
+                            'depth'     => $depth,
+                            'max_depth' => $args['max_depth']
+                        )
+                    )
+                ); ?>
+        </div><?php
+    if ( 'div' != $args['style'] ) : ?>
+        </div><?php
+    endif;
+}
+
+
+function moraghebehtheme_post_columns( $columns ) {
+  unset( $columns['date'] );
+  $columns['mydate'] = 'تاریخ';
+  return $columns;
+}
+
+function my_format_column( $column_name , $post_id ) {
+    if($column_name == 'mydate'){
+        echo jdate( 'l, d F Y', strtotime(get_the_date('Y/m/d', $post_id)) )."<br>".get_post_status( $post_id );
+    }
+
+    if ($column_name == 'date') {
+        echo 'sdfsdf';
+    }
+}
+
+function my_column_register_sortable( $columns ) {
+    $columns['mydate'] = 'mydate';
+    return $columns;
+}
+
+function my_column_orderby( $vars ) {
+    if ( isset( $vars['orderby'] ) && 'mydate' == $vars['orderby'] ) {
+        $vars = array_merge( $vars, array(
+            'orderby' => 'date'
+        ) );
+    }
+    return $vars;
+}
+
+function my_column_init() {
+  add_filter( 'manage_posts_columns' , 'moraghebehtheme_post_columns' );
+  add_action( 'manage_posts_custom_column' , 'my_format_column' , 10 , 2 );
+  add_filter( 'manage_edit-post_sortable_columns', 'my_column_register_sortable' );
+  add_filter( 'request', 'my_column_orderby' );
+
+
+//  add_filter( 'manage_edit-comments_sortable_columns', 'my_columns_column_register_sortable' );
+//  add_filter( 'request', 'my_column_orderby' );
+}
+//add_action( 'admin_init' , 'my_column_init' );
+
+function moraghebehtheme_comments_columns($culumns) {
+    $culumns['ddddate'] = 'jugulu';
+    $culumns['date'] = 'erer';
+    $culumns['id'] = 'شناسه پرسش';
+    return $culumns;
+}
+  add_filter( 'manage_edit-comments_columns' , 'moraghebehtheme_comments_columns' );
+
+function my_comments_format_column( $column_name , $post_id ) {
+    if($column_name == 'ddddate'){
+//        echo jdate( 'l, d F Y', strtotime(get_the_date('Y/m/d', $post_id)) )."<br>".get_post_status( $post_id );
+echo 'dddd';
+    }
+
+    if ($column_name == 'id') {
+        echo $post_id;
+
+    }
+
+}
+add_action( 'manage_comments_custom_column' , 'my_comments_format_column' , 10 , 2 );
+
+// define the load-edit-comments.php callback
+function action_load_edit_comments_php( $grofiles_admin_cards ) {
+    // make action magic happen here...
+    $ourCurrentUser = wp_get_current_user();
+$currentUserRoles = $ourCurrentUser -> roles;
+$currentUserId = get_current_user_id();
+if (!in_array('reporter', $currentUserRoles)) {
+    wp_redirect(esc_url(site_url('/wp-admin/admin.php?page=unauthorized-commnets')));
+    exit;
+}
+
+};
+
+// add the action
+add_action( 'load-edit-comments.php', 'action_load_edit_comments_php', 10, 1 );
+
+add_action( 'admin_menu', 'wpse_91693_register' );
+
+function wpse_91693_register()
+{
+    add_menu_page(
+        'شما مجاز به مشاهده این صفحه نمی باشید',     // page title
+        '',     // menu title
+        'manage_options',   // capability
+        'unauthorized-commnets',     // menu slug
+        'wpse_91693_render' // callback function
+    );
+    remove_menu_page('include-text');
+//    remove_menu_page('menu-comments');
+}
+function wpse_91693_render()
+{
+    global $title;
+
+    print '<div class="wrap">';
+//    print "<h1>$title</h1>";
+
+    $file = plugin_dir_path( __FILE__ ) . "included.html";
+
+    if ( file_exists( $file ) )
+        require $file;
+
+//    print "<p class='description'>Included from <code>$file</code></p>";
+
+    print '</div>';
+}

@@ -20,8 +20,20 @@
 //if ( post_password_required() ) {
 //    return;
 //}
+$currentUserId = get_current_user_id();
 
-$twenty_twenty_one_comment_count = get_comments_number();
+$comment_array = get_approved_comments(get_the_ID());
+//testHelper($comment_array);
+$moraghebehtheme_comment_count = 0;
+$comments = array();
+foreach ($comment_array as $comment){
+//    testHelper($comment);
+    if ($comment->user_id == $currentUserId || get_comment($comment->comment_parent)->user_id == $currentUserId){
+        $comments[] = $comment;
+        $moraghebehtheme_comment_count++;
+    }
+}
+
 ?>
 
 <div id="comments" class="comments-area default-max-width <?php echo get_option( 'show_avatars' ) ? 'show-avatars' : ''; ?>">
@@ -31,14 +43,14 @@ $twenty_twenty_one_comment_count = get_comments_number();
         ;
         ?>
         <h2 class="comments-title">
-            <?php if ( '1' === $twenty_twenty_one_comment_count ) : ?>
+            <?php if ( '1' === $moraghebehtheme_comment_count ) : ?>
                 <?php esc_html_e( '1 comment', 'twentytwentyone' ); ?>
             <?php else : ?>
                 <?php
                 printf(
                 /* translators: %s: comment count number. */
-                    esc_html( _nx( '%s comment', '%s comments', $twenty_twenty_one_comment_count, 'Comments title', 'twentytwentyone' ) ),
-                    esc_html( number_format_i18n( $twenty_twenty_one_comment_count ) )
+                    esc_html( _nx( '%s comment', '%s comments', $moraghebehtheme_comment_count, 'Comments title', 'twentytwentyone' ) ),
+                    esc_html( number_format_i18n( $moraghebehtheme_comment_count ) )
                 );
                 ?>
             <?php endif; ?>
@@ -46,33 +58,36 @@ $twenty_twenty_one_comment_count = get_comments_number();
 
         <ol class="comment-list">
             <?php
+
             wp_list_comments(
                 array(
-                    'avatar_size' => 60,
                     'style'       => 'ol',
                     'short_ping'  => true,
-                )
+                    'max_depth' => 2,
+                    'callback' => 'moraghebehtheme_comment'
+                ),
+                $comments
             );
             ?>
         </ol><!-- .comment-list -->
 
         <?php
         the_comments_pagination(
-            array(
-                /* translators: There is a space after page. */
-                'before_page_number' => esc_html__( 'Page ', 'twentytwentyone' ),
-                'mid_size'           => 0,
-                'prev_text'          => sprintf(
-                    '%s <span class="nav-prev-text">%s</span>',
-                    is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ),
-                    esc_html__( 'Older comments', 'twentytwentyone' )
-                ),
-                'next_text'          => sprintf(
-                    '<span class="nav-next-text">%s</span> %s',
-                    esc_html__( 'Newer comments', 'twentytwentyone' ),
-                    is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' )
-                ),
-            )
+//            array(
+//                /* translators: There is a space after page. */
+//                'before_page_number' => esc_html__( 'Page ', 'twentytwentyone' ),
+//                'mid_size'           => 0,
+//                'prev_text'          => sprintf(
+//                    '%s <span class="nav-prev-text">%s</span>',
+//                    is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ),
+//                    esc_html__( 'Older comments', 'twentytwentyone' )
+//                ),
+//                'next_text'          => sprintf(
+//                    '<span class="nav-next-text">%s</span> %s',
+//                    esc_html__( 'Newer comments', 'twentytwentyone' ),
+//                    is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' )
+//                ),
+//            )
         );
         ?>
 
@@ -85,9 +100,21 @@ $twenty_twenty_one_comment_count = get_comments_number();
     comment_form(
         array(
             'logged_in_as'       => null,
-            'title_reply'        => esc_html__( 'Leave a comment', 'twentytwentyone' ),
+            'title_reply'        => esc_html__( 'سوال خود را مطرح کنید', 'twentytwentyone' ),
             'title_reply_before' => '<h2 id="reply-title" class="comment-reply-title">',
             'title_reply_after'  => '</h2>',
+            'comment_notes_before' => 'ثب',
+            'comment_field' => sprintf(
+                '<p class="comment-form-comment">%s %s</p>',
+                sprintf(
+                    '<label for="comment">%s</label>',
+                    _x( '', 'noun' )
+                ),
+                '<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>'
+            ),
+            'submit_button' => '<input style="border: 0px; background-color: #ef9912; border-color: #ef9912; color: #ffffff;     padding: .6180469716em 1.41575em; text-decoration: none; font-weight: 600; text-shadow: none; display: inline-block; -webkit-appearance: none;
+    word-break: break-all; " name="%1$s" type="submit" id="%2$s" class="%3$s" value="%4$s" />',
+            'label_submit' => 'ارسال سـوال'
         )
     );
     ?>
