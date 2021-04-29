@@ -1282,7 +1282,7 @@ function wpse_91693_register()
         'unauthorized-commnets',     // menu slug
         'wpse_91693_render' // callback function
     );
-    remove_menu_page('include-text');
+    remove_menu_page('unauthorized-commnets');
 //    remove_menu_page('menu-comments');
 }
 function wpse_91693_render()
