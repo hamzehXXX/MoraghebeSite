@@ -680,7 +680,7 @@ function prefix_register_my_comment_route() {
     ) );
 }
  
-add_action( 'rest_api_init', 'prefix_register_my_comment_route' );
+//add_action( 'rest_api_init', 'prefix_register_my_comment_route' );
  
 /**
  * Grabs the five most recent comments and outputs them as a rest response.
@@ -1248,6 +1248,18 @@ function my_comments_format_column( $column_name , $post_id ) {
     if ($column_name == 'id') {
         echo $post_id;
     }
+
+    if ($column_name == 'comment'){
+        echo 'heey';
+    }
+    echo $column_name;
+
+//    $commentObj = get_comment($post_id);
+//    $commentDate = $commentObj->comment_date;
+//    var_dump($commentDate);
+//    echo sprintf(__( '%1$s at %2$s' ),
+//    jdate('l, d F Y', strtotime($commentDate)),
+//    get_comment_date( __( 'g:i a' ), $commentObj ));
 
 }
 add_action( 'manage_comments_custom_column' , 'my_comments_format_column' , 10 , 2 );

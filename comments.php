@@ -110,7 +110,7 @@ foreach ($comment_array as $comment){
                     '<label for="comment">%s</label>',
                     _x( '', 'noun' )
                 ),
-                '<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>'
+                '<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required" style="max-width:-webkit-fill-available;"></textarea>'
             ),
             'submit_button' => '<input style="border: 0px; background-color: #ef9912; border-color: #ef9912; color: #ffffff;     padding: .6180469716em 1.41575em; text-decoration: none; font-weight: 600; text-shadow: none; display: inline-block; -webkit-appearance: none;
     word-break: break-all; " name="%1$s" type="submit" id="%2$s" class="%3$s" value="%4$s" />',

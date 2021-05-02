@@ -13,7 +13,7 @@ $resultsForm = get_posts(array(
     'author' => $userID,
     'meta_key' => 'arbayiinid',
     'meta_query' => array(
-        'relation' => 'OR',
+        'relation' => 'AND',
         array(
             'key' => 'arbayiinid',
             'compare' => '=',
@@ -38,6 +38,8 @@ $lastResultForm = $resultsForm[sizeof($resultsForm) - 1];
 
     if (get_current_user_id() == 1) {
         testHelper($userID);
+        testHelper($arbayiinID);
+        testHelper($repeat);
         testHelper($resultsForm);
     }
     //********************************       [ RESULTS FORM ]       *********************************   >>>>>>

@@ -97,7 +97,7 @@ while(have_posts()) {
                               'repeat' => $repeat
                     );
 //                    testHelper($ressultsArgs);
-                    echo get_template_part( 'template-parts/content', 'resultsform', $ressultsArgs);
+                    get_template_part( 'template-parts/content', 'resultsform', $ressultsArgs);
                     echo '<div class="display-table" id="display-table" data-arbid="' . $dastoor_ID . 'and'.$repeat .'">' . 'بستن جدول'. '</div>';
                     echo '</div>';
                     echo '<hr class=""/>';
