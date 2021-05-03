@@ -13,7 +13,8 @@ while (have_posts()){
         </div></a>
 
     <div class="container container--narrow page-section">
-        <?php the_content(); ?>
+        <?php the_content();
+        echo do_shortcode ( '[questions]' );?>
     </div>
 <?php
 }

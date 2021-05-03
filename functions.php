@@ -1350,7 +1350,7 @@ function wpb_demo_shortcode_2() {
 
 }
 // Register shortcode
-add_shortcode('my_ad_code', 'wpb_demo_shortcode_2');
+add_shortcode('questions', 'wpb_demo_shortcode_2');
 
 add_shortcode( 'bartag', 'wpdocs_bartag_func' );
 function wpdocs_bartag_func( $atts ) {
