@@ -31,9 +31,11 @@ if (!is_user_logged_in() AND
 
     <div class="container container--narrow page-section">
         <?php the_content();
-        if (comments_open()){
-            comments_template();
-        }
+        echo do_shortcode ( '[bartag foo="bar"]' );
+        echo do_shortcode ( '[my_ad_code]' );
+//        if (comments_open()){
+//            comments_template();
+//        }
         ?>
     </div>
 <?php

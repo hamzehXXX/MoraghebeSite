@@ -32,7 +32,7 @@ require get_theme_file_path('/inc/resultFormAdminColumns.php');
 function moraghebeh_files() {
 //    wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
     wp_enqueue_style('font-awsomesss', get_theme_file_uri('/css/font-awesome/css/font-awesome.min.css'), NULL, '1.2');
-    $styleVersion = '4.4';
+    $styleVersion = '4.5';
     $jQueryVersion = '3.9';
     wp_enqueue_style('moraghebeh_main_styles', get_stylesheet_uri(), NULL, $styleVersion);
 
@@ -1154,7 +1154,7 @@ function moraghebehtheme_comment($comment, $args, $depth) {
 //                    $comment->comment_ID
 //                );
 //var_dump($comment->user_id == get_current_user_id());
-            printf( __( '<cite class="fn">%s</cite>' ), ($comment->user_id == get_current_user_id()) ? get_comment_author_link() : '<span style="background-color: #dbffcb; padding: 6px">پاسخ حضرت استاد</span>'); ?>
+            printf( __( '<cite class="fn">%s</cite>' ), ($comment->user_id == get_current_user_id()) ? get_comment_author_link() : '<span style="background-color: #dbffcb; padding: 6px">پاسخ حضرت استاد حفظه الله</span>'); ?>
         </div><?php
         if ( $comment->comment_approved == '0' ) { ?>
             <em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.' ); ?></em><br/><?php
@@ -1252,7 +1252,7 @@ function my_comments_format_column( $column_name , $post_id ) {
     if ($column_name == 'comment'){
         echo 'heey';
     }
-    echo $column_name;
+//    echo $column_name;
 
 //    $commentObj = get_comment($post_id);
 //    $commentDate = $commentObj->comment_date;
@@ -1308,4 +1308,56 @@ function wpse_91693_render()
 //    print "<p class='description'>Included from <code>$file</code></p>";
 
     print '</div>';
+}
+
+function wpdocs_set_comment_form_defaults( $defaults ) {
+    //Here you are able to change the $defaults[]
+    //For example:
+//    testHelper($defaults);
+$commenter     = wp_get_current_commenter();
+    $defaults['fields'] = sprintf(
+			'<p class="comment-form-category">%s %s</p>',
+			sprintf(
+				'<label for="author">%s</label>',
+				__( 'دسته بندی' )
+//				( $req ? ' <span class="required">*</span>' : '' )
+			),
+			sprintf(
+				'<input id="comment-cat" name="comment-cat" type="text" value="%s" size="30" maxlength="245" />',
+				esc_attr( $commenter['comment_cat'] )
+//				$html_req
+//			)
+		));
+
+//    testHelper($defaults);
+    return $defaults;
+}
+add_filter( 'comment_form_defaults', 'wpdocs_set_comment_form_defaults' );
+
+function add_to_wp_commenter($commenter) {
+
+    $commenter['comment_cat'] = '' ;
+    return $commenter;
+}
+add_filter('wp_get_current_commenter', 'add_to_wp_commenter');
+
+// The shortcode function
+function wpb_demo_shortcode_2() {
+
+    if (comments_open()){
+        return comments_template();
+        }
+
+}
+// Register shortcode
+add_shortcode('my_ad_code', 'wpb_demo_shortcode_2');
+
+add_shortcode( 'bartag', 'wpdocs_bartag_func' );
+function wpdocs_bartag_func( $atts ) {
+    $atts = shortcode_atts( array(
+        'foo' => 'no foo',
+        'baz' => 'default baz'
+    ), $atts, 'bartag' );
+
+    return "foo = {$atts['foo']}";
 }

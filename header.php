@@ -65,8 +65,8 @@ if (!is_user_logged_in()) {
 
                         <?php }
                        if (in_array('reporter', $ourCurrentUser->roles)){ ?>
-                           <li <?php if (get_the_ID() == 2974)echo 'class="current-menu-item"'; ?>>
-                               <a style="color: red" href="<?php  echo site_url("/questions"); ?>">پرسش و پاسخ</a>
+                           <li <?php if (get_post_type() == 'questioncat')echo 'class="current-menu-item"'; ?>>
+                               <a style="color: red" href="<?php echo get_post_type_archive_link('questioncat'); ?>">پرسش و پاسخ</a>
                            </li>
                        <?php } ?>
 
