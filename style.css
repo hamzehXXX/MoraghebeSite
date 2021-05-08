@@ -1280,7 +1280,7 @@ body.login {
     font-weight: 300;
     font-size: 0.6rem;
     margin: 0 0 1rem 0;
-    color: #003812;
+    color: #000;
   }
 @media (min-width: 530px) {
 .page-banner__title {

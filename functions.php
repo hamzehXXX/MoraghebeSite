@@ -32,7 +32,7 @@ require get_theme_file_path('/inc/resultFormAdminColumns.php');
 function moraghebeh_files() {
 //    wp_enqueue_style('font-awsome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
     wp_enqueue_style('font-awsomesss', get_theme_file_uri('/css/font-awesome/css/font-awesome.min.css'), NULL, '1.2');
-    $styleVersion = '4.5';
+    $styleVersion = '4.6';
     $jQueryVersion = '3.9';
     wp_enqueue_style('moraghebeh_main_styles', get_stylesheet_uri(), NULL, $styleVersion);
 
@@ -323,7 +323,7 @@ function my_custom_columns($column) {
             $khademName = $khadem->data->display_name;
 
             echo ' ( ';
-		?> 
+		?>
 		<a href="<?php echo get_admin_url($post->ID)
 		        . 'edit.php?s&post_status=all&post_type=salek&m=0&khadem='
 		        .  $khademUserObj->ID; ?>">
@@ -347,7 +347,7 @@ function my_custom_columns($column) {
     if($column == 'salek') {
         echo isset(get_field('salekid', $post->ID)->ID)?get_field('salekid', $post->ID)->data->user_login: 'تعریف نشده';
     }
-	
+
 	if($column == 'arb_after_app') {
 		/* echo '<pre>';
 		print_r(get_field($column, $post->ID));
@@ -541,13 +541,13 @@ function salek_filter_by_khadem() {
 	if (isset($_GET['post_type'])) {
         $type = $_GET['post_type'];
     }
-	
+
 	if('salek' == $type) {
 		$params = array(
 			'name' => 'khademid',
 			'show_option_all' => 'همه ی سالکان'
 		);
-		
+
 		if (isset($_GET['user'])) {
             $params['selected'] = $_GET['user'];
         }
@@ -556,12 +556,12 @@ function salek_filter_by_khadem() {
 }
 
 
-  
-  
+
+
   //add_filter( 'parse_query', 'filter_request_query' , 10);
 function filter_request_query($query){
     //modify the query only if it admin and main query.
-    if( !(is_admin() AND $query->is_main_query()) ){ 
+    if( !(is_admin() AND $query->is_main_query()) ){
       return $query;
     }
     //we want to modify the query for the targeted custom post and filter option
@@ -581,7 +581,7 @@ function filter_request_query($query){
     ));
     return $query;
   }
-  
+
 
 // Enable font size and font family selects in the editor
 if ( ! function_exists( 'am_add_mce_font_buttons' ) ) {
@@ -679,9 +679,9 @@ function prefix_register_my_comment_route() {
         'schema' => 'prefix_get_comment_schema',
     ) );
 }
- 
+
 //add_action( 'rest_api_init', 'prefix_register_my_comment_route' );
- 
+
 /**
  * Grabs the five most recent comments and outputs them as a rest response.
  *
@@ -692,22 +692,22 @@ function prefix_get_comment_sample( $request ) {
         'number' => 5,
     );
     $comments = get_comments( $args );
- 
+
     $data = array();
- 
+
     if ( empty( $comments ) ) {
         return rest_ensure_response( $data );
     }
- 
+
     foreach ( $comments as $comment ) {
         $response = prefix_rest_prepare_comment( $comment, $request );
         $data[] = prefix_prepare_for_collection( $response );
     }
- 
+
     // Return all of our comment response data.
     return rest_ensure_response( $data );
 }
- 
+
 /**
  * Matches the comment data to the schema we want.
  *
@@ -715,25 +715,25 @@ function prefix_get_comment_sample( $request ) {
  */
 function prefix_rest_prepare_comment( $comment, $request ) {
     $comment_data = array();
- 
+
     $schema = prefix_get_comment_schema();
- 
+
     // We are also renaming the fields to more understandable names.
     if ( isset( $schema['properties']['id'] ) ) {
         $comment_data['id'] = (int) $comment->comment_ID;
     }
- 
+
     if ( isset( $schema['properties']['author'] ) ) {
         $comment_data['author'] = (int) $comment->user_id;
     }
- 
+
     if ( isset( $schema['properties']['content'] ) ) {
         $comment_data['content'] = apply_filters( 'comment_text', $comment->comment_content, $comment );
     }
- 
+
     return rest_ensure_response( $comment_data );
 }
- 
+
 /**
  * Prepare a response for inserting into a collection of responses.
  *
@@ -746,23 +746,23 @@ function prefix_prepare_for_collection( $response ) {
     if ( ! ( $response instanceof WP_REST_Response ) ) {
         return $response;
     }
- 
+
     $data = (array) $response->get_data();
     $server = rest_get_server();
- 
+
     if ( method_exists( $server, 'get_compact_response_links' ) ) {
         $links = call_user_func( array( $server, 'get_compact_response_links' ), $response );
     } else {
         $links = call_user_func( array( $server, 'get_response_links' ), $response );
     }
- 
+
     if ( ! empty( $links ) ) {
         $data['_links'] = $links;
     }
- 
+
     return $data;
 }
- 
+
 /**
  * Get our sample schema for comments.
  */
@@ -791,7 +791,7 @@ function prefix_get_comment_schema() {
             ),
         ),
     );
- 
+
     return $schema;
 }
 // Add the filter to manage the p tags
@@ -850,7 +850,7 @@ function wpse64933_add_posttype_note()
     if (!in_array(
         $post -> post_type
         , array(
-            
+
             'amal'
         )
     ))

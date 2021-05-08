@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9d4ca1b5-b948-436d-86c1-d2b7cbb9a39e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/archive-arbayiin.php" beforeDir="false" afterPath="$PROJECT_DIR$/archive-arbayiin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/archive-salek.php" beforeDir="false" afterPath="$PROJECT_DIR$/archive-salek.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/modules/page-banner.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/modules/page-banner.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +72,7 @@
     <property name="NewWatcherDialog.advanced.open" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Roaming/npm/sass-lint.cmd" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Errors" />
@@ -145,6 +146,7 @@
       <workItem from="1613018532896" duration="787000" />
       <workItem from="1613404822470" duration="708000" />
       <workItem from="1613486223032" duration="145000" />
+      <workItem from="1620500117291" duration="245000" />
     </task>
     <servers />
   </component>
