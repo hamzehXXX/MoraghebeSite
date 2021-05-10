@@ -1,11 +1,11 @@
 <?php
+$start_time = microtime(true); // record the start time of transaction
 if (!is_user_logged_in()) {
     wp_redirect(esc_url(site_url('/vorud')));
     exit;
 }
 get_header();
-//include('classes/CONSTANTS.php');
-//include_once('jdf.php');
+
 ?>
 
     <div class="page-banner">
@@ -20,30 +20,29 @@ get_header();
     </div>
 <?php
 
-
 //Detect special conditions devices
-$iPod = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
-$iPhone = stripos($_SERVER['HTTP_USER_AGENT'], "iPhone");
-$iPad = stripos($_SERVER['HTTP_USER_AGENT'], "iPad");
-$Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
-$webOS = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
-
-//do something with this information
-if ($iPod || $iPhone) {
-    //browser reported as an iPhone/iPod touch -- do something here
-    echo 'iPhone';
-} else if ($iPad) {
-    //browser reported as an iPad -- do something here
-    echo 'ipad';
-} else if ($Android) {
-    //browser reported as an Android device -- do something here
-//    echo 'android';
-} else if ($webOS) {
-    //browser reported as a webOS device -- do something here
-    echo 'webOS';
-} else {
-//    echo 'PC or Laptop';
-}
+//$iPod = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
+//$iPhone = stripos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+//$iPad = stripos($_SERVER['HTTP_USER_AGENT'], "iPad");
+//$Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
+//$webOS = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
+//
+////do something with this information
+//if ($iPod || $iPhone) {
+//    //browser reported as an iPhone/iPod touch -- do something here
+//    echo 'iPhone';
+//} else if ($iPad) {
+//    //browser reported as an iPad -- do something here
+//    echo 'ipad';
+//} else if ($Android) {
+//    //browser reported as an Android device -- do something here
+////    echo 'android';
+//} else if ($webOS) {
+//    //browser reported as a webOS device -- do something here
+//    echo 'webOS';
+//} else {
+////    echo 'PC or Laptop';
+//}
 
 
 ?>
@@ -55,15 +54,21 @@ if ($iPod || $iPhone) {
             <div class="full-width-split__inner">
                 <h2 class="headline headline--small-plus t-center">اطلاعیه ها</h2>
                 <?php
-                $homepagePosts = new WP_Query(array(
-                    'post_type' => 'post',
-                    'meta_query' => array(
-                        'key' => 'related_arbayiin',
-                        'compare' => '=',
-                        'value' => ''
-                    ),
-                    'posts_per_page' => -1,
-                ));
+//				delete_transient('recent_posts');
+				if (false === ($homepagePosts = get_transient('recent_posts'))){
+					$homepagePosts = new WP_Query(array(
+						'post_type' => 'post',
+						'meta_query' => array(
+							'key' => 'related_arbayiin',
+							'compare' => '=',
+							'value' => ''
+						),
+						'posts_per_page' => -1,
+					));
+
+					set_transient('recent_posts', $homepagePosts, DAY_IN_SECONDS);
+				}
+
                 $counter = 0;
                     while ($homepagePosts->have_posts()) {
                         $homepagePosts->the_post();
@@ -105,12 +110,16 @@ if ($iPod || $iPhone) {
 
                 <?php
 
-                $homepageEvents = new WP_Query(array(
-                        'posts_per_page' => 2,
-                        'post_type' => 'event',
+				if (false === ($homepageEvents = get_transient('recent_events'))){
+					$homepageEvents = new WP_Query(array(
+							'posts_per_page' => 2,
+							'post_type' => 'event',
+						)
+					);
 
-                    )
-                );
+					set_transient('recent_events', $homepageEvents, DAY_IN_SECONDS);
+				}
+
 
                 while ($homepageEvents->have_posts()) {
                     $homepageEvents->the_post();
@@ -145,4 +154,8 @@ if ($iPod || $iPhone) {
     </div>
 
 <?php get_footer();
+
+$end_time = microtime(true); //
+$run_time = ($end_time - $start_time);
+echo '<p style="display: none"> It took: <strong>'.$run_time.'</strong> to run this script.';
 ?>

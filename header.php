@@ -1,8 +1,10 @@
 <?php
+$start_time = microtime(true);
 if (!is_user_logged_in()) {
     wp_redirect(esc_url(site_url('/vorud')));
     exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html dir="rtl" <?php language_attributes(); ?>>
@@ -25,6 +27,7 @@ if (!is_user_logged_in()) {
                    <ul>
                        <?php
                        $ourCurrentUser = wp_get_current_user();
+                       $postType = $postType = get_post_type();
                         if (in_array('administrator', $ourCurrentUser->roles) OR
                             in_array('admin', $ourCurrentUser->roles) OR
                             in_array('khadem-mard', $ourCurrentUser->roles) OR
@@ -33,20 +36,20 @@ if (!is_user_logged_in()) {
                             in_array('admin-zan', $ourCurrentUser->roles)){ ?>
 
 
-                            <li <?php if (get_post_type() == 'salek')echo 'class="current-menu-item"'; ?>>
+                            <li <?php if ($postType == 'salek')echo 'class="current-menu-item"'; ?>>
                                 <a href="<?php  echo get_post_type_archive_link('salek'); ?>">شاگردان</a>
                             </li>
 
                         <?php }
 //                       if (in_array('reporter', $ourCurrentUser->roles)){ ?>
-                           <li <?php if (get_post_type() == 'questioncat')echo 'class="current-menu-item"'; ?>>
+                           <li <?php if ($postType == 'questioncat')echo 'class="current-menu-item"'; ?>>
                                <a style="color: red" href="<?php echo get_post_type_archive_link('questioncat'); ?>">پرسش و پاسخ</a>
                            </li>
 <!--                       --><?php //} ?>
 
-					   <li <?php if (get_post_type() == 'arbayiin')echo 'class="current-menu-item"'; ?>><a href="<?php echo get_post_type_archive_link('arbayiin'); ?>">اربعینیات</a></li>
-                        <li <?php if (get_post_type() == 'event' OR is_page('past-events')) echo 'class="current-menu-item"'?>><a href="<?php echo get_post_type_archive_link('event');?>">رویدادها</a></li>
-                        <li <?php if (get_post_type() == 'post') echo 'class="current-menu-item"' ?>><a href="<?php echo site_url('/news');?>">اطلاعیه ها</a></li>
+					   <li <?php if ($postType == 'arbayiin')echo 'class="current-menu-item"'; ?>><a href="<?php echo get_post_type_archive_link('arbayiin'); ?>">اربعینیات</a></li>
+                        <li <?php if ($postType == 'event' OR is_page('past-events')) echo 'class="current-menu-item"'?>><a href="<?php echo get_post_type_archive_link('event');?>">رویدادها</a></li>
+                        <li <?php if ($postType == 'post') echo 'class="current-menu-item"' ?>><a href="<?php echo site_url('/news');?>">اطلاعیه ها</a></li>
 
 
                 </nav>
@@ -65,3 +68,8 @@ if (!is_user_logged_in()) {
             </div>
         </div>
     </header>
+<?php
+	$end_time = microtime(true);
+	$run_time = ($end_time - $start_time);
+//	echo '<p> It took: <strong>'.$run_time.'</strong> to run this script.';
+?>

@@ -16,6 +16,7 @@ require get_theme_file_path('/inc/profile-route.php');
 require get_theme_file_path('/inc/remove_wordpress_traces.php');
 require get_theme_file_path('/inc/results-form-android-route.php');
 require get_theme_file_path('/inc/archiveSalekFunctions.php');
+require get_theme_file_path('/inc/transientFunctions.php');
 
 
 require get_theme_file_path('/inc/moraghebehHooks.php');
